@@ -2,12 +2,19 @@
 
     .register-html{
         .content-box{
+
+            .table-btn{
+                button{
+                    margin-right: 8px;
+                }
+            }
+
             .btn-box{
                 text-align: right;
                 // padding: 10px;
 
                 button{
-                    margin-left: 15px;
+                    margin-left: 16px;
                 }
             }
         }

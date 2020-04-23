@@ -41,6 +41,9 @@
             }
         },
         methods: {
+            /**
+             * 下一步
+             */
             handleSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
@@ -50,6 +53,9 @@
                     }
                 })
             },
+            /**
+             * 重置
+             */
             handleReset (name) {
                 this.$refs[name].resetFields();
             }
