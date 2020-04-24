@@ -3,93 +3,19 @@
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="140" :label-colon="true">
             <Row>
                 <Col span="12">
-                    <FormItem label="公司" prop="company">
-                        <Input v-model="formValidate.company" placeholder="请输入公司名称..." />
+                    <FormItem label="营业执照" prop="company">
+                        <Input v-model="formValidate.company" placeholder="请输入证书编号..." />
                     </FormItem>                
                 </Col>
                 <Col span="12">
-                    <FormItem label="简称" prop="companyLogogram">
-                        <Input v-model="formValidate.companyLogogram" placeholder="请输入公司简称..." />
-                    </FormItem>               
+             
                 </Col>                
             </Row>
-            <Row>
-                <Col span="12">
-                    <FormItem label="企业性质" prop="companyType">
-                        <Select v-model="formValidate.companyType" placeholder="请选择">
-                            <Option value="stockholdingSystem">股份制</Option>
-                            <Option value="prOivateOwnership">私有制</Option>
-                        </Select>
-                    </FormItem>              
-                </Col>                
-                <Col span="12">
-                    <FormItem label="境内/境外" prop="state">
-                        <RadioGroup v-model="formValidate.state">
-                            <Radio label="inland">境内</Radio>
-                            <Radio label="foreign">境外</Radio>
-                        </RadioGroup>
-                    </FormItem>              
-                </Col>
-            </Row>
-            <Row>
-                <Col span="12">
-                    <FormItem label="业务线" prop="business">
-                        <Select v-model="formValidate.business" placeholder="请选择">
-                            <Option value="car">商用车</Option>
-                            <Option value="bus">公交车</Option>
-                        </Select>
-                    </FormItem>              
-                </Col>
-                <Col span="12">
-                    <FormItem label="供应商类型" prop="supplierType">
-                        <CheckboxGroup v-model="formValidate.supplierType">
-                            <Checkbox label="轻卡" name="s"></Checkbox>
-                            <Checkbox label="重卡" name="2"></Checkbox>
-                            <Checkbox label="电动车" name="sdd"></Checkbox>
-                            <Checkbox label="摩托车" name="ggs"></Checkbox>
-                        </CheckboxGroup>
-                    </FormItem>             
-                </Col>                
-            </Row>                               
-            <Row>
-                <Col span="12">
-                    <FormItem label="统一社会信用代码" prop="code">
-                        <Input v-model="formValidate.code" placeholder="请输入统一社会信用代码..." />
-                    </FormItem>            
-                </Col>
-                <Col span="12">
-                    <FormItem label="合作意向" prop="intention">
-                        <Input v-model="formValidate.intention" placeholder="请输入合作意向..." />
-                    </FormItem>            
-                </Col>                
-            </Row> 
-            <Row>
-                <Col span="24">
-                    <FormItem label="备注" prop="remark">
-                        <Input v-model="formValidate.remark" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="请输入备注..." />
-                    </FormItem>            
-                </Col>
-            </Row> 
+  
 
             <br/>
             <Divider />
-            
-            <div class="table-btn">
-                <Button type="primary" size="small" icon="md-add" @click="addRow">新增</Button>
-                <Button type="error" size="small" icon="md-trash" @click="deleteAll">全部删除</Button>
-            </div>
-            <div>
-                <mark>注：每种地址标签如有多条，可维护多列。</mark>
-                <span></span>
-            </div>
-            <Table 
-                :columns="columns" 
-                :data="formValidate.dataTable"
-               
-            ></Table>
 
-
-            <br/>
             <div class="btn-box">
                 <FormItem>
                     <Button type="warning" @click="handleResetModal">重置</Button>

@@ -1,7 +1,10 @@
 <template>
-    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="120">
+    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="0" :label-colon="true">
 
-        <FormItem label="供应商申明" prop="desc">
+        <br/>
+        <h3>供应商申明</h3>
+        <br/>
+        <FormItem label="" prop="desc">
             <Input 
                 v-model="formValidate.desc" 
                 type="textarea" 
@@ -17,10 +20,10 @@
         </FormItem>
         <div class="btn-box">
             <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
-            <Button type="primary" @click="handleSubmit('formValidate')">下一步</Button>
+            <Button type="primary" @click="nextStep">下一步</Button>
         </div>
         </FormItem>
-    </Form>
+    </Form>        
 </template>
 <script>
     export default {
@@ -44,12 +47,21 @@
             /**
              * 下一步
              */
-            handleSubmit (name) {
-                this.$refs[name].validate((valid) => {
+            nextStep () {
+                
+                this.$refs['formValidate'].validate((valid) => {
                     if (valid) {
-                        this.$Message.success('Success!');
+                        // 数据录入完成 跳转下一步
+                        this.$Message.success({
+                            "content":'填写完成!',
+                            "duration":2  
+                        });
+                        this.$emit('nextStep');
                     } else {
-                        this.$Message.error('必填项，未填!');
+                        this.$Message.error({
+                            "content":'必填项，未填!',
+                            "duration":2  
+                        });
                     }
                 })
             },
