@@ -86,8 +86,9 @@
             <Register1 v-if="currentPage==1" @lastStep="lastStep" @nextStep="nextStep" />
             <Register2 v-if="currentPage==2" @lastStep="lastStep" @nextStep="nextStep" />
             <Register3 v-if="currentPage==3" @lastStep="lastStep" @nextStep="nextStep" />
-
-
+            <Register4 v-if="currentPage==4" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register5 v-if="currentPage==5" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register6 v-if="currentPage==6" @lastStep="lastStep" @nextStep="nextStep" />
         </div>
     </span>
 </template>
@@ -97,17 +98,22 @@
     import Register1 from './Register1.vue';   // 供应商声明
     import Register2 from './Register2.vue';   // 基本信息
     import Register3 from './Register3.vue';   // 供应商资质信息
-
+    import Register4 from './Register4.vue';   // 财务信息
+    import Register5 from './Register5.vue';   // 供应商联系人
+    import Register6 from './Register6.vue';   // 调研问卷
 
     export default {
         components:{
             Register1,
             Register2,
-            Register3
+            Register3,
+            Register4,
+            Register5,
+            Register6
         },
         data () {
             return {
-                currentPage:3,   // 当前页面
+                currentPage:1,   // 当前页面
             }
         },
         methods: {
