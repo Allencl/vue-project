@@ -88,7 +88,7 @@
             <Register3 v-if="currentPage==3" @lastStep="lastStep" @nextStep="nextStep" />
             <Register4 v-if="currentPage==4" @lastStep="lastStep" @nextStep="nextStep" />
             <Register5 v-if="currentPage==5" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register6 v-if="currentPage==6" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register6 v-if="currentPage==6" @lastStep="lastStep" @nextStep="nextStep" @saveHandle="saveHandle" />
         </div>
     </span>
 </template>
@@ -101,6 +101,10 @@
     import Register4 from './Register4.vue';   // 财务信息
     import Register5 from './Register5.vue';   // 供应商联系人
     import Register6 from './Register6.vue';   // 调研问卷
+
+
+    import {GlobalBus} from './../common/GlobalBus.js';
+
 
     export default {
         components:{
@@ -128,6 +132,58 @@
              */
             nextStep(){
                 this.currentPage=this.currentPage+1;
+            },
+            /**
+             * 保存数据
+             *  
+             * */
+            saveHandle(){
+                var register1={};     // 供应商声明
+                var register2={};    // 基本信息
+                var register3={};    // 供应商资质信息
+                var register4={};    // 财务信息
+                var register5={};    // 供应商联系人
+                var register6={};    // 调研问卷
+  
+
+                GlobalBus.$emit("register1_save",function(option){
+                    register1=option;
+                });
+
+                GlobalBus.$emit("register2_save",function(option){
+                    register2=option;
+                });
+
+                GlobalBus.$emit("register3_save",function(option){
+                    register3=option;
+                });
+
+                GlobalBus.$emit("register4_save",function(option){
+                    register4=option;
+                });
+
+                GlobalBus.$emit("register5_save",function(option){
+                    register5=option;
+                });
+
+                GlobalBus.$emit("register6_save",function(option){
+                    register6=option;
+                });				
+
+                
+                // 最后保存的数据
+                var params={
+                   register1:register1,
+                   register2:register2, 
+                   register3:register3, 
+                   register4:register4, 
+                   register5:register5, 
+                   register6:register6, 
+
+                }
+
+                console.log(params);
+    
             }            
         }        
     }

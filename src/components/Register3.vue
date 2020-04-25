@@ -40,6 +40,8 @@
     </span>
 </template>
 <script>
+    import {GlobalBus} from './../common/GlobalBus.js';
+
     export default {
         data () {
             return {
@@ -106,6 +108,12 @@
         created(){
 
             let that=this;
+
+			// 保存数据
+			GlobalBus.$off("register3_save");
+			GlobalBus.$on("register3_save", function (callBack){
+                callBack(that.formValidate);
+			});            
 
             // 配置列
             this.columns = [
@@ -538,29 +546,29 @@
                 this.$refs['formValidate'].validate((valid) => {
                     if (valid) {
 
-                        var result=false;  // 验证table 必填               
-                        if( this.formValidate.dataTable['length']==0 ){
-                            this.$Message.info({
-                                "content":'地址未编辑!',
-                                "duration":2  
-                            });  
-                            return;                          
-                        }else{
-                            this.formValidate.dataTable.map((o)=>{
-                                Object.entries(o).map((j)=>{
-                                    if( j[1]['required'] && !(j[1]['value']) ) result=true;
-                                });
-                            });
+                        // var result=false;  // 验证table 必填               
+                        // if( this.formValidate.dataTable['length']==0 ){
+                        //     this.$Message.info({
+                        //         "content":'地址未编辑!',
+                        //         "duration":2  
+                        //     });  
+                        //     return;                          
+                        // }else{
+                        //     this.formValidate.dataTable.map((o)=>{
+                        //         Object.entries(o).map((j)=>{
+                        //             if( j[1]['required'] && !(j[1]['value']) ) result=true;
+                        //         });
+                        //     });
                             
-                        }
+                        // }
 
-                        if(result){
-                            this.$Message.info({
-                                "content":'地址数据不完整!',
-                                "duration":2  
-                            });
-                            return;
-                        }
+                        // if(result){
+                        //     this.$Message.info({
+                        //         "content":'地址数据不完整!',
+                        //         "duration":2  
+                        //     });
+                        //     return;
+                        // }
                         
 
 

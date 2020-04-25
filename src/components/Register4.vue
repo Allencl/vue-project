@@ -43,6 +43,8 @@
     </span>
 </template>
 <script>
+    import {GlobalBus} from './../common/GlobalBus.js';
+
     export default {
         data () {
             return {
@@ -67,6 +69,12 @@
         created(){
 
             let that=this;
+
+            // 保存数据
+			GlobalBus.$off("register4_save");
+			GlobalBus.$on("register4_save", function (callBack){
+                callBack(that.formValidate);
+			});
 
             // 配置列
             this.columns = [

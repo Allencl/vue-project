@@ -26,6 +26,8 @@
     </Form>        
 </template>
 <script>
+    import {GlobalBus} from './../common/GlobalBus.js';
+
     export default {
         data () {
             return {
@@ -43,6 +45,15 @@
                 }
             }
         },
+		created() {
+            var that=this;
+
+			// 保存数据
+			GlobalBus.$off("register1_save");
+			GlobalBus.$on("register1_save", function (callBack){
+                callBack(that.formValidate);
+			});
+		}, 	        
         methods: {
             /**
              * 下一步

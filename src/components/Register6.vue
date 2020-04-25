@@ -41,6 +41,8 @@
     </span>      
 </template>
 <script>
+    import {GlobalBus} from './../common/GlobalBus.js';
+
     export default {
         data () {
             return {
@@ -61,6 +63,15 @@
                 }
             }
         },
+		created() {
+            var that=this;
+
+			// 保存数据
+			GlobalBus.$off("register6_save");
+			GlobalBus.$on("register6_save", function (callBack){
+                callBack(that.formValidate);
+			});
+		}, 	        
         methods: {
             /**
              * 上一步
@@ -80,7 +91,7 @@
                             "content":'完成了!',
                             "duration":2  
                         });
-                        // this.$emit('saveHandle');
+                        this.$emit('saveHandle');
                     } else {
                         this.$Message.error({
                             "content":'必填项，未填!',
