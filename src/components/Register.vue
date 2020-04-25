@@ -12,8 +12,54 @@
             left: 0px;
             z-index: 1;
             width: 100%;
+            padding: 6px 16px;
             // height: 200px;
             // height: ;
+
+            h2{
+                margin-top: 10px;
+                margin-bottom: 30px;
+            }
+
+            .ivu-divider{
+                margin: 0px;
+            }
+
+            ul{
+                li.action{
+                    background:url('./../../public/arrows1.svg');
+                    background-repeat: no-repeat;   //不重复
+                    background-size: 100% 100%;     // 满屏
+                }
+
+                li{
+                    // position: relative;
+                    display: inline-block;
+                    // width: 170px;
+                    height: 40px;
+                    line-height: 32px;
+                    // background: yellow;
+                    padding: 3px 16px;
+                    margin-right: 30px;
+                    // border: 1px solid red;
+
+                    // background:url('./../../public/arrows1.svg');
+
+
+                    // img{
+                    //     position: absolute;
+                    //     top: 0px;
+                    //     right: 0px;
+                    //     width: 20px;
+                    //     height: 20px;
+                    // }
+
+                    span{
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+                }
+            }
         }
 
         .content-box{
@@ -71,15 +117,34 @@
     <span class="register-html">
         <div class="head">
             <h2 style="text-align:center">供应商申请注册</h2>
-            <Steps :current="1">
+            <!-- <Steps :current="1">
                 <Step title="已完成" content="这里是该步骤的描述信息"></Step>
                 <Step title="进行中" content="这里是该步骤的描述信息"></Step>
                 <Step title="待进行" content="这里是该步骤的描述信息"></Step>
                 <Step title="待进行" content="这里是该步骤的描述信息"></Step>
-            </Steps>
+            </Steps> -->
+            <ul>
+                <li :class="currentPage>=1?'action':''">
+                    <span>供应商声明</span>
+                </li>
+                <li :class="currentPage>=2?'action':''">
+                    <span>基本信息</span>
+                </li>
+                <li :class="currentPage>=3?'action':''">
+                    <span>供应商资质信息</span>
+                </li>
+                <li :class="currentPage>=4?'action':''">
+                    <span>财务信息</span>
+                </li>
+                <li :class="currentPage>=5?'action':''">
+                    <span>供应商联系人</span>
+                </li>
+                <li :class="currentPage>=6?'action':''">
+                    <span>调研问卷</span>
+                </li>                                                                                
+            </ul>
 
-
-            <!-- <Divider /> -->
+            <Divider />
 
         </div>
         <div class="content-box">
@@ -104,6 +169,8 @@
 
 
     import {GlobalBus} from './../common/GlobalBus.js';
+    import img1 from './../../public/arrows1.svg';
+    import img2 from './../../public/arrows2.svg';
 
 
     export default {
@@ -117,6 +184,9 @@
         },
         data () {
             return {
+                img1:img1,
+                img2:img2,
+
                 currentPage:1,   // 当前页面
             }
         },
