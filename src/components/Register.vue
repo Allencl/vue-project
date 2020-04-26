@@ -315,7 +315,12 @@
                 }
 
                 console.log(params);
-    
+                // 参数 参考
+                this.$Notice.open({
+                    title: '注册参数',
+                    duration:0,
+                    desc: JSON.stringify( params )
+                }); 
             }            
         }        
     }
