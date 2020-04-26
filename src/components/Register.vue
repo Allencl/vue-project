@@ -10,7 +10,7 @@
             position: fixed;
             top: 0px;
             left: 0px;
-            z-index: 1;
+            z-index: 991;
             width: 100%;
             padding: 6px 16px;
             // height: 200px;
@@ -29,6 +29,7 @@
                 margin-bottom: 8px;
 
                 li.action{
+                    color: #fff;
                     background:url('./../../public/backg1.png');
                     background-repeat: no-repeat;   //不重复
                     background-size: 100% 100%;     // 满屏
@@ -38,13 +39,14 @@
                     // position: relative;
                     display: inline-block;
                     width: 140px;
-                    height: 40px;
+                    height: 36px;
                     text-align: center;
                     line-height: 38px;
                     // background: yellow;
-                    padding: 3px 12px;
-                    margin-right: 30px;
-                    color: #fff;
+                    padding: 0px 12px;
+                    margin-right: 22px;
+                    font-size: 16px;
+                    
                     // border: 1px solid red;
 
                     // background:url('./../../public/arrows1.svg');
@@ -67,6 +69,10 @@
         }
 
         .content-box{
+
+            .title-text{
+                line-height: 36px;
+            }
 
             .table-FormItem{
                 margin-bottom: 0px;
@@ -112,6 +118,34 @@
                 .ivu-checkbox{
                     margin-right: 3px;
                 }
+            }
+
+            .checkbox-box{
+                .ivu-checkbox-checked .ivu-checkbox-inner {
+                    border-color: #2d8cf0;
+                    background-color: #2d8cf0;
+                }
+
+                .ivu-checkbox-disabled.ivu-checkbox-checked .ivu-checkbox-inner:after {
+                    border-color: #fff;
+                }
+            }
+        }
+
+        .qualification-page{
+            .ivu-row{
+                .ivu-col{
+                    text-align: center;
+                    padding: 0px 16px;
+
+                    &.checkbox-box{
+                        text-align: left;
+                    }
+                }
+            }
+            
+            .ivu-form-item-error-tip{
+                // width: 100%;
             }
         }
     }
@@ -191,7 +225,7 @@
                 img1:img1,
                 img2:img2,
 
-                currentPage:5,   // 当前页面
+                currentPage:1,   // 当前页面
             }
         },
         methods: {
