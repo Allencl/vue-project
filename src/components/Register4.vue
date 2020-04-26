@@ -7,10 +7,10 @@
                 <Button type="primary" size="small" icon="md-add" @click="addRow">新增</Button>
                 <Button type="error" size="small" icon="md-trash" @click="deleteAll">全部删除</Button>
             </div>
-            <div>
+            <!-- <div>
                 <mark>注：每种地址标签如有多条，可维护多列。</mark>
                 <span></span>
-            </div>
+            </div> -->
             <Table 
                 :columns="columns" 
                 :data="formValidate.dataTable"
@@ -79,58 +79,9 @@
             // 配置列
             this.columns = [
                 {
-                    title: '地址标签',
-                    key: 'address',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择地址标签..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                },
-                {
                     title: '国家',
                     key: 'country',
+                    width:140,
                     renderHeader:(h, params) => {
                         return h('div', [
                             h('span', {
@@ -179,8 +130,9 @@
                     }                    
                 }, 
                 {
-                    title: '省',
-                    key: 'provincial',
+                    title: '货币',
+                    key: 'currency',
+                    width:120,
                     renderHeader:(h, params) => {
                         return h('div', [
                             h('span', {
@@ -205,7 +157,7 @@
                             h('Select',{
                                 props:{
                                     transfer:true,
-                                    placeholder:"请选择省..."
+                                    placeholder:"请选择货币..."
                                 },
                                 on: {  
                                     'on-change':(value) => { 
@@ -227,111 +179,11 @@
                             ])
                         ]);
                     }                    
-                },   
+                },    
                 {
-                    title: '市',
-                    key: 'city',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择市..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                }, 
-                {
-                    title: '县/区',
-                    key: 'county',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择县/区..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                },  
-                {
-                    title: '街道',
-                    key: 'street',
-                    minWidth:180,
+                    title: '银行账号',
+                    key: 'bankAccount',
+                    // minWidth:100,
                     renderHeader:(h, params) => {
                         return h('div', [
                             h('span', {
@@ -355,7 +207,7 @@
                         },[
                             h('Input',{
                                 props:{
-                                    placeholder:"请输入详细街道地址..."   
+                                    placeholder:"请输入银行账号..."   
                                 },
                                 on: {  
                                     'on-change':(event) => { 
@@ -369,10 +221,136 @@
                             })
                         ]);
                     }                    
-                },  
+                }, 
                 {
-                    title: '邮政编码',
-                    key: 'postalCode',
+                    title: '开户名称',
+                    key: 'bankDeposit',
+                    // minWidth:100,
+                    renderHeader:(h, params) => {
+                        return h('div', [
+                            h('span', {
+                                style:{
+                                    color:"#ed4014"
+                                }
+                            },'*'),
+                            h('span', params.column.title)
+                        ]);
+                    },
+                    render: (h, params) => {
+                        var key= params.column['key'];
+                        var index= params.index;
+                        var row = params.row;
+
+                        return h('FormItem',{
+                            class:"table-FormItem",
+                            props:{
+                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
+                            }
+                        },[
+                            h('Input',{
+                                props:{
+                                    placeholder:"请输入开户名称..."   
+                                },
+                                on: {  
+                                    'on-change':(event) => { 
+                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
+                                            var json=o[key];
+                                            if(i==index) json=Object.assign({},json,{value:event.target.value});
+                                            return Object.assign({},o,{[key]:json});
+                                        });                                        
+                                    }  
+                                },   
+                            })
+                        ]);
+                    }                    
+                }, 
+                {
+                    title: '银行名称',
+                    key: 'bankName',
+                    // minWidth:100,
+                    renderHeader:(h, params) => {
+                        return h('div', [
+                            h('span', {
+                                style:{
+                                    color:"#ed4014"
+                                }
+                            },'*'),
+                            h('span', params.column.title)
+                        ]);
+                    },
+                    render: (h, params) => {
+                        var key= params.column['key'];
+                        var index= params.index;
+                        var row = params.row;
+
+                        return h('FormItem',{
+                            class:"table-FormItem",
+                            props:{
+                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
+                            }
+                        },[
+                            h('Input',{
+                                props:{
+                                    placeholder:"请输入银行名称..."   
+                                },
+                                on: {  
+                                    'on-change':(event) => { 
+                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
+                                            var json=o[key];
+                                            if(i==index) json=Object.assign({},json,{value:event.target.value});
+                                            return Object.assign({},o,{[key]:json});
+                                        });                                        
+                                    }  
+                                },   
+                            })
+                        ]);
+                    }                    
+                },                                  
+                {
+                    title: '开户地址',
+                    key: 'address',
+                    width:260,
+                    renderHeader:(h, params) => {
+                        return h('div', [
+                            // h('span', {
+                            //     style:{
+                            //         color:"#ed4014"
+                            //     }
+                            // },'*'),
+                            h('span', params.column.title)
+                        ]);
+                    },
+                    render: (h, params) => {
+                        var key= params.column['key'];
+                        var index= params.index;
+                        var row = params.row;
+
+                        return h('FormItem',{
+                            class:"table-FormItem",
+                            props:{
+                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
+                            }
+                        },[
+                            h('Input',{
+                                props:{
+                                    placeholder:"请输入开户地址..."   
+                                },
+                                on: {  
+                                    'on-change':(event) => { 
+                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
+                                            var json=o[key];
+                                            if(i==index) json=Object.assign({},json,{value:event.target.value});
+                                            return Object.assign({},o,{[key]:json});
+                                        });                                         
+                                    }  
+                                },   
+                            })
+                        ]);
+                    }                    
+                },
+                {
+                    title: '备注',
+                    key: 'remark',
                     width:180,
                     renderHeader:(h, params) => {
                         return h('div', [
@@ -397,7 +375,7 @@
                         },[
                             h('Input',{
                                 props:{
-                                    placeholder:"请输入邮政编码..."   
+                                    placeholder:"请输入备注..."   
                                 },
                                 on: {  
                                     'on-change':(event) => { 
@@ -411,53 +389,7 @@
                             })
                         ]);
                     }                    
-                },
-                {
-                    title: '主地址',
-                    key: 'main',
-                    width:120,
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            // h('span', {
-                            //     style:{
-                            //         color:"#ed4014"
-                            //     }
-                            // },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Checkbox',{
-                                props:{
-                                    value:row[key]['value']
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index){
-                                                json=Object.assign({},json,{value:value});
-                                            } else{
-                                                json=Object.assign({},json,{value:false});
-                                            }
-                                            return Object.assign({},o,{[key]:json});
-                                        });                                         
-                                    }  
-                                }, 
-                            },(row[key]['value']?'是':'否'))
-                        ]);
-                    }                    
-                },                                                                                                              
+                },                                                                                                                             
                 {
                     title: '操作',
                     key: 'action',
@@ -508,7 +440,7 @@
 
                 if( this.formValidate.dataTable['length']==0 ){
                     this.$Message.info({
-                        "content":'地址未编辑!',
+                        "content":'财务信息未编辑!',
                         "duration":2  
                     });  
                     return;                          
@@ -524,7 +456,7 @@
                 // table数据不完整
                 if(result){
                     this.$Message.info({
-                        "content":'地址数据不完整!',
+                        "content":'财务信息数据不完整!',
                         "duration":2  
                     });
                     return;
@@ -578,19 +510,6 @@
             */
             tableInit(){
 
-                // 地址 list
-                var addrList=[
-                    {
-                        value: 'register',
-                        label: '注册'
-                    },
-                    {
-                        value: 'office',
-                        label: '办公'
-                    }
-                ];
-
-
                 // 国家
                 var countryList=[
                     {
@@ -603,84 +522,54 @@
                     }
                 ];
 
-                // 省
-                var provincialList = [
+                // 货币
+                var currencyList = [
                     {
-                        value: 'beijing',
-                        label: '北京市'
+                        value: 'CNY',
+                        label: 'CNY'
                     },
                     {
-                        value: 'shanghai',
-                        label: '上海市'
-                    }                    
-                ];
-
-                // 市
-                var cityList = [
-                    {
-                        value: 'zunyi',
-                        label: '遵义市'
-                    },
-                    {
-                        value: 'nantong',
-                        label: '南通市'
+                        value: 'USD',
+                        label: 'USD'
                     }                    
                 ];
 
 
-                // 县/区
-                var countyList=[
-                    {
-                        value: '徐汇',
-                        label: '徐汇区'
-                    },
-                    {
-                        value: 'luwan',
-                        label: '卢湾区'
-                    }                     
-                ];
 
 
                 // 模拟行数据
                 this.rowData=[
                     {
-                        address:{
-                            required:true,   // 必填
-                            value: '',       // 选中值
-                            children:addrList  // 下拉数据
-                        },
                         country:{
                             required:true,
                             value: '',
                             children:countryList
                         },
-                        provincial:{
+                        currency:{
                             required:true,
                             value: '',
-                            children:provincialList
+                            children:currencyList
                         },
-                        city:{
-                            required:true,
-                            value: '',
-                            children:cityList
-                        }, 
-                        county:{
-                            required:true,
-                            value: '',
-                            children:countyList
-                        },
-                        street:{
+                        bankAccount:{
                             required:true,
                             value: '',                            
                         },
-                        postalCode:{
+                        bankDeposit:{
+                            required:true,
+                            value: '',                            
+                        },
+                        bankName:{
+                            required:true,
+                            value: '',                            
+                        },
+                        address:{
                             required:false,
                             value: '',                            
                         },
-                        main:{
+                        remark:{
                             required:false,
-                            value: false,                              
-                        }                                                                            
+                            value: '',                            
+                        }                                                                          
                     }
                 ];
             },

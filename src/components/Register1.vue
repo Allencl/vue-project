@@ -3,7 +3,7 @@
 
         <br/>
         <h3>供应商申明</h3>
-        <br/>
+   
         <FormItem label="" prop="desc">
             <Input 
                 v-model="formValidate.desc" 
@@ -19,7 +19,7 @@
             </RadioGroup>
         </FormItem>
         <div class="btn-box">
-            <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+            <!-- <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button> -->
             <Button type="primary" @click="nextStep">下一步</Button>
         </div>
         </FormItem>

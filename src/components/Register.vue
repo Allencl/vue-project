@@ -2,7 +2,7 @@
 
     .register-html{
         position: relative;
-        padding: 100px 64px 64px 64px;
+        padding: 150px 64px 64px 64px;
         display: block;
 
         .head{
@@ -26,8 +26,10 @@
             }
 
             ul{
+                margin-bottom: 8px;
+
                 li.action{
-                    background:url('./../../public/arrows1.svg');
+                    background:url('./../../public/backg1.png');
                     background-repeat: no-repeat;   //不重复
                     background-size: 100% 100%;     // 满屏
                 }
@@ -35,12 +37,14 @@
                 li{
                     // position: relative;
                     display: inline-block;
-                    // width: 170px;
+                    width: 140px;
                     height: 40px;
-                    line-height: 32px;
+                    text-align: center;
+                    line-height: 38px;
                     // background: yellow;
-                    padding: 3px 16px;
+                    padding: 3px 12px;
                     margin-right: 30px;
+                    color: #fff;
                     // border: 1px solid red;
 
                     // background:url('./../../public/arrows1.svg');
@@ -148,12 +152,12 @@
 
         </div>
         <div class="content-box">
-            <Register1 v-if="currentPage==1" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register2 v-if="currentPage==2" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register3 v-if="currentPage==3" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register4 v-if="currentPage==4" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register5 v-if="currentPage==5" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register6 v-if="currentPage==6" @lastStep="lastStep" @nextStep="nextStep" @saveHandle="saveHandle" />
+            <Register1 v-show="currentPage==1" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register2 v-show="currentPage==2" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register3 v-show="currentPage==3" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register4 v-show="currentPage==4" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register5 v-show="currentPage==5" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register6 v-show="currentPage==6" @lastStep="lastStep" @nextStep="nextStep" @saveHandle="saveHandle" />
         </div>
     </span>
 </template>
@@ -187,7 +191,7 @@
                 img1:img1,
                 img2:img2,
 
-                currentPage:1,   // 当前页面
+                currentPage:5,   // 当前页面
             }
         },
         methods: {
