@@ -226,6 +226,7 @@
                 img2:img2,
 
                 currentPage:1,   // 当前页面
+                
             }
         },
         methods: {
