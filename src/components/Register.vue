@@ -2,17 +2,19 @@
 
     .register-html{
         position: relative;
-        padding: 150px 64px 64px 64px;
+        // padding: 150px 64px 64px 64px;
+        // padding: 0px 32px;
         display: block;
+        padding-bottom: 50px;
 
         .head{
             background: #fff;
-            position: fixed;
+            // position: fixed;
             top: 0px;
             left: 0px;
             z-index: 991;
             width: 100%;
-            padding: 6px 16px;
+            padding: 6px 16px 0px 16px;
             // height: 200px;
             // height: ;
 
@@ -69,6 +71,25 @@
         }
 
         .content-box{
+            padding: 32px 32px;
+            overflow-y: auto;
+
+
+            &::-webkit-scrollbar {
+                width : 3px;  
+                height: 1px;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+                background   : #ccc;
+            }
+            &::-webkit-scrollbar-track {
+                box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+                background   : #fff;
+            }
+
 
             .title-text{
                 line-height: 36px;
@@ -95,8 +116,15 @@
             }
 
             .btn-box{
+                position: absolute;
+                bottom: 0px;
+                right: 0px;
                 text-align: right;
-                margin: 16px 0px;
+                padding: 16px 36px;
+                padding-bottom: 0px;
+                width: 100%;
+                z-index: 911;
+                background: #fff;
                 // padding: 10px;
 
                 button{
@@ -152,15 +180,9 @@
 </style>
 
 <template>
-    <span class="register-html">
+    <div class="register-html">
         <div class="head">
             <h2 style="text-align:center">供应商申请注册</h2>
-            <!-- <Steps :current="1">
-                <Step title="已完成" content="这里是该步骤的描述信息"></Step>
-                <Step title="进行中" content="这里是该步骤的描述信息"></Step>
-                <Step title="待进行" content="这里是该步骤的描述信息"></Step>
-                <Step title="待进行" content="这里是该步骤的描述信息"></Step>
-            </Steps> -->
             <ul>
                 <li :class="currentPage>=1?'action':''">
                     <span>供应商声明</span>
@@ -185,7 +207,7 @@
             <Divider />
 
         </div>
-        <div class="content-box">
+        <div class="content-box" :style="{height:outerHeight+'px'}">
             <Register1 v-show="currentPage==1" @lastStep="lastStep" @nextStep="nextStep" />
             <Register2 v-show="currentPage==2" @lastStep="lastStep" @nextStep="nextStep" />
             <Register3 v-show="currentPage==3" @lastStep="lastStep" @nextStep="nextStep" />
@@ -193,7 +215,7 @@
             <Register5 v-show="currentPage==5" @lastStep="lastStep" @nextStep="nextStep" />
             <Register6 v-show="currentPage==6" @lastStep="lastStep" @nextStep="nextStep" @saveHandle="saveHandle" />
         </div>
-    </span>
+    </div>
 </template>
 
 <script>
@@ -222,6 +244,7 @@
         },
         data () {
             return {
+                outerHeight:window.innerHeight-240,
                 img1:img1,
                 img2:img2,
 

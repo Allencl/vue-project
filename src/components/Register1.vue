@@ -1,29 +1,31 @@
 <template>
-    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="0" :label-colon="true">
+    <span>
+        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="0" :label-colon="true">
 
-        <br/>
-        <h3>供应商申明</h3>
-   
-        <FormItem label="" prop="desc">
-            <Input 
-                v-model="formValidate.desc" 
-                type="textarea" 
-                :autosize="{minRows: 12,maxRows: 15}" 
-                readonly
-            />
-        </FormItem>
-        <FormItem>
-        <FormItem label="" prop="gender">
-            <RadioGroup v-model="formValidate.gender">
-                <Radio label="agree">已经查看申明类型，并同意</Radio>
-            </RadioGroup>
-        </FormItem>
+            <br/>
+            <h3 style="margin-bottom:16px">供应商申明</h3>
+            <FormItem label="" prop="desc">
+                <Input 
+                    v-model="formValidate.desc" 
+                    type="textarea" 
+                    :autosize="{minRows: 12,maxRows: 15}" 
+                    readonly
+                />
+            </FormItem>
+
+
+            <FormItem label="" prop="gender">
+                <RadioGroup v-model="formValidate.gender">
+                    <Radio label="agree">已经查看申明类型，并同意</Radio>
+                </RadioGroup>
+            </FormItem>
+
+        </Form> 
         <div class="btn-box">
             <!-- <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button> -->
             <Button type="primary" @click="nextStep">下一步</Button>
         </div>
-        </FormItem>
-    </Form>        
+    </span>           
 </template>
 <script>
     import {GlobalBus} from './../common/GlobalBus.js';

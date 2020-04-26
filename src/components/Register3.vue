@@ -565,13 +565,7 @@
             <br/>
             <Divider />
 
-            <div class="btn-box">
-                <FormItem>
-                    <Button type="warning" @click="handleResetModal">重置</Button>
-                    <Button type="info" @click="lastStep">上一步</Button>
-                    <Button type="primary" @click="nextStep">下一步</Button>
-                </FormItem>            
-            </div> 
+
         </Form>        
         <Modal v-model="modal" width="360">
             <p slot="header" style="color:#f60;text-align:center">
@@ -585,7 +579,12 @@
             <div slot="footer">
                 <Button type="error" size="large" long @click="handleReset">重置</Button>
             </div>
-        </Modal>       
+        </Modal>  
+        <div class="btn-box">
+            <Button type="warning" @click="handleResetModal">重置</Button>
+            <Button type="info" @click="lastStep">上一步</Button>
+            <Button type="primary" @click="nextStep">下一步</Button>
+        </div>      
     </span>
 </template>
 <script>
@@ -878,14 +877,13 @@
                         }
 
 
-                        console.log(this.formValidate);
-                        // return;
+
                         // 数据录入完成 跳转下一步
-                        // this.$Message.success({
-                        //     "content":'填写完成!',
-                        //     "duration":2  
-                        // });
-                        // this.$emit('nextStep');
+                        this.$Message.success({
+                            "content":'填写完成!',
+                            "duration":2  
+                        });
+                        this.$emit('nextStep');
 
                     } else {
                         this.$Message.error({
