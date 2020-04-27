@@ -2,21 +2,27 @@
     <span>
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="0" :label-colon="true">
 
-            <br/>
+       
             <h3 style="margin-bottom:16px">供应商申明</h3>
-            <FormItem label="" prop="desc">
+            <Input 
+                v-model="formValidate.desc" 
+                type="textarea" 
+                :autosize="{minRows: 12,maxRows: 15}" 
+                readonly
+            />            
+            <!-- <FormItem label="" prop="desc">
                 <Input 
                     v-model="formValidate.desc" 
                     type="textarea" 
                     :autosize="{minRows: 12,maxRows: 15}" 
                     readonly
                 />
-            </FormItem>
+            </FormItem> -->
 
 
             <FormItem label="" prop="gender">
                 <RadioGroup v-model="formValidate.gender">
-                    <Radio label="agree">已经查看申明类型，并同意</Radio>
+                    <Radio label="agree">已经查看申明类型，并同意。</Radio>
                 </RadioGroup>
             </FormItem>
 
@@ -34,7 +40,7 @@
         data () {
             return {
                 formValidate: {
-                    desc: '1、这里是一些规则'
+                    desc:'1、这里是供应商声明。。。',
                 },
                 ruleValidate: {
                     gender: [

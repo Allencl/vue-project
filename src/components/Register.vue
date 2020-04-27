@@ -205,7 +205,7 @@
             </ul>
 
             <Divider />
-
+            
         </div>
         <div class="content-box" :style="{height:outerHeight+'px'}">
             <Register1 v-show="currentPage==1" @lastStep="lastStep" @nextStep="nextStep" />
@@ -319,7 +319,7 @@
                 this.$Notice.open({
                     title: '注册参数',
                     duration:0,
-                    desc: JSON.stringify( params )
+                    desc: `<div style="overflow: auto;height:500px">${ JSON.stringify( params ) }</div>` 
                 }); 
             }            
         }        
