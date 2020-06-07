@@ -91,7 +91,7 @@
                             "content":'完成了!',
                             "duration":2  
                         });
-                        this.$emit('saveHandle');
+                        this.$emit('saveHandle');                    
                     } else {
                         this.$Message.error({
                             "content":'必填项，未填!',

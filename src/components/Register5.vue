@@ -8,7 +8,7 @@
                 <Button type="error" size="small" icon="md-trash" @click="deleteAll">全部删除</Button>
             </div>
             <div>
-                <mark>注：每种地址标签如有多条，可维护多列。</mark>
+                <mark>注：平台账号将发送至管理联系人员的电子邮件。</mark>
                 <span></span>
             </div>
             <Table 
@@ -19,13 +19,6 @@
 
 
             <br/>
-            <div class="btn-box">
-                <FormItem>
-                    <Button type="warning" @click="handleResetModal">重置</Button>
-                    <Button type="info" @click="lastStep">上一步</Button>
-                    <Button type="primary" @click="nextStep">下一步</Button>
-                </FormItem>            
-            </div> 
         </Form>        
         <Modal v-model="modal" width="360">
             <p slot="header" style="color:#f60;text-align:center">
@@ -39,7 +32,12 @@
             <div slot="footer">
                 <Button type="error" size="large" long @click="handleReset">重置</Button>
             </div>
-        </Modal>       
+        </Modal>  
+        <div class="btn-box">
+            <Button type="warning" @click="handleResetModal">重置</Button>
+            <Button type="info" @click="lastStep">上一步</Button>
+            <Button type="primary" @click="nextStep">下一步</Button>
+        </div>              
     </span>
 </template>
 <script>
@@ -79,259 +77,9 @@
             // 配置列
             this.columns = [
                 {
-                    title: '地址标签',
-                    key: 'address',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择地址标签..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                },
-                {
-                    title: '国家',
-                    key: 'country',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择国家..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                }, 
-                {
-                    title: '省',
-                    key: 'provincial',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error: ( (row[key]['required']) && (row[key]['value']))?'':'必填！'
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择省..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                },   
-                {
-                    title: '市',
-                    key: 'city',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择市..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                }, 
-                {
-                    title: '县/区',
-                    key: 'county',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择县/区..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                },  
-                {
-                    title: '街道',
-                    key: 'street',
-                    minWidth:180,
+                    title: '姓名',
+                    key: 'name',
+                    // minWidth:180,
                     renderHeader:(h, params) => {
                         return h('div', [
                             h('span', {
@@ -355,7 +103,7 @@
                         },[
                             h('Input',{
                                 props:{
-                                    placeholder:"请输入详细街道地址..."   
+                                    placeholder:"请输入姓名..."   
                                 },
                                 on: {  
                                     'on-change':(event) => { 
@@ -369,11 +117,61 @@
                             })
                         ]);
                     }                    
-                },  
+                },                 
                 {
-                    title: '邮政编码',
-                    key: 'postalCode',
-                    width:180,
+                    title: '职务名称',
+                    key: 'position',
+                    renderHeader:(h, params) => {
+                        return h('div', [
+                            // h('span', {
+                            //     style:{
+                            //         color:"#ed4014"
+                            //     }
+                            // },'*'),
+                            h('span', params.column.title)
+                        ]);
+                    },
+                    render: (h, params) => {
+                        var key= params.column['key'];
+                        var index= params.index;
+                        var row = params.row;
+
+                        return h('FormItem',{
+                            class:"table-FormItem",
+                            props:{
+                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
+                            }
+                        },[
+                            h('Select',{
+                                props:{
+                                    transfer:true,
+                                    placeholder:"请选择职务名称..."
+                                },
+                                on: {  
+                                    'on-change':(value) => { 
+                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
+                                            var json=o[key];
+                                            if(i==index) json=Object.assign({},json,{value:value});
+                                            return Object.assign({},o,{[key]:json});
+                                        });
+                                    }  
+                                },  
+                            },[
+                                row[key]['children'].map((o)=>{
+                                    return h('Option',{
+                                        props:{
+                                            value:o['value']
+                                        }
+                                    },o['label'])
+                                })
+                            ])
+                        ]);
+                    }                    
+                },
+                {
+                    title: '电话',
+                    key: 'phone',
+                    // minWidth:180,
                     renderHeader:(h, params) => {
                         return h('div', [
                             // h('span', {
@@ -397,7 +195,7 @@
                         },[
                             h('Input',{
                                 props:{
-                                    placeholder:"请输入邮政编码..."   
+                                    placeholder:"请输入电话..."   
                                 },
                                 on: {  
                                     'on-change':(event) => { 
@@ -405,7 +203,91 @@
                                             var json=o[key];
                                             if(i==index) json=Object.assign({},json,{value:event.target.value});
                                             return Object.assign({},o,{[key]:json});
-                                        });                                         
+                                        });                                        
+                                    }  
+                                },   
+                            })
+                        ]);
+                    }                    
+                }, 
+                {
+                    title: '移动电话',
+                    key: 'mobileTelephone',
+                    // minWidth:180,
+                    renderHeader:(h, params) => {
+                        return h('div', [
+                            h('span', {
+                                style:{
+                                    color:"#ed4014"
+                                }
+                            },'*'),
+                            h('span', params.column.title)
+                        ]);
+                    },
+                    render: (h, params) => {
+                        var key= params.column['key'];
+                        var index= params.index;
+                        var row = params.row;
+
+                        return h('FormItem',{
+                            class:"table-FormItem",
+                            props:{
+                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
+                            }
+                        },[
+                            h('Input',{
+                                props:{
+                                    placeholder:"请输入移动电话..."   
+                                },
+                                on: {  
+                                    'on-change':(event) => { 
+                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
+                                            var json=o[key];
+                                            if(i==index) json=Object.assign({},json,{value:event.target.value});
+                                            return Object.assign({},o,{[key]:json});
+                                        });                                        
+                                    }  
+                                },   
+                            })
+                        ]);
+                    }                    
+                },  
+                {
+                    title: '传真',
+                    key: 'fax',
+                    // minWidth:180,
+                    renderHeader:(h, params) => {
+                        return h('div', [
+                            // h('span', {
+                            //     style:{
+                            //         color:"#ed4014"
+                            //     }
+                            // },'*'),
+                            h('span', params.column.title)
+                        ]);
+                    },
+                    render: (h, params) => {
+                        var key= params.column['key'];
+                        var index= params.index;
+                        var row = params.row;
+
+                        return h('FormItem',{
+                            class:"table-FormItem",
+                            props:{
+                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
+                            }
+                        },[
+                            h('Input',{
+                                props:{
+                                    placeholder:"请输入传真..."   
+                                },
+                                on: {  
+                                    'on-change':(event) => { 
+                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
+                                            var json=o[key];
+                                            if(i==index) json=Object.assign({},json,{value:event.target.value});
+                                            return Object.assign({},o,{[key]:json});
+                                        });                                        
                                     }  
                                 },   
                             })
@@ -413,9 +295,93 @@
                     }                    
                 },
                 {
-                    title: '主地址',
+                    title: '电子邮件',
+                    key: 'email',
+                    // minWidth:180,
+                    renderHeader:(h, params) => {
+                        return h('div', [
+                            h('span', {
+                                style:{
+                                    color:"#ed4014"
+                                }
+                            },'*'),
+                            h('span', params.column.title)
+                        ]);
+                    },
+                    render: (h, params) => {
+                        var key= params.column['key'];
+                        var index= params.index;
+                        var row = params.row;
+
+                        return h('FormItem',{
+                            class:"table-FormItem",
+                            props:{
+                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
+                            }
+                        },[
+                            h('Input',{
+                                props:{
+                                    placeholder:"请输入电子邮件..."   
+                                },
+                                on: {  
+                                    'on-change':(event) => { 
+                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
+                                            var json=o[key];
+                                            if(i==index) json=Object.assign({},json,{value:event.target.value});
+                                            return Object.assign({},o,{[key]:json});
+                                        });                                        
+                                    }  
+                                },   
+                            })
+                        ]);
+                    }                    
+                },
+                {
+                    title: '确认电子邮件',
+                    key: 'emailAffirm',
+                    // minWidth:180,
+                    renderHeader:(h, params) => {
+                        return h('div', [
+                            h('span', {
+                                style:{
+                                    color:"#ed4014"
+                                }
+                            },'*'),
+                            h('span', params.column.title)
+                        ]);
+                    },
+                    render: (h, params) => {
+                        var key= params.column['key'];
+                        var index= params.index;
+                        var row = params.row;
+
+                        return h('FormItem',{
+                            class:"table-FormItem",
+                            props:{
+                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
+                            }
+                        },[
+                            h('Input',{
+                                props:{
+                                    placeholder:"请输入电子邮件..."   
+                                },
+                                on: {  
+                                    'on-change':(event) => { 
+                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
+                                            var json=o[key];
+                                            if(i==index) json=Object.assign({},json,{value:event.target.value});
+                                            return Object.assign({},o,{[key]:json});
+                                        });                                        
+                                    }  
+                                },   
+                            })
+                        ]);
+                    }                    
+                },                                                                   
+                {
+                    title: '主供应商联系人',
                     key: 'main',
-                    width:120,
+                    width:160,
                     renderHeader:(h, params) => {
                         return h('div', [
                             // h('span', {
@@ -508,7 +474,7 @@
 
                 if( this.formValidate.dataTable['length']==0 ){
                     this.$Message.info({
-                        "content":'地址未编辑!',
+                        "content":'供应商注册未编辑!',
                         "duration":2  
                     });  
                     return;                          
@@ -524,7 +490,7 @@
                 // table数据不完整
                 if(result){
                     this.$Message.info({
-                        "content":'地址数据不完整!',
+                        "content":'供应商注册数据不完整!',
                         "duration":2  
                     });
                     return;
@@ -578,105 +544,53 @@
             */
             tableInit(){
 
-                // 地址 list
-                var addrList=[
+                // 职务
+                var positionList=[
                     {
-                        value: 'register',
-                        label: '注册'
+                        value: 'chairman',
+                        label: '董事长'
                     },
                     {
-                        value: 'office',
-                        label: '办公'
+                        value: 'generalManager ',
+                        label: '总经理'
                     }
                 ];
 
 
-                // 国家
-                var countryList=[
-                    {
-                        value: 'China',
-                        label: '中国'
-                    },
-                    {
-                        value: 'America',
-                        label: '美国'
-                    }
-                ];
-
-                // 省
-                var provincialList = [
-                    {
-                        value: 'beijing',
-                        label: '北京市'
-                    },
-                    {
-                        value: 'shanghai',
-                        label: '上海市'
-                    }                    
-                ];
-
-                // 市
-                var cityList = [
-                    {
-                        value: 'zunyi',
-                        label: '遵义市'
-                    },
-                    {
-                        value: 'nantong',
-                        label: '南通市'
-                    }                    
-                ];
-
-
-                // 县/区
-                var countyList=[
-                    {
-                        value: '徐汇',
-                        label: '徐汇区'
-                    },
-                    {
-                        value: 'luwan',
-                        label: '卢湾区'
-                    }                     
-                ];
 
 
                 // 模拟行数据
                 this.rowData=[
                     {
-                        address:{
-                            required:true,   // 必填
+                        name:{
+                            required:true,
+                            value: '',  
+                        },
+                        position:{
+                            required:false,   // 必填
                             value: '',       // 选中值
-                            children:addrList  // 下拉数据
+                            children:positionList  // 下拉数据
                         },
-                        country:{
-                            required:true,
-                            value: '',
-                            children:countryList
-                        },
-                        provincial:{
-                            required:true,
-                            value: '',
-                            children:provincialList
-                        },
-                        city:{
-                            required:true,
-                            value: '',
-                            children:cityList
-                        }, 
-                        county:{
-                            required:true,
-                            value: '',
-                            children:countyList
-                        },
-                        street:{
-                            required:true,
-                            value: '',                            
-                        },
-                        postalCode:{
+                        phone:{
                             required:false,
-                            value: '',                            
+                            value: '',  
                         },
+                        mobileTelephone:{
+                            required:true,
+                            value: '',  
+                        },
+                        fax:{
+                            required:false,
+                            value: '',  
+                        },
+                        email:{
+                            required:true,
+                            value: '',  
+                        },
+                        emailAffirm:{
+                            required:true,
+                            value: '',  
+                        },                                                                                                
                         main:{
                             required:false,
                             value: false,                              

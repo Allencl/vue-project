@@ -2,17 +2,19 @@
 
     .register-html{
         position: relative;
-        padding: 100px 64px 64px 64px;
+        // padding: 150px 64px 64px 64px;
+        // padding: 0px 32px;
         display: block;
+        padding-bottom: 50px;
 
         .head{
             background: #fff;
-            position: fixed;
+            // position: fixed;
             top: 0px;
             left: 0px;
-            z-index: 1;
+            z-index: 991;
             width: 100%;
-            padding: 6px 16px;
+            padding: 6px 16px 0px 16px;
             // height: 200px;
             // height: ;
 
@@ -26,8 +28,11 @@
             }
 
             ul{
+                margin-bottom: 8px;
+
                 li.action{
-                    background:url('./../../public/arrows1.svg');
+                    color: #fff;
+                    background:url('./../../public/backg1.png');
                     background-repeat: no-repeat;   //不重复
                     background-size: 100% 100%;     // 满屏
                 }
@@ -35,12 +40,15 @@
                 li{
                     // position: relative;
                     display: inline-block;
-                    // width: 170px;
-                    height: 40px;
-                    line-height: 32px;
+                    width: 140px;
+                    height: 36px;
+                    text-align: center;
+                    line-height: 38px;
                     // background: yellow;
-                    padding: 3px 16px;
-                    margin-right: 30px;
+                    padding: 0px 12px;
+                    margin-right: 22px;
+                    font-size: 16px;
+                    
                     // border: 1px solid red;
 
                     // background:url('./../../public/arrows1.svg');
@@ -63,6 +71,29 @@
         }
 
         .content-box{
+            padding: 32px 32px;
+            overflow-y: auto;
+
+
+            &::-webkit-scrollbar {
+                width : 3px;  
+                height: 1px;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+                background   : #ccc;
+            }
+            &::-webkit-scrollbar-track {
+                box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+                background   : #fff;
+            }
+
+
+            .title-text{
+                line-height: 36px;
+            }
 
             .table-FormItem{
                 margin-bottom: 0px;
@@ -85,8 +116,15 @@
             }
 
             .btn-box{
+                position: absolute;
+                bottom: 0px;
+                right: 0px;
                 text-align: right;
-                margin: 16px 0px;
+                padding: 16px 36px;
+                padding-bottom: 0px;
+                width: 100%;
+                z-index: 911;
+                background: #fff;
                 // padding: 10px;
 
                 button{
@@ -109,20 +147,42 @@
                     margin-right: 3px;
                 }
             }
+
+            .checkbox-box{
+                .ivu-checkbox-checked .ivu-checkbox-inner {
+                    border-color: #2d8cf0;
+                    background-color: #2d8cf0;
+                }
+
+                .ivu-checkbox-disabled.ivu-checkbox-checked .ivu-checkbox-inner:after {
+                    border-color: #fff;
+                }
+            }
+        }
+
+        .qualification-page{
+            .ivu-row{
+                .ivu-col{
+                    text-align: center;
+                    padding: 0px 16px;
+
+                    &.checkbox-box{
+                        text-align: left;
+                    }
+                }
+            }
+            
+            .ivu-form-item-error-tip{
+                // width: 100%;
+            }
         }
     }
 </style>
 
 <template>
-    <span class="register-html">
+    <div class="register-html">
         <div class="head">
             <h2 style="text-align:center">供应商申请注册</h2>
-            <!-- <Steps :current="1">
-                <Step title="已完成" content="这里是该步骤的描述信息"></Step>
-                <Step title="进行中" content="这里是该步骤的描述信息"></Step>
-                <Step title="待进行" content="这里是该步骤的描述信息"></Step>
-                <Step title="待进行" content="这里是该步骤的描述信息"></Step>
-            </Steps> -->
             <ul>
                 <li :class="currentPage>=1?'action':''">
                     <span>供应商声明</span>
@@ -145,17 +205,17 @@
             </ul>
 
             <Divider />
-
+            
         </div>
-        <div class="content-box">
-            <Register1 v-if="currentPage==1" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register2 v-if="currentPage==2" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register3 v-if="currentPage==3" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register4 v-if="currentPage==4" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register5 v-if="currentPage==5" @lastStep="lastStep" @nextStep="nextStep" />
-            <Register6 v-if="currentPage==6" @lastStep="lastStep" @nextStep="nextStep" @saveHandle="saveHandle" />
+        <div class="content-box" :style="{height:outerHeight+'px'}">
+            <Register1 v-show="currentPage==1" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register2 v-show="currentPage==2" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register3 v-show="currentPage==3" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register4 v-show="currentPage==4" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register5 v-show="currentPage==5" @lastStep="lastStep" @nextStep="nextStep" />
+            <Register6 v-show="currentPage==6" @lastStep="lastStep" @nextStep="nextStep" @saveHandle="saveHandle" />
         </div>
-    </span>
+    </div>
 </template>
 
 <script>
@@ -184,10 +244,12 @@
         },
         data () {
             return {
+                outerHeight:window.innerHeight-240,
                 img1:img1,
                 img2:img2,
 
                 currentPage:1,   // 当前页面
+                
             }
         },
         methods: {
@@ -253,7 +315,12 @@
                 }
 
                 console.log(params);
-    
+                // 参数 参考
+                this.$Notice.open({
+                    title: '注册参数',
+                    duration:0,
+                    desc: `<div style="overflow: auto;height:500px">${ JSON.stringify( params ) }</div>` 
+                }); 
             }            
         }        
     }

@@ -1,28 +1,571 @@
 <template>
-    <span>
-        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="140" :label-colon="true">
+    <span class="qualification-page">
+        <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="0" :label-colon="true">
+            
             <Row>
-                <Col span="12">
-                    <FormItem label="营业执照" prop="company">
-                        <Input v-model="formValidate.company" placeholder="请输入证书编号..." />
+                <Col span="5">
+                    <h3 style="textAlign:right" class="title-text">营业执照：</h3>                
+                </Col>                
+                <Col span="4">
+                    <FormItem prop="businessLicense.code">
+                        <Input 
+                            v-model="formValidate.businessLicense.code" 
+                            placeholder="请输入证书编号..." 
+                        />
                     </FormItem>                
                 </Col>
-                <Col span="12">
-             
-                </Col>                
+                <Col span="3">
+                    <FormItem prop="businessLicense.startDate">
+                        <DatePicker 
+                            v-model="formValidate.businessLicense.startDate" 
+                            type="date" 
+                            placeholder="请选择有限期开始日期..." 
+                            style="width: 100%"
+                            :options="businessLicenseStartDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col>
+                <Col span="3">
+                    <FormItem prop="businessLicense.endDate">
+                        <DatePicker 
+                            v-model="formValidate.businessLicense.endDate" 
+                            type="date" 
+                            placeholder="请选择有效期截止日期..." 
+                            style="width: 100%"
+                            :options="businessLicenseEndDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col> 
+                <Col span="4">
+                    <Upload
+                        action=""
+                        :before-upload="(file)=>{ 
+                            this.handleUpload('businessLicense',file)  
+                            return false;
+                        }"
+                    >
+                        <span v-if="formValidate.businessLicense.accessory">
+                            <Button type="success" icon="md-checkmark">已上传</Button>
+                            <Button style="marginLeft:10px" type="error" size="small" shape="circle" icon="md-close" @click="resetAccessory($event,'businessLicense')" title="重新上传"></Button>
+                        </span>
+                        <span v-else>
+                            <Button v-if="!formValidate.businessLicense.error" type="primary" icon="ios-cloud-upload-outline">附件上传</Button>
+                            <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
+                        </span> 
+                    </Upload>               
+                </Col> 
+                <Col span="3" class="checkbox-box">
+                    <FormItem >
+                        <Checkbox
+                            v-model="formValidate.businessLicense.required" 
+                            disabled
+                        > {{ formValidate.businessLicense.required?'附件必传':'附件不必传' }}</Checkbox>
+                    </FormItem>               
+                </Col>                                                                 
             </Row>
-  
+
+            <Row>
+                <Col span="5">
+                    <h3 style="textAlign:right" class="title-text">开户许可证：</h3>                
+                </Col>                
+                <Col span="4">
+                    <FormItem prop="accountLicence.code">
+                        <Input 
+                            v-model="formValidate.accountLicence.code" 
+                            placeholder="请输入证书编号..." 
+                        />
+                    </FormItem>                
+                </Col>
+                <Col span="3">
+                    <FormItem prop="accountLicence.startDate">
+                        <DatePicker 
+                            v-model="formValidate.accountLicence.startDate" 
+                            type="date" 
+                            placeholder="请选择有限期开始日期..." 
+                            style="width: 100%"
+                            :options="accountLicenceStartDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col>
+                <Col span="3">
+                    <FormItem prop="accountLicence.endDate">
+                        <DatePicker 
+                            v-model="formValidate.accountLicence.endDate" 
+                            type="date" 
+                            placeholder="请选择有效期截止日期..." 
+                            style="width: 100%"
+                            :options="accountLicenceEndDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col> 
+                <Col span="4">
+                    <Upload
+                        action=""
+                        :before-upload="(file)=>{ 
+                            this.handleUpload('accountLicence',file)  
+                            return false;
+                        }"
+                    >
+                        <span v-if="formValidate.accountLicence.accessory">
+                            <Button type="success" icon="md-checkmark">已上传</Button>
+                            <Button style="marginLeft:10px" type="error" size="small" shape="circle" icon="md-close" @click="resetAccessory($event,'businessLicense')" title="重新上传"></Button>
+                        </span>
+                        <span v-else>
+                            <Button v-if="!formValidate.accountLicence.error" type="primary" icon="ios-cloud-upload-outline">附件上传</Button>
+                            <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
+                        </span> 
+                    </Upload>               
+                </Col> 
+                <Col span="3" class="checkbox-box">
+                    <FormItem >
+                        <Checkbox
+                            v-model="formValidate.accountLicence.required" 
+                            disabled
+                        > {{ formValidate.accountLicence.required?'附件必传':'附件不必传' }}</Checkbox>
+                    </FormItem>               
+                </Col>                                                                 
+            </Row>  
+
+            <Row>
+                <Col span="5">
+                    <h3 style="textAlign:right" class="title-text">质量管理体系ISO9001：</h3>                
+                </Col>                
+                <Col span="4">
+                    <FormItem prop="ISO.code">
+                        <Input 
+                            v-model="formValidate.ISO.code" 
+                            placeholder="请输入证书编号..." 
+                        />
+                    </FormItem>                
+                </Col>
+                <Col span="3">
+                    <FormItem prop="ISO.startDate">
+                        <DatePicker 
+                            v-model="formValidate.ISO.startDate" 
+                            type="date" 
+                            placeholder="请选择有限期开始日期..." 
+                            style="width: 100%"
+                            :options="ISOStartDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col>
+                <Col span="3">
+                    <FormItem prop="ISO.endDate">
+                        <DatePicker 
+                            v-model="formValidate.ISO.endDate" 
+                            type="date" 
+                            placeholder="请选择有效期截止日期..." 
+                            style="width: 100%"
+                            :options="ISOEndDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col> 
+                <Col span="4">
+                    <Upload
+                        action=""
+                        :before-upload="(file)=>{ 
+                            this.handleUpload('ISO',file)  
+                            return false;
+                        }"
+                    >
+                        <span v-if="formValidate.ISO.accessory">
+                            <Button type="success" icon="md-checkmark">已上传</Button>
+                            <Button style="marginLeft:10px" type="error" size="small" shape="circle" icon="md-close" @click="resetAccessory($event,'businessLicense')" title="重新上传"></Button>
+                        </span>
+                        <span v-else>
+                            <Button v-if="!formValidate.ISO.error" type="primary" icon="ios-cloud-upload-outline">附件上传</Button>
+                            <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
+                        </span> 
+                    </Upload>               
+                </Col> 
+                <Col span="3" class="checkbox-box">
+                    <FormItem >
+                        <Checkbox
+                            v-model="formValidate.ISO.required" 
+                            disabled
+                        > {{ formValidate.ISO.required?'附件必传':'附件不必传' }}</Checkbox>
+                    </FormItem>               
+                </Col>                                                                 
+            </Row> 
+
+            <Row>
+                <Col span="5">
+                    <h3 style="textAlign:right" class="title-text">质量管理体系ITF16949：</h3>                
+                </Col>                
+                <Col span="4">
+                    <FormItem prop="ITF.code">
+                        <Input 
+                            v-model="formValidate.ITF.code" 
+                            placeholder="请输入证书编号..." 
+                        />
+                    </FormItem>                
+                </Col>
+                <Col span="3">
+                    <FormItem prop="ITF.startDate">
+                        <DatePicker 
+                            v-model="formValidate.ITF.startDate" 
+                            type="date" 
+                            placeholder="请选择有限期开始日期..." 
+                            style="width: 100%"
+                            :options="ITFStartDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col>
+                <Col span="3">
+                    <FormItem prop="ITF.endDate">
+                        <DatePicker 
+                            v-model="formValidate.ITF.endDate" 
+                            type="date" 
+                            placeholder="请选择有效期截止日期..." 
+                            style="width: 100%"
+                            :options="ITFEndDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col> 
+                <Col span="4">
+                    <Upload
+                        action=""
+                        :before-upload="(file)=>{ 
+                            this.handleUpload('ITF',file)  
+                            return false;
+                        }"
+                    >
+                        <span v-if="formValidate.ITF.accessory">
+                            <Button type="success" icon="md-checkmark">已上传</Button>
+                            <Button style="marginLeft:10px" type="error" size="small" shape="circle" icon="md-close" @click="resetAccessory($event,'businessLicense')" title="重新上传"></Button>
+                        </span>
+                        <span v-else>
+                            <Button v-if="!formValidate.ITF.error" type="primary" icon="ios-cloud-upload-outline">附件上传</Button>
+                            <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
+                        </span> 
+                    </Upload>               
+                </Col> 
+                <Col span="3" class="checkbox-box">
+                    <FormItem >
+                        <Checkbox
+                            v-model="formValidate.ITF.required" 
+                            disabled
+                        > {{ formValidate.ITF.required?'附件必传':'附件不必传' }}</Checkbox>
+                    </FormItem>               
+                </Col>                                                                 
+            </Row> 
+
+            <Row>
+                <Col span="5">
+                    <h3 style="textAlign:right" class="title-text">职业健康安全：</h3>                
+                </Col>                
+                <Col span="4">
+                    <FormItem prop="healthySafety.code">
+                        <Input 
+                            v-model="formValidate.healthySafety.code" 
+                            placeholder="请输入证书编号..." 
+                        />
+                    </FormItem>                
+                </Col>
+                <Col span="3">
+                    <FormItem prop="healthySafety.startDate">
+                        <DatePicker 
+                            v-model="formValidate.healthySafety.startDate" 
+                            type="date" 
+                            placeholder="请选择有限期开始日期..." 
+                            style="width: 100%"
+                            :options="healthySafetyStartDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col>
+                <Col span="3">
+                    <FormItem prop="healthySafety.endDate">
+                        <DatePicker 
+                            v-model="formValidate.healthySafety.endDate" 
+                            type="date" 
+                            placeholder="请选择有效期截止日期..." 
+                            style="width: 100%"
+                            :options="healthySafetyEndDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col> 
+                <Col span="4">
+                    <Upload
+                        action=""
+                        :before-upload="(file)=>{ 
+                            this.handleUpload('healthySafety',file)  
+                            return false;
+                        }"
+                    >
+                        <span v-if="formValidate.healthySafety.accessory">
+                            <Button type="success" icon="md-checkmark">已上传</Button>
+                            <Button style="marginLeft:10px" type="error" size="small" shape="circle" icon="md-close" @click="resetAccessory($event,'businessLicense')" title="重新上传"></Button>
+                        </span>
+                        <span v-else>
+                            <Button v-if="!formValidate.healthySafety.error" type="primary" icon="ios-cloud-upload-outline">附件上传</Button>
+                            <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
+                        </span> 
+                    </Upload>               
+                </Col> 
+                <Col span="3" class="checkbox-box">
+                    <FormItem >
+                        <Checkbox
+                            v-model="formValidate.healthySafety.required" 
+                            disabled
+                        > {{ formValidate.healthySafety.required?'附件必传':'附件不必传' }}</Checkbox>
+                    </FormItem>               
+                </Col>                                                                 
+            </Row> 
+
+            <Row>
+                <Col span="5">
+                    <h3 style="textAlign:right" class="title-text">环境管理：</h3>                
+                </Col>                
+                <Col span="4">
+                    <FormItem prop="environmentalManagement.code">
+                        <Input 
+                            v-model="formValidate.environmentalManagement.code" 
+                            placeholder="请输入证书编号..." 
+                        />
+                    </FormItem>                
+                </Col>
+                <Col span="3">
+                    <FormItem prop="environmentalManagement.startDate">
+                        <DatePicker 
+                            v-model="formValidate.environmentalManagement.startDate" 
+                            type="date" 
+                            placeholder="请选择有限期开始日期..." 
+                            style="width: 100%"
+                            :options="environmentalManagementStartDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col>
+                <Col span="3">
+                    <FormItem prop="environmentalManagement.endDate">
+                        <DatePicker 
+                            v-model="formValidate.environmentalManagement.endDate" 
+                            type="date" 
+                            placeholder="请选择有效期截止日期..." 
+                            style="width: 100%"
+                            :options="environmentalManagementEndDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col> 
+                <Col span="4">
+                    <Upload
+                        action=""
+                        :before-upload="(file)=>{ 
+                            this.handleUpload('environmentalManagement',file)  
+                            return false;
+                        }"
+                    >
+                        <span v-if="formValidate.environmentalManagement.accessory">
+                            <Button type="success" icon="md-checkmark">已上传</Button>
+                            <Button style="marginLeft:10px" type="error" size="small" shape="circle" icon="md-close" @click="resetAccessory($event,'businessLicense')" title="重新上传"></Button>
+                        </span>
+                        <span v-else>
+                            <Button v-if="!formValidate.environmentalManagement.error" type="primary" icon="ios-cloud-upload-outline">附件上传</Button>
+                            <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
+                        </span> 
+                    </Upload>               
+                </Col> 
+                <Col span="3" class="checkbox-box">
+                    <FormItem >
+                        <Checkbox
+                            v-model="formValidate.environmentalManagement.required" 
+                            disabled
+                        > {{ formValidate.environmentalManagement.required?'附件必传':'附件不必传' }}</Checkbox>
+                    </FormItem>               
+                </Col>                                                                 
+            </Row> 
+         
+            <Row>
+                <Col span="5">
+                    <h3 style="textAlign:right" class="title-text">特殊资质：</h3>                
+                </Col>                
+                <Col span="4">
+                    <FormItem prop="specialQualifications.code">
+                        <Input 
+                            v-model="formValidate.specialQualifications.code" 
+                            placeholder="请输入证书编号..." 
+                        />
+                    </FormItem>                
+                </Col>
+                <Col span="3">
+                    <FormItem prop="specialQualifications.startDate">
+                        <DatePicker 
+                            v-model="formValidate.specialQualifications.startDate" 
+                            type="date" 
+                            placeholder="请选择有限期开始日期..." 
+                            style="width: 100%"
+                            :options="specialQualificationsStartDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col>
+                <Col span="3">
+                    <FormItem prop="specialQualifications.endDate">
+                        <DatePicker 
+                            v-model="formValidate.specialQualifications.endDate" 
+                            type="date" 
+                            placeholder="请选择有效期截止日期..." 
+                            style="width: 100%"
+                            :options="specialQualificationsEndDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col> 
+                <Col span="4">
+                    <Upload
+                        action=""
+                        :before-upload="(file)=>{ 
+                            this.handleUpload('specialQualifications',file)  
+                            return false;
+                        }"
+                    >
+                        <span v-if="formValidate.specialQualifications.accessory">
+                            <Button type="success" icon="md-checkmark">已上传</Button>
+                            <Button style="marginLeft:10px" type="error" size="small" shape="circle" icon="md-close" @click="resetAccessory($event,'businessLicense')" title="重新上传"></Button>
+                        </span>
+                        <span v-else>
+                            <Button v-if="!formValidate.specialQualifications.error" type="primary" icon="ios-cloud-upload-outline">附件上传</Button>
+                            <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
+                        </span> 
+                    </Upload>               
+                </Col> 
+                <Col span="3" class="checkbox-box">
+                    <FormItem >
+                        <Checkbox
+                            v-model="formValidate.specialQualifications.required" 
+                            disabled
+                        > {{ formValidate.specialQualifications.required?'附件必传':'附件不必传' }}</Checkbox>
+                    </FormItem>               
+                </Col>                                                                 
+            </Row> 
+
+            <Row>
+                <Col span="5">
+                    <h3 style="textAlign:right" class="title-text">代理商授权书：</h3>                
+                </Col>                
+                <Col span="4">
+                    <FormItem prop="authorization.code">
+                        <Input 
+                            v-model="formValidate.authorization.code" 
+                            placeholder="请输入证书编号..." 
+                        />
+                    </FormItem>                
+                </Col>
+                <Col span="3">
+                    <FormItem prop="authorization.startDate">
+                        <DatePicker 
+                            v-model="formValidate.authorization.startDate" 
+                            type="date" 
+                            placeholder="请选择有限期开始日期..." 
+                            style="width: 100%"
+                            :options="authorizationStartDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col>
+                <Col span="3">
+                    <FormItem prop="authorization.endDate">
+                        <DatePicker 
+                            v-model="formValidate.authorization.endDate" 
+                            type="date" 
+                            placeholder="请选择有效期截止日期..." 
+                            style="width: 100%"
+                            :options="authorizationEndDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col> 
+                <Col span="4">
+                    <Upload
+                        action=""
+                        :before-upload="(file)=>{ 
+                            this.handleUpload('authorization',file)  
+                            return false;
+                        }"
+                    >
+                        <span v-if="formValidate.authorization.accessory">
+                            <Button type="success" icon="md-checkmark">已上传</Button>
+                            <Button style="marginLeft:10px" type="error" size="small" shape="circle" icon="md-close" @click="resetAccessory($event,'businessLicense')" title="重新上传"></Button>
+                        </span>
+                        <span v-else>
+                            <Button v-if="!formValidate.authorization.error" type="primary" icon="ios-cloud-upload-outline">附件上传</Button>
+                            <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
+                        </span> 
+                    </Upload>               
+                </Col> 
+                <Col span="3" class="checkbox-box">
+                    <FormItem >
+                        <Checkbox
+                            v-model="formValidate.authorization.required" 
+                            disabled
+                        > {{ formValidate.authorization.required?'附件必传':'附件不必传' }}</Checkbox>
+                    </FormItem>               
+                </Col>                                                                 
+            </Row> 
+
+            <Row>
+                <Col span="5">
+                    <h3 style="textAlign:right" class="title-text">其他：</h3>                
+                </Col>                
+                <Col span="4">
+                    <FormItem prop="other.code">
+                        <Input 
+                            v-model="formValidate.other.code" 
+                            placeholder="请输入证书编号..." 
+                        />
+                    </FormItem>                
+                </Col>
+                <Col span="3">
+                    <FormItem prop="other.startDate">
+                        <DatePicker 
+                            v-model="formValidate.other.startDate" 
+                            type="date" 
+                            placeholder="请选择有限期开始日期..." 
+                            style="width: 100%"
+                            :options="otherStartDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col>
+                <Col span="3">
+                    <FormItem prop="other.endDate">
+                        <DatePicker 
+                            v-model="formValidate.other.endDate" 
+                            type="date" 
+                            placeholder="请选择有效期截止日期..." 
+                            style="width: 100%"
+                            :options="otherEndDate"
+                        ></DatePicker>                        
+                    </FormItem>  
+                </Col> 
+                <Col span="4">
+                    <Upload
+                        action=""
+                        :before-upload="(file)=>{ 
+                            this.handleUpload('other',file)  
+                            return false;
+                        }"
+                    >
+                        <span v-if="formValidate.other.accessory">
+                            <Button type="success" icon="md-checkmark">已上传</Button>
+                            <Button style="marginLeft:10px" type="error" size="small" shape="circle" icon="md-close" @click="resetAccessory($event,'businessLicense')" title="重新上传"></Button>
+                        </span>
+                        <span v-else>
+                            <Button v-if="!formValidate.other.error" type="primary" icon="ios-cloud-upload-outline">附件上传</Button>
+                            <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
+                        </span> 
+                    </Upload>               
+                </Col> 
+                <Col span="3" class="checkbox-box">
+                    <FormItem >
+                        <Checkbox
+                            v-model="formValidate.other.required" 
+                            disabled
+                        > {{ formValidate.other.required?'附件必传':'附件不必传' }}</Checkbox>
+                    </FormItem>               
+                </Col>                                                                 
+            </Row> 
+
+
 
             <br/>
             <Divider />
 
-            <div class="btn-box">
-                <FormItem>
-                    <Button type="warning" @click="handleResetModal">重置</Button>
-                    <Button type="info" @click="lastStep">上一步</Button>
-                    <Button type="primary" @click="nextStep">下一步</Button>
-                </FormItem>            
-            </div> 
+
         </Form>        
         <Modal v-model="modal" width="360">
             <p slot="header" style="color:#f60;text-align:center">
@@ -36,73 +579,260 @@
             <div slot="footer">
                 <Button type="error" size="large" long @click="handleReset">重置</Button>
             </div>
-        </Modal>       
+        </Modal>  
+        <div class="btn-box">
+            <Button type="warning" @click="handleResetModal">重置</Button>
+            <Button type="info" @click="lastStep">上一步</Button>
+            <Button type="primary" @click="nextStep">下一步</Button>
+        </div>      
     </span>
 </template>
 <script>
     import {GlobalBus} from './../common/GlobalBus.js';
 
     export default {
-        data () {
+        data (_this) {
             return {
                 modal:false,
 
                 // 表单
                 formValidate: {
-                    company: '',            // 公司
-                    companyLogogram: '',    // 简称
-                    state: '',             // 境内 境外
-                    business: '',           // 业务线
-                    companyType: '',        // 企业性质
-                    supplierType: [],      //  供应商类型
-                    intention:'',          // 合作意向
-                    code:'',                // 统一社会信用代码
-                    remark: '',             // 备注
 
-                                    
-                    dataTable: []   // table 数据
+                    // 营业执照
+                    businessLicense:{
+                        code:'',            // 编号
+                        startDate:'',       // 开始日期
+                        endDate:'',         // 结束日期
+                        accessory:null,     // 附件
+                        required:true,        // 附件必传
+                        error:false
+                    },
 
+                    // 开户许可证
+                    accountLicence:{
+                        code:'',            // 编号
+                        startDate:'',       // 开始日期
+                        endDate:'',         // 结束日期
+                        accessory:null,     // 附件
+                        required:false,        // 附件必传
+                        error:false
+
+                    },
+
+                    // 质量管理体系ISO9001
+                    ISO:{
+                        code:'',            // 编号
+                        startDate:'',       // 开始日期
+                        endDate:'',         // 结束日期
+                        accessory:null,     // 附件
+                        required:false,        // 附件必传
+                        error:false
+
+                    },
+
+                    // 质量管理体系ITF16949
+                    ITF:{
+                        code:'',            // 编号
+                        startDate:'',       // 开始日期
+                        endDate:'',         // 结束日期
+                        accessory:null,     // 附件
+                        required:false,        // 附件必传
+                        error:false
+
+                    },
+
+                    // 职业健康安全
+                    healthySafety:{
+                        code:'',            // 编号
+                        startDate:'',       // 开始日期
+                        endDate:'',         // 结束日期
+                        accessory:null,     // 附件
+                        required:false,        // 附件必传
+                        error:false
+
+                    },
+
+                    // 环境管理
+                    environmentalManagement:{
+                        code:'',            // 编号
+                        startDate:'',       // 开始日期
+                        endDate:'',         // 结束日期
+                        accessory:null,     // 附件
+                        required:false,        // 附件必传
+                        error:false
+
+                    },
+
+                    // 特殊资质
+                    specialQualifications:{
+                        code:'',            // 编号
+                        startDate:'',       // 开始日期
+                        endDate:'',         // 结束日期
+                        accessory:null,     // 附件
+                        required:false,        // 附件必传
+                        error:false
+
+                    },
+
+                    // 代理商授权书
+                    authorization:{
+                        code:'',            // 编号
+                        startDate:'',       // 开始日期
+                        endDate:'',         // 结束日期
+                        accessory:null,     // 附件
+                        required:false,        // 附件必传
+                        error:false
+
+                    },
+
+                    // 其它
+                    other:{
+                        code:'',            // 编号
+                        startDate:'',       // 开始日期
+                        endDate:'',         // 结束日期
+                        accessory:null,     // 附件
+                        required:false,        // 附件必传
+                        error:false
+
+                    },                    
                 },
                 // 表单 验证
                 ruleValidate: {
-                    company: [
-                        { required: true, message: '必填！', trigger: 'blur' }
-                    ],
-                    companyLogogram: [
-                        { required: true, message: '必填！', trigger: 'blur' }
-                    ],                    
-                    state: [
-                        { required: true, message: '必选！', trigger: 'change' }
-                    ],
-                    business: [
-                        { required: true, message: '必选！', trigger: 'change' }
-                    ],
-                    companyType: [
-                        { required: true, message: '必选！', trigger: 'change' }
-                    ],
-                    supplierType: [
-                        { required: true, type: 'array', min: 1, message: '必选！', trigger: 'change' },
-                        // { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
-                    ],
-                    intention: [
-                        { required: true, message: '必填！', trigger: 'blur' }
-                    ],
-                    code: [
-                        { required: true, message: '必填！', trigger: 'blur' }
-                    ],
-                    remark: [
-                        // { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
-                        // { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
-                    ],
-
+                    // 必填字段
+                    // 'businessLicense.code': [
+                    //     { required: true, message: '必填！', trigger: 'blur' }
+                    // ],
+                },   
+                
+                
+                // 营业执照 设置开始结束 日期  限制                  
+                businessLicenseStartDate: {
+                    disabledDate (date) {
+                        var endDate = _this.formValidate.businessLicense.endDate;
+                        return endDate && date.getTime() > endDate.getTime()
+                    }
                 },
+                businessLicenseEndDate: {
+                    disabledDate (date) {
+                        var startDate = _this.formValidate.businessLicense.startDate;
+                        return startDate && date.getTime() < startDate.getTime()
+                    }
+                },
+               
+                // 开户许可证 设置开始结束 日期  限制  
+                accountLicenceStartDate: {
+                    disabledDate (date) {
+                        var endDate = _this.formValidate.accountLicence.endDate;
+                        return endDate && date.getTime() > endDate.getTime()
+                    }
+                },
+                accountLicenceEndDate: {
+                    disabledDate (date) {
+                        var startDate = _this.formValidate.accountLicence.startDate;
+                        return startDate && date.getTime() < startDate.getTime()
+                    }
+                }, 
+                
+                // 质量管理体系ISO9001 设置开始结束 日期  限制  
+                ISOStartDate: {
+                    disabledDate (date) {
+                        var endDate = _this.formValidate.ISO.endDate;
+                        return endDate && date.getTime() > endDate.getTime()
+                    }
+                },
+                ISOEndDate: {
+                    disabledDate (date) {
+                        var startDate = _this.formValidate.ISO.startDate;
+                        return startDate && date.getTime() < startDate.getTime()
+                    }
+                },                
+                
 
- 
-                // table 列配置
-                columns: [],
-                rowData:[],   // 行数据
+                // 质量管理体系ITF16949 设置开始结束 日期  限制  
+                ITFStartDate: {
+                    disabledDate (date) {
+                        var endDate = _this.formValidate.ITF.endDate;
+                        return endDate && date.getTime() > endDate.getTime()
+                    }
+                },
+                ITFEndDate: {
+                    disabledDate (date) {
+                        var startDate = _this.formValidate.ITF.startDate;
+                        return startDate && date.getTime() < startDate.getTime()
+                    }
+                }, 
 
-             
+                // 职业健康安全 设置开始结束 日期  限制  
+                healthySafetyStartDate: {
+                    disabledDate (date) {
+                        var endDate = _this.formValidate.healthySafety.endDate;
+                        return endDate && date.getTime() > endDate.getTime()
+                    }
+                },
+                healthySafetyEndDate: {
+                    disabledDate (date) {
+                        var startDate = _this.formValidate.healthySafety.startDate;
+                        return startDate && date.getTime() < startDate.getTime()
+                    }
+                },    
+                            
+                // 环境管理 设置开始结束 日期  限制  
+                environmentalManagementStartDate: {
+                    disabledDate (date) {
+                        var endDate = _this.formValidate.environmentalManagement.endDate;
+                        return endDate && date.getTime() > endDate.getTime()
+                    }
+                },
+                environmentalManagementEndDate: {
+                    disabledDate (date) {
+                        var startDate = _this.formValidate.environmentalManagement.startDate;
+                        return startDate && date.getTime() < startDate.getTime()
+                    }
+                },
+                
+                // 特殊资质 设置开始结束 日期  限制  
+                specialQualificationsStartDate: {
+                    disabledDate (date) {
+                        var endDate = _this.formValidate.specialQualifications.endDate;
+                        return endDate && date.getTime() > endDate.getTime()
+                    }
+                },
+                specialQualificationsEndDate: {
+                    disabledDate (date) {
+                        var startDate = _this.formValidate.specialQualifications.startDate;
+                        return startDate && date.getTime() < startDate.getTime()
+                    }
+                },
+                
+
+                // 代理商授权书 设置开始结束 日期  限制  
+                authorizationStartDate: {
+                    disabledDate (date) {
+                        var endDate = _this.formValidate.authorization.endDate;
+                        return endDate && date.getTime() > endDate.getTime()
+                    }
+                },
+                authorizationEndDate: {
+                    disabledDate (date) {
+                        var startDate = _this.formValidate.authorization.startDate;
+                        return startDate && date.getTime() < startDate.getTime()
+                    }
+                },
+                
+                // 其它 设置开始结束 日期  限制  
+                otherStartDate: {
+                    disabledDate (date) {
+                        var endDate = _this.formValidate.other.endDate;
+                        return endDate && date.getTime() > endDate.getTime()
+                    }
+                },
+                otherEndDate: {
+                    disabledDate (date) {
+                        var startDate = _this.formValidate.other.startDate;
+                        return startDate && date.getTime() < startDate.getTime()
+                    }
+                },                
+                
             }
         },
         created(){
@@ -114,422 +844,6 @@
 			GlobalBus.$on("register3_save", function (callBack){
                 callBack(that.formValidate);
 			});            
-
-            // 配置列
-            this.columns = [
-                {
-                    title: '地址标签',
-                    key: 'address',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择地址标签..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                },
-                {
-                    title: '国家',
-                    key: 'country',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择国家..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                }, 
-                {
-                    title: '省',
-                    key: 'provincial',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error: ( (row[key]['required']) && (row[key]['value']))?'':'必填！'
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择省..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                },   
-                {
-                    title: '市',
-                    key: 'city',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择市..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                }, 
-                {
-                    title: '县/区',
-                    key: 'county',
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Select',{
-                                props:{
-                                    transfer:true,
-                                    placeholder:"请选择县/区..."
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });
-                                    }  
-                                },  
-                            },[
-                                row[key]['children'].map((o)=>{
-                                    return h('Option',{
-                                        props:{
-                                            value:o['value']
-                                        }
-                                    },o['label'])
-                                })
-                            ])
-                        ]);
-                    }                    
-                },  
-                {
-                    title: '街道',
-                    key: 'street',
-                    minWidth:180,
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            h('span', {
-                                style:{
-                                    color:"#ed4014"
-                                }
-                            },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Input',{
-                                props:{
-                                    placeholder:"请输入详细街道地址..."   
-                                },
-                                on: {  
-                                    'on-change':(event) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:event.target.value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });                                        
-                                    }  
-                                },   
-                            })
-                        ]);
-                    }                    
-                },  
-                {
-                    title: '邮政编码',
-                    key: 'postalCode',
-                    width:180,
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            // h('span', {
-                            //     style:{
-                            //         color:"#ed4014"
-                            //     }
-                            // },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Input',{
-                                props:{
-                                    placeholder:"请输入邮政编码..."   
-                                },
-                                on: {  
-                                    'on-change':(event) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index) json=Object.assign({},json,{value:event.target.value});
-                                            return Object.assign({},o,{[key]:json});
-                                        });                                         
-                                    }  
-                                },   
-                            })
-                        ]);
-                    }                    
-                },
-                {
-                    title: '主地址',
-                    key: 'main',
-                    width:120,
-                    renderHeader:(h, params) => {
-                        return h('div', [
-                            // h('span', {
-                            //     style:{
-                            //         color:"#ed4014"
-                            //     }
-                            // },'*'),
-                            h('span', params.column.title)
-                        ]);
-                    },
-                    render: (h, params) => {
-                        var key= params.column['key'];
-                        var index= params.index;
-                        var row = params.row;
-
-                        return h('FormItem',{
-                            class:"table-FormItem",
-                            props:{
-                                error:  (row[key]['value'])?'':( (row[key]['required'])?'必填！':'')
-                            }
-                        },[
-                            h('Checkbox',{
-                                props:{
-                                    value:row[key]['value']
-                                },
-                                on: {  
-                                    'on-change':(value) => { 
-                                        that.formValidate.dataTable=that.formValidate.dataTable.map((o,i)=>{
-                                            var json=o[key];
-                                            if(i==index){
-                                                json=Object.assign({},json,{value:value});
-                                            } else{
-                                                json=Object.assign({},json,{value:false});
-                                            }
-                                            return Object.assign({},o,{[key]:json});
-                                        });                                         
-                                    }  
-                                }, 
-                            },(row[key]['value']?'是':'否'))
-                        ]);
-                    }                    
-                },                                                                                                              
-                {
-                    title: '操作',
-                    key: 'action',
-                    width:80,
-                    align: 'center',
-                    render: (h, params) => {
-  
-                        return h('div', [
-                            h('Button', {
-                                attrs:{
-                                    title:'删除'
-                                },
-                                props: {
-                                    type: 'error',
-                                    size: 'small',
-                                    icon:"md-close-circle",
-                                },
-                                on: {
-                                    click: () => {
-                                        this.removeRow(params.index);
-                                    }
-                                }
-                            })
-                        ]);
-                    }
-                }                
-            ];
-
-
-            // table 数据
-            setTimeout(()=>{
-                this.tableInit();
-            },1000);
         },
         methods: {
             /**
@@ -546,30 +860,22 @@
                 this.$refs['formValidate'].validate((valid) => {
                     if (valid) {
 
-                        // var result=false;  // 验证table 必填               
-                        // if( this.formValidate.dataTable['length']==0 ){
-                        //     this.$Message.info({
-                        //         "content":'地址未编辑!',
-                        //         "duration":2  
-                        //     });  
-                        //     return;                          
-                        // }else{
-                        //     this.formValidate.dataTable.map((o)=>{
-                        //         Object.entries(o).map((j)=>{
-                        //             if( j[1]['required'] && !(j[1]['value']) ) result=true;
-                        //         });
-                        //     });
-                            
-                        // }
-
-                        // if(result){
-                        //     this.$Message.info({
-                        //         "content":'地址数据不完整!',
-                        //         "duration":2  
-                        //     });
-                        //     return;
-                        // }
+                        var result=false;
+                        Object.entries(this.formValidate).map((o)=>{
+                            if( o[1]['required'] && !o[1]['accessory'] ){
+                                result=true;
+                                this.formValidate[o[0]]['error']=true;
+                            }
+                        });
                         
+                        if(result){
+                            this.$Message.error({
+                                "content":'文件待上传!',
+                                "duration":2  
+                            });   
+                            return;
+                        }
+
 
 
                         // 数据录入完成 跳转下一步
@@ -599,7 +905,11 @@
              */
             handleReset () {
                 this.$refs['formValidate'].resetFields();
-                this.formValidate.dataTable=[];
+
+                Object.entries(this.formValidate).map((o)=>{
+                    this.formValidate[o[0]]['accessory']=null;
+                    this.formValidate[o[0]]['error']=false;
+                });
 
                 this.modal = false;
                 this.$Message.success({
@@ -608,133 +918,19 @@
                 });
             },
             /**
-             * 删除行
+             * 附件上传
              */
-            removeRow (index){
-                this.formValidate.dataTable.splice(index, 1);
+            handleUpload(name,file){
+                this.formValidate[name]['accessory']=file;   // 设置文件
+                this.formValidate[name].error=false;
             },
             /**
-             * 删除全部
-             */
-            deleteAll(){
-                this.formValidate.dataTable=[];
-            },
-            /**
-             * table 初始化 
-            */
-            tableInit(){
-
-                // 地址 list
-                var addrList=[
-                    {
-                        value: 'register',
-                        label: '注册'
-                    },
-                    {
-                        value: 'office',
-                        label: '办公'
-                    }
-                ];
-
-
-                // 国家
-                var countryList=[
-                    {
-                        value: 'China',
-                        label: '中国'
-                    },
-                    {
-                        value: 'America',
-                        label: '美国'
-                    }
-                ];
-
-                // 省
-                var provincialList = [
-                    {
-                        value: 'beijing',
-                        label: '北京市'
-                    },
-                    {
-                        value: 'shanghai',
-                        label: '上海市'
-                    }                    
-                ];
-
-                // 市
-                var cityList = [
-                    {
-                        value: 'zunyi',
-                        label: '遵义市'
-                    },
-                    {
-                        value: 'nantong',
-                        label: '南通市'
-                    }                    
-                ];
-
-
-                // 县/区
-                var countyList=[
-                    {
-                        value: '徐汇',
-                        label: '徐汇区'
-                    },
-                    {
-                        value: 'luwan',
-                        label: '卢湾区'
-                    }                     
-                ];
-
-
-                // 模拟行数据
-                this.rowData=[
-                    {
-                        address:{
-                            required:true,   // 必填
-                            value: '',       // 选中值
-                            children:addrList  // 下拉数据
-                        },
-                        country:{
-                            required:true,
-                            value: '',
-                            children:countryList
-                        },
-                        provincial:{
-                            required:true,
-                            value: '',
-                            children:provincialList
-                        },
-                        city:{
-                            required:true,
-                            value: '',
-                            children:cityList
-                        }, 
-                        county:{
-                            required:true,
-                            value: '',
-                            children:countyList
-                        },
-                        street:{
-                            required:true,
-                            value: '',                            
-                        },
-                        postalCode:{
-                            required:false,
-                            value: '',                            
-                        },
-                        main:{
-                            required:false,
-                            value: false,                              
-                        }                                                                            
-                    }
-                ];
-            },
-            /**
-             * table 新增行
-             */
-            addRow(){
-                this.formValidate.dataTable=this.formValidate.dataTable.concat(this.rowData);
+             * 重新上传 
+             * */   
+            resetAccessory(event,name){
+                event.stopPropagation();
+                this.formValidate[name].accessory=null;
+                this.formValidate[name].error=false;
             }
         }
     }
