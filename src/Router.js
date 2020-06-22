@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router';
 
 import RegisterPage from './components/Register.vue';
-import HomePage from './home.vue';
+import HomePage from './home/home.vue';
 
 
 const routes = [
