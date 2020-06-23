@@ -31,6 +31,7 @@
 
             tr{
                 transition: background-color .2s ease-in-out;
+                cursor: move;
 
                 &:hover{
                     background-color: #ebf7ff;

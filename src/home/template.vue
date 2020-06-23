@@ -12,21 +12,21 @@
     <Row>
         <Col span="8" class="switch-box">
             <span class="mark-text">模板一</span>
-            <i-switch v-model="tep1" :before-change="handleBeforeChange">
+            <i-switch v-model="tep1" @on-change="changeHandle" :before-change="handleBeforeChange">
                 <Icon type="md-checkmark" slot="open"></Icon>
                 <Icon type="md-close" slot="close"></Icon>
             </i-switch>        
         </Col>
         <Col span="8" class="switch-box">
             <span class="mark-text">模板二</span>
-            <i-switch v-model="tep2" :before-change="handleBeforeChange">
+            <i-switch v-model="tep2" @on-change="changeHandle" :before-change="handleBeforeChange">
                 <Icon type="md-checkmark" slot="open"></Icon>
                 <Icon type="md-close" slot="close"></Icon>
             </i-switch>        
         </Col>
         <Col span="8" class="switch-box">
             <span class="mark-text">模板三</span>
-            <i-switch v-model="tep3" :before-change="handleBeforeChange">
+            <i-switch v-model="tep3" @on-change="changeHandle" :before-change="handleBeforeChange">
                 <Icon type="md-checkmark" slot="open"></Icon>
                 <Icon type="md-close" slot="close"></Icon>
             </i-switch>        
@@ -61,6 +61,18 @@
         }
     }, 	        
     methods: {
+        /**
+         * 切换
+         */
+        changeHandle: function(){
+            let config = {
+                "1":this.tep1,
+                "2":this.tep2,
+                "3":this.tep3,
+            };
+
+            this.$emit("templateChange",Number( Object.entries(config).filter(o=>o[1])[0][0] ));
+        },
         /**
          * 切换 
         */
