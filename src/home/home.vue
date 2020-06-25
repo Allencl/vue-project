@@ -13,6 +13,17 @@
   <div class="weima-home">
     <Row>
         <Col span="8">
+          <customTemplate 
+            :currentTpl="currentTpl"
+            @templateChange="_templateChange"
+          />
+        </Col>
+        <Col span="16">
+          <customTable />
+        </Col>
+    </Row>    
+    <Row>
+        <Col span="8">
             <div 
               class="module-box"
               @drop="dropHandle($event,1)"
@@ -43,17 +54,7 @@
             </div>
         </Col>        
     </Row>
-    <Row>
-        <Col span="8">
-          <customTemplate 
-            :currentTpl="currentTpl"
-            @templateChange="_templateChange"
-          />
-        </Col>
-        <Col span="16">
-          <customTable />
-        </Col>
-    </Row> 
+ 
   </div>  
 </template>
 <script>
