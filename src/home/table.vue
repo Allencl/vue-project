@@ -1,9 +1,15 @@
 <style lang="scss">
   .weima-home-table{
     text-align:center;
+    width: 210px;
+    // height: 500px;
+    background: burlywood;
 
     .title{
         text-align: left;
+        padding: 12px 16px;
+        cursor: all-scroll;
+        // border-bottom: 1px solid red;
     }
 
     .table-box{
@@ -61,10 +67,11 @@
             user-select: none;
 
             list-style: none;
-            width: 50%;
-            float: left;
-            padding: 3px 12px;
-            text-align: right;
+            width: 100%;
+            // width: 50%;
+            // float: left;
+            padding: 3px 26px;
+            text-align: left;
             cursor: all-scroll;
             font-size: 13px;
 
@@ -82,101 +89,131 @@
 
         }
     }
+
+    .toggle-icon{
+        cursor: pointer;
+        position: absolute;
+        /* float: right; */
+        padding: 10px;
+        top: 6px;
+        right: 0px;
+    }
+
+    .content-box{
+        min-height: 300;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 10px 0px;
+        border-top: 1px solid red;
+
+
+       &.hidden{
+           display: none;
+       }  
+    }
+
+    &.global-diff{
+        position: fixed;
+        top: 50px;
+        right: 10px;
+        z-index: 101; 
+        transition: none; 
+
+        .ivu-card-head{
+            padding: 0;
+            user-select:none;
+        }
+        
+        .diff-title{
+            font-size: 14px;
+            padding: 15px 13px;
+            height: 43px; 
+            cursor: all-scroll;           
+        }
+
+        .close-icon{
+            margin-top: -5px;
+            margin-right: -7px;
+
+            i{
+                cursor: pointer;
+                font-size: 16px;
+                padding: 5px;
+            }
+        }
+
+        .empty-btn{
+
+            margin-top: 12px;
+            height: 32px;
+
+            >span{
+                display: block;
+                float: left;
+                margin-right: 5px;
+                margin-bottom: 10px;
+            }
+
+        }
+    }
+
   }
 
 
 
 </style>
 <template>
-    <div class="weima-home-table">
-        <p class="title">报表选择（拖拽填充）</p>    
-        <Row>
-            <Col span="8"> 
-                <p>A 类别</p>
-            </Col>  
-            <Col span="8"> 
-                <p>B 类别</p>
-            </Col> 
-            <Col span="8"> 
-                <p>C 类别</p>
-            </Col>                      
-        </Row>  
-        <Row>
-            <Col span="8"> 
-                <ul>
-                    <li 
-                        v-for="(o,i) in data1" :key="i" :title="o['name']"
-                        :draggable="true"
-                        @dragstart="dragStart($event,o)"
-                        @dragend="dragEnd"
-                    >{{ o["name"] }}</li>
-                </ul>
-            </Col>  
-            <Col span="8"> 
-                <ul>
-                    <li 
-                        v-for="(o,i) in data2" :key="i" :title="o['name']"
-                        :draggable="true"
-                        @dragstart="dragStart($event,o)"
-                        @dragend="dragEnd"                        
-                    >{{ o["name"] }}</li>
-                </ul>
-            </Col> 
-            <Col span="8"> 
-                <ul>
-                    <li 
-                        v-for="(o,i) in data3" :key="i" :title="o['name']"
-                        :draggable="true"
-                        @dragstart="dragStart($event,o)"
-                        @dragend="dragEnd"
-                    >{{ o["name"] }}</li>
-                </ul>
-            </Col>                      
-        </Row>           
-    <!-- <table class="table-box" border="0" cellspacing="0" cellpadding="0">
-        <thead>
-            <tr>
-            <th v-for="(itemHed,i) in columns" :key="i">{{ itemHed["name"]||'' }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr 
-            v-for="(itemTr,j) in data" :key="j"
-                :draggable="true"
-                @dragstart="dragStart($event,itemTr)"
-                @dragend="dragEnd"
-            >
-            <td v-for="(itemTd,k) in Object.entries(itemTr)" :key="k">{{ itemTd[1]||'' }}</td>
-            </tr>
-        </tbody>
-    </table>             -->
+    <div 
+        class="weima-home-table global-diff" 
+        id="drag_box"
+    > 
+        <p
+            id="drag"
+            v-drag
+            class="title"
+        >
+            <Icon type="ios-hand" />
+            <b>报表选择（拖拽填充）</b>
+            <Icon v-if="toggle_icon" class="toggle-icon" type="ios-arrow-up" @click="_toggleIcon" />
+            <Icon v-else class="toggle-icon" type="ios-arrow-down"  @click="_toggleIcon" />
+        </p>
+
+        <div slot="content">
+            <div style="overflow-y: hidden;" :class="`content-box ${toggle_icon?'hidden':''}`">
+                <Row>
+                    <Col span="24"> 
+                        <ul>
+                            <li 
+                                v-for="(o,i) in data" :key="i" :title="o['name']"
+                                :draggable="true"
+                                @dragstart="dragStart($event,o)"
+                                @dragend="dragEnd"
+                            >
+                                <Icon type="ios-hand-outline" />
+                                {{ o["name"] }}
+                            </li>
+                        </ul>
+                    </Col>  
+                    
+                </Row> 
+            </div> 
+
+        </div>
+
     </div>
+
 </template>
 <script>
 export default {
+    props: {
+
+    },    
     data () {
         return {
-            // // 配置 table列
-            // columns:[
-            //     {
-            //         name:"姓名",
-            //         key:"name",
-            //     }, 
-            //     {
-            //         name:"年纪",
-            //         key:"age",
-            //     }                
-            // ],  
-            
-            // // table 数据
-            // data:[
+            toggle_icon:false,  
 
-            // ]
-
-
-            data1:[],           // A 类数据
-            data2:[],           // b 类数据
-            data3:[],           //  c 类数据    
+            data:[],           // 数据
+ 
 
             
             
@@ -192,7 +229,7 @@ export default {
         initPage: function(){
             // ajax 拿到数据
             // 模拟 数据
-            this.data1=[
+            this.data=[
                 {
                     name:"外贸订单 数据报表",
                 },
@@ -210,7 +247,16 @@ export default {
                 },
                 {
                     name:"aakiucn 数据报表",
-                }                                                  
+                },
+                {
+                    name:"22323进度表 数据报表",
+                },
+                {
+                    name:"yyy库存表 数据报表",
+                },
+                {
+                    name:"ytrgdg 数据报表",
+                }                                                                   
             ];
 
             this.data2=[
@@ -232,17 +278,51 @@ export default {
             ];            
         },
         /**
+         * icon 切换
+         */
+        _toggleIcon: function(){
+            this.toggle_icon=!this.toggle_icon;
+        },
+        /**
          *  面板 拖拽
          */
         dragStart: function (event, item) {
+            event.stopPropagation();   
             event.dataTransfer.setData('item', JSON.stringify(item) );
         },
         dragEnd: function (event) {
+            event.stopPropagation();  
             event.dataTransfer.clearData();
         },  
     },
-    props: {
-
+    directives: {
+        drag: {
+            bind: function (el) {
+                setTimeout(()=>{
+                    let odiv = document.querySelector('#drag_box');
+                    
+                    el.onmousedown = (e) => {
+                        let disX = e.clientX - odiv.offsetLeft;
+                        let disY = e.clientY - odiv.offsetTop;
+                        
+                        document.onmousemove = (e)=>{
+                            let left = e.clientX - disX;    
+                            let top = e.clientY - disY;
+                        
+                            odiv.positionX = top;
+                            odiv.positionY = left;
+                                                
+                            odiv.style.left = left + 'px';
+                            odiv.style.top = top + 'px';
+                        };
+                        document.onmouseup = (e) => {
+                            document.onmousemove = null;
+                            document.onmouseup = null;
+                        };
+                    };                    
+                },500);
+            }
+        }
     }
 }
 </script>

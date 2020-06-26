@@ -1,9 +1,20 @@
 <style lang="scss">
   .weima-home{
     .module-box{
-      height: 150px;
-      background: wheat;
+      // height: 150px;
+      // background: wheat;
       border: 1px solid red;
+      margin: 6px 8px;
+
+      &.detail{
+        height: 120px;
+        padding: 5px 8px;
+      }
+    }
+
+    .bi-module-box{
+      padding: 5px 8px;
+      height: 300px;
     }
   }
 
@@ -11,48 +22,47 @@
 </style>
 <template>
   <div class="weima-home">
+    <customTable />
     <Row>
         <Col span="8">
-          <customTemplate 
-            :currentTpl="currentTpl"
-            @templateChange="_templateChange"
-          />
+          <div class="module-box detail">
+            <customTemplate 
+              :currentTpl="currentTpl"
+              @templateChange="_templateChange"
+            />
+          </div>
         </Col>
-        <Col span="16">
-          <customTable />
-        </Col>
+        <!-- <Col span="16">
+          <div class="module-box detail">
+            
+          </div>        
+        </Col> -->
     </Row>    
     <Row>
-        <Col span="8">
+        <Col span="12">
             <div 
               class="module-box"
-              @drop="dropHandle($event,1)"
+              @drop="dropHandle($event,'foreign')"
               @dragover.prevent
             >
-              <BIPage1 
+              <ForeignTrade 
                 :currentTpl="currentTpl"
-                :config="BIConfig1"
+                :config="config_foreign"
               />
             </div>
         </Col>
-        <Col span="8">
+        <Col span="12">
             <div 
               class="module-box"
-              @drop="dropHandle($event,2)"
+              @drop="dropHandle($event,'domestic')"
               @dragover.prevent
             >
-              <!-- <BIPage1 /> -->
+              <DomesticTrade 
+                :currentTpl="currentTpl"
+                :config="config_domestic"
+              />
             </div>
-        </Col>
-        <Col span="8">
-            <div 
-              class="module-box"
-              @drop="dropHandle($event)"
-              @dragover.prevent
-            >
-              <!-- <BIPage2 /> -->
-            </div>
-        </Col>        
+        </Col>       
     </Row>
  
   </div>  
@@ -62,8 +72,8 @@
   import customTable from "./table.vue";             // table
   import customTemplate from "./template.vue";       // 模板切换
 
-  import BIPage1 from "./BI/index1.vue";               // 报表模块 1
-  // import BIPage2 from "./BI/index2.vue";               // 报表模块 2
+  import ForeignTrade from "./BI/foreignTrade.vue";            // 报表 外贸订单
+  import DomesticTrade from "./BI/domesticTrade.vue";          // 报表 内贸订单
   // import BIPage3 from "./BI/index3.vue";               // 报表模块 3
   // import BIPage4 from "./BI/index4.vue";               // 报表模块 4
   // import BIPage5 from "./BI/index5.vue";               // 报表模块 5
@@ -78,18 +88,17 @@
     components: {
       customTable,
       customTemplate,
-      BIPage1
+      ForeignTrade,
+      DomesticTrade
     },
     data () {
       return {
         currentTpl:1,   // 当前模板  默认模板一 
 
-        BIConfig1:{},   // 模块1 配置文件
-        BIConfig2:{},   // 模块2 配置文件
-        BIConfig3:{},   // 模块3 配置文件
-        BIConfig4:{},   // 模块4 配置文件
-        BIConfig5:{},   // 模块5 配置文件
-        BIConfig6:{},   // 模块6 配置文件
+        config_foreign:{},   // 配置文件 外贸订单
+        config_domestic:{},   // 配置文件 内贸订单
+
+
 
       }
     },
@@ -123,13 +132,15 @@
       dropHandle: function (event,key) {
         let row = JSON.parse( event.dataTransfer.getData('item') );  
 
+        this.bufferConfig();  // 缓存数据
+
         // 跟新模块数据
-        switch ( Number(key) ) {
-          case 1:
-            this.BIConfig1=row;
+        switch ( key ) {
+          case 'foreign':         // 外贸 订单
+            this.config_foreign=row;
             break;
-          case 2:
-            this.BIConfig2=row;
+          case 'domestic':        // 内贸 订单
+            this.config_domestic=row;
             break;
           case 3:
             this.BIConfig3=row;
@@ -147,7 +158,16 @@
             break;
         }
 
-      }    
+      },
+      /**
+       * 缓存 数据 
+       * */    
+      bufferConfig:function(){
+        // 缓存 数据
+        let config = {
+          currentTpl:this.currentTpl,   // 当前模板
+        }
+      }
     }
   }
 </script>
