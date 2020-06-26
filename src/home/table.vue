@@ -10,6 +10,13 @@
         padding: 12px 16px;
         cursor: all-scroll;
         // border-bottom: 1px solid red;
+
+        -moz-user-select: none; 
+        -webkit-user-select: none; 
+        -ms-user-select: none; 
+        -khtml-user-select: none; 
+        user-select: none;
+
     }
 
     .table-box{
@@ -206,7 +213,11 @@
 <script>
 export default {
     props: {
-
+        // 配置 参数
+        config:{
+            type: Object,
+            default:()=>{}              
+        }        
     },    
     data () {
         return {

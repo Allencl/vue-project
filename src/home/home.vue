@@ -22,7 +22,34 @@
 </style>
 <template>
   <div class="weima-home">
-    <customTable />
+    <customTable 
+      :config="table_config"
+    />
+
+    <Row>
+      <Col span="8">
+        <div class="module-box">
+          <TodoPage 
+            :config="config_todo"
+          />
+        </div>
+      </Col>
+      <Col span="8">
+        <div class="module-box">
+          <ProjectPage 
+            :config="config_project"
+          />
+        </div>
+      </Col>      
+      <Col span="8">
+        <div class="module-box">
+          <NoticePage 
+            :config="config_notice"
+          />
+        </div>
+      </Col>       
+    </Row>
+
     <Row>
         <Col span="8">
           <div class="module-box detail">
@@ -32,6 +59,8 @@
             />
           </div>
         </Col>
+
+
         <!-- <Col span="16">
           <div class="module-box detail">
             
@@ -72,12 +101,15 @@
   import customTable from "./table.vue";             // table
   import customTemplate from "./template.vue";       // 模板切换
 
+  import TodoPage from "./todo.vue";                  // 处理事项
+  import ProjectPage from "./project.vue";            // 项目信息
+  import NoticePage from "./notice.vue";            //  系统公告
+
+
+
   import ForeignTrade from "./BI/foreignTrade.vue";            // 报表 外贸订单
   import DomesticTrade from "./BI/domesticTrade.vue";          // 报表 内贸订单
-  // import BIPage3 from "./BI/index3.vue";               // 报表模块 3
-  // import BIPage4 from "./BI/index4.vue";               // 报表模块 4
-  // import BIPage5 from "./BI/index5.vue";               // 报表模块 5
-  // import BIPage6 from "./BI/index6.vue";               // 报表模块 6
+
 
 
 
@@ -88,12 +120,24 @@
     components: {
       customTable,
       customTemplate,
+      TodoPage,
+      ProjectPage,
+      NoticePage,
+
       ForeignTrade,
       DomesticTrade
     },
     data () {
       return {
         currentTpl:1,   // 当前模板  默认模板一 
+        table_config:{},   // 拖拽 table 配置文件
+
+        config_todo:{},    // 配置文件 处理事项
+        config_project:{},    // 配置文件 项目信息
+        config_notice:{},    // 配置文件 系统 公告
+
+
+        
 
         config_foreign:{},   // 配置文件 外贸订单
         config_domestic:{},   // 配置文件 内贸订单
@@ -113,7 +157,7 @@
         // 模拟数据
         let config = {
           currentTpl:1,     // 当前模板
-          table_config:{},  // table 配置文件
+          table_config:{},  // 拖拽 table 配置文件
 
         } 
 
