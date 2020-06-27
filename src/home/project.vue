@@ -44,7 +44,7 @@ export default {
                 {
                     name: 'John Brown',
                     age: 18,
-                    address: 'New York No. 1 Lake Park',
+                    address: 'New York ',
                     date: '2016-10-03'
                 },
                 // {

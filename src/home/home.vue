@@ -26,7 +26,9 @@
 <template>
   <div class="weima-home">
     <customTable 
+      :currentTpl="currentTpl"
       :config="table_config"
+      @templateChange="_templateChange"
     />
 
     <Row>
@@ -53,7 +55,7 @@
       </Col>       
     </Row>
 
-    <Row>
+    <!-- <Row>
         <Col span="8">
           <div class="module-box detail" >
             <customTemplate 
@@ -62,7 +64,7 @@
             />
           </div>
         </Col>
-    </Row>    
+    </Row>     -->
     <Row>
         <Col span="12">
             <div 
@@ -149,7 +151,7 @@
 <script>
 
   import customTable from "./table.vue";             // table
-  import customTemplate from "./template.vue";       // 模板切换
+  // import customTemplate from "./template.vue";       // 模板切换
 
   import TodoPage from "./todo.vue";                  // 处理事项
   import ProjectPage from "./project.vue";            // 项目信息
@@ -172,7 +174,7 @@
   export default {
     components: {
       customTable,
-      customTemplate,
+
       TodoPage,
       ProjectPage,
       NoticePage,

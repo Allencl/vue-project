@@ -30,7 +30,7 @@ export default {
     watch: {
         // 监听 模板
         'currentTpl'(){
-            console.log("模板切换了");
+            console.log(`模板切换了 ${this.currentTpl}`);
         },
         // 监听 配置参数
         'config'(){

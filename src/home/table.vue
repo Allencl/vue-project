@@ -186,6 +186,12 @@
         </p>
 
         <div slot="content">
+
+            <customTemplate 
+              :currentTpl="currentTpl"
+              @templateChange="_templateChange"
+            />
+
             <div style="overflow-y: hidden;" :class="`content-box ${toggle_icon?'hidden':''}`">
                 <Row>
                     <Col span="24"> 
@@ -211,8 +217,20 @@
 
 </template>
 <script>
+
+import customTemplate from "./template.vue";       // 模板切换
+
+
 export default {
+    components: {
+        customTemplate
+    },    
     props: {
+        // 当前模板
+        currentTpl:{
+            type: Number,
+            // default:()=>1           
+        },        
         // 配置 参数
         config:{
             type: Object,
@@ -293,6 +311,12 @@ export default {
          */
         _toggleIcon: function(){
             this.toggle_icon=!this.toggle_icon;
+        },
+        /**
+         * 模板切换
+         */
+        _templateChange: function(num){
+            this.$emit("templateChange",num);
         },
         /**
          *  面板 拖拽
