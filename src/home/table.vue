@@ -102,7 +102,7 @@
 
             &:hover{
                 transform: scale(1.2,1.2);
-                background: #abdcff;
+                background: rgba(45, 140, 240, 0.2);
             }            
 
         }
@@ -132,9 +132,9 @@
 
     &.global-diff{
         position: fixed;
-        top: 50px;
-        right: 10px;
-        z-index: 101; 
+        top: 120px;
+        right: 20px;
+        z-index: 901; 
         transition: none; 
 
         .ivu-card-head{
@@ -192,8 +192,8 @@
         >
             <Icon type="ios-hand" />
             <b style="padding-left: 6px;">报表选择 <span style="font-weight: normal;">（拖拽填充）</span> </b>
-            <Icon v-if="toggle_icon" class="toggle-icon" type="ios-arrow-up" @click="_toggleIcon" />
-            <Icon v-else class="toggle-icon" type="ios-arrow-down"  @click="_toggleIcon" />
+            <Icon v-if="toggle_icon" class="toggle-icon" type="ios-arrow-up" @click="_toggleIcon" title="展开" />
+            <Icon v-else class="toggle-icon" type="ios-arrow-down"  @click="_toggleIcon" title="合并" />
         </p>
 
         <div slot="content">

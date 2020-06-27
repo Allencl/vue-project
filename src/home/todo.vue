@@ -22,7 +22,8 @@
 
             &:hover{
                 transform: scale(1.1,1.1);
-                background: #abdcff;
+                // background: #abdcff;
+                background: rgba(45, 140, 240, 0.2);
             } 
 
 
