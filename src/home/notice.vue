@@ -1,30 +1,49 @@
 <style lang="scss">
+    .weima-home-notice{
 
+        .title{
+            text-align: left;
+            padding: 12px 16px;
+            cursor: all-scroll;
+            // border-bottom: 1px solid red;
+
+        }
+
+        ul{
+            max-height: 202px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        li{
+            list-style: none;
+            padding: 6px 10px;
+            font-size: 12px;
+
+
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .box{
+            padding: 10px;
+            padding-right: 0px;
+
+
+        }
+    }
 
 </style>
 <template>
-    <div class="bi-module-box">
+    <div class="weima-home-notice bi-module-box">
         <p>系统公告</p>
-        <div style="width:100%;height:200px" >
+        <div style="width:100%;" class="box">
             <ul>
-                <li>
-                    <span>1 、xxwxxxxi 上线</span>
-                </li>
-                <li>
-                    <span>我的已办</span>
-                </li>    
-                <li>
-                    <span>我的转办</span>
-                </li> 
-                <li>
-                    <span>我的待回复</span>
-                </li> 
-                <li>
-                    <span>我的草稿</span>
-                </li>    
-                <li>
-                    <span>我参与的</span>
-                </li>                                                                         
+                <li v-for="(o,i) in data" :key="i" :title="o['name']">
+                    <span>{{ o['name'] }}</span>
+                </li>                                                                        
             </ul>
         </div>
     </div>
@@ -35,7 +54,7 @@
 export default {
     data () {
         return {
-            
+            data:[],
         }
     },
     created() {
@@ -46,7 +65,43 @@ export default {
          * 初始化
          */
         initPage: function(){
-
+            // 模拟数据
+            this.data = [
+                {
+                    name:"1、xxxxxxxQSI 系统提示"
+                },
+                {
+                    name:"2、rrrrrrrrrQSI 邮件提示"
+                },
+                {
+                    name:"3、hhhhhhhhhhQSI 系统上线"
+                },
+                                {
+                    name:"1、xxxxxxxQSI 系统提示"
+                },
+                {
+                    name:"2、rrrrrrrrrQSI 邮件提示"
+                },
+                {
+                    name:"3、hhhhhhhhhhQSI 系统上线"
+                }               , {
+                    name:"1、xxxxxxxQSI 系统提示"
+                },
+                {
+                    name:"2、rrrrrrrrrQSI 邮件提示"
+                },
+                {
+                    name:"3、hhhhhhhhhhQSI 系统上线"
+                }               , {
+                    name:"1、xxxxxxxQSI 系统提示"
+                },
+                {
+                    name:"2、rrrrrrrrrQSI 邮件提示"
+                },
+                {
+                    name:"3、hhhhhhhhhhQSI 系统上线"
+                }
+            ];
         },
  
     },

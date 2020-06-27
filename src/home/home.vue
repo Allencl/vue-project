@@ -4,6 +4,7 @@
       // height: 150px;
       // background: wheat;
       border: 1px solid red;
+      // border: 1px solid #eee;
       margin: 6px 8px;
 
       &.detail{
@@ -14,7 +15,7 @@
 
     .bi-module-box{
       padding: 5px 8px;
-      height: 300px;
+      height: 100%;
     }
   }
 
@@ -28,21 +29,21 @@
 
     <Row>
       <Col span="8">
-        <div class="module-box">
+        <div class="module-box" style="height:250px">
           <TodoPage 
             :config="config_todo"
           />
         </div>
       </Col>
       <Col span="8">
-        <div class="module-box">
+        <div class="module-box" style="height:250px">
           <ProjectPage 
             :config="config_project"
           />
         </div>
       </Col>      
       <Col span="8">
-        <div class="module-box">
+        <div class="module-box" style="height:250px">
           <NoticePage 
             :config="config_notice"
           />
@@ -52,25 +53,19 @@
 
     <Row>
         <Col span="8">
-          <div class="module-box detail">
+          <div class="module-box detail" >
             <customTemplate 
               :currentTpl="currentTpl"
               @templateChange="_templateChange"
             />
           </div>
         </Col>
-
-
-        <!-- <Col span="16">
-          <div class="module-box detail">
-            
-          </div>        
-        </Col> -->
     </Row>    
     <Row>
         <Col span="12">
             <div 
               class="module-box"
+              style="height:250px"
               @drop="dropHandle($event,'foreign')"
               @dragover.prevent
             >
@@ -83,6 +78,7 @@
         <Col span="12">
             <div 
               class="module-box"
+              style="height:250px"
               @drop="dropHandle($event,'domestic')"
               @dragover.prevent
             >
@@ -91,7 +87,59 @@
                 :config="config_domestic"
               />
             </div>
-        </Col>       
+        </Col>  
+        <Col span="12">
+            <div 
+              class="module-box"
+              style="height:250px"
+              @drop="dropHandle($event,'inventory')"
+              @dragover.prevent
+            >
+              <Inventory 
+                :currentTpl="currentTpl"
+                :config="config_inventory"
+              />
+            </div>
+        </Col> 
+        <Col span="12">
+            <div 
+              class="module-box"
+              style="height:250px"
+              @drop="dropHandle($event,'production')"
+              @dragover.prevent
+            >
+              <Production 
+                :currentTpl="currentTpl"
+                :config="config_production"
+              />
+            </div>
+        </Col>                 
+        <Col span="12">
+            <div 
+              class="module-box"
+              style="height:250px"
+              @drop="dropHandle($event,'inventory2')"
+              @dragover.prevent
+            >
+              <Inventory2 
+                :currentTpl="currentTpl"
+                :config="config_inventory2"
+              />
+            </div>
+        </Col> 
+        <Col span="12">
+            <div 
+              class="module-box"
+              style="height:250px"
+              @drop="dropHandle($event,'puality')"
+              @dragover.prevent
+            >
+              <Puality 
+                :currentTpl="currentTpl"
+                :config="config_puality"
+              />
+            </div>
+        </Col>                       
     </Row>
  
   </div>  
@@ -109,7 +157,10 @@
 
   import ForeignTrade from "./BI/foreignTrade.vue";            // 报表 外贸订单
   import DomesticTrade from "./BI/domesticTrade.vue";          // 报表 内贸订单
-
+  import Inventory from "./BI/inventory.vue";                 // 报表 配件库存表
+  import Inventory2 from "./BI/inventory2.vue";                 // 报表 配件库存表2
+  import Production from "./BI/production.vue";               // 报表 各产品生产进度表
+  import Puality from "./BI/quality.vue";                    // 报表 月度质量趋势表
 
 
 
@@ -125,7 +176,11 @@
       NoticePage,
 
       ForeignTrade,
-      DomesticTrade
+      DomesticTrade,
+      Inventory,
+      Inventory2,
+      Production,
+      Puality
     },
     data () {
       return {
@@ -141,6 +196,12 @@
 
         config_foreign:{},   // 配置文件 外贸订单
         config_domestic:{},   // 配置文件 内贸订单
+        config_inventory:{},   // 配置文件 配件库存表
+        config_inventory2:{},   // 配置文件 配件库存表2
+        config_production:{},   // 配置文件 各产品生产进度表
+        config_puality:{},   // 配置文件 月度质量趋势表
+
+
 
 
 
@@ -186,18 +247,20 @@
           case 'domestic':        // 内贸 订单
             this.config_domestic=row;
             break;
-          case 3:
-            this.BIConfig3=row;
+          case 'inventory':      // 配件库存表
+            this.config_inventory=row;
             break;
-          case 4:
-            this.BIConfig4=row;
+          case 'inventory2':      // 配件库存表2
+            this.config_inventory2=row;
+            break;            
+            
+          case 'production':    // 各产品生产进度表
+            this.config_production=row;
             break;
-          case 5:
-            this.BIConfig5=row;
+          case 'puality':      // 月度质量趋势表
+            this.config_puality=row;
             break;
-          case 6:
-            this.BIConfig6=row;
-            break;                                                        
+                                                      
           default:
             break;
         }

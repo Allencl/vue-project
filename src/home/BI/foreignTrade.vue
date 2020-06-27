@@ -37,7 +37,12 @@ export default {
             console.log("内贸订单 配置参数切换了");
             console.log(this.config);
 
-            // this.initPage();  // 初始化
+            // 模拟刷新 后面可以删掉
+            document.querySelector("#foreignID").style.visibility="hidden"; 
+            setTimeout(()=>{
+                document.querySelector("#foreignID").style.visibility="inherit"
+            },500);
+            // 模拟刷新 后面可以删掉
 
         },
         
@@ -47,7 +52,7 @@ export default {
          * 初始化
          */
         initPage: function(){
-            var echartObj = echarts.init(document.getElementById('foreignID'));
+            var echartObj = echarts.init(document.querySelector('#foreignID'));
 
             const option = {
                 grid: {

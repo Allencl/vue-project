@@ -4,8 +4,8 @@
 </style>
 <template>
     <div class="bi-module-box">
-        <p>外贸订单</p>
-        <div style="width:100%;height:100%;" id="domesticID"></div>
+        <p>各产品生产进度表</p>
+        <div style="width:100%;height:100%;" id="productionID"></div>
     </div>
 </template>
 <script>
@@ -13,7 +13,7 @@
 import echarts from 'echarts';
 
 
-// 外贸 订单
+// 各产品生产进度表 
 export default {
     data () {
         return {
@@ -34,13 +34,13 @@ export default {
         },
         // 监听 配置参数
         'config'(){
-            console.log("外贸订单 配置参数切换了");
+            console.log("各产品生产进度表 配置参数切换了");
             console.log(this.config);
 
             // 模拟刷新 后面可以删掉
-            document.querySelector("#domesticID").style.visibility="hidden"; 
+            document.querySelector("#productionID").style.visibility="hidden"; 
             setTimeout(()=>{
-                document.querySelector("#domesticID").style.visibility="inherit"
+                document.querySelector("#productionID").style.visibility="inherit"
             },500);
             // 模拟刷新 后面可以删掉
 
@@ -52,7 +52,7 @@ export default {
          * 初始化
          */
         initPage: function(){
-            var echartObj = echarts.init(document.querySelector('#domesticID'));
+            var echartObj = echarts.init(document.querySelector('#productionID'));
 
             const option = {
                 grid: {
@@ -61,18 +61,24 @@ export default {
                     top: '30px',
                     bottom: '50px'
                 },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                },
-                yAxis: {
-                    type: 'value'
-                },
+                xAxis: {},
+                yAxis: {},
                 series: [{
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
-                    type: 'line',
-                    areaStyle: {}
+                    symbolSize: 20,
+                    data: [
+                        [10.0, 8.04],
+                        [8.0, 6.95],
+                        [13.0, 7.58],
+                        [9.0, 8.81],
+                        [11.0, 8.33],
+                        [14.0, 9.96],
+                        [6.0, 7.24],
+                        [4.0, 4.26],
+                        [12.0, 10.84],
+                        [7.0, 4.82],
+                        [5.0, 5.68]
+                    ],
+                    type: 'scatter'
                 }]
             };
 

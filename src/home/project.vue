@@ -1,13 +1,18 @@
 <style lang="scss">
-
+    .weima-home-project{
+        .box{
+            padding: 10px;
+            
+        }
+    }
 
 </style>
 <template>
-    <div class="bi-module-box">
+    <div class="weima-home-project bi-module-box">
         <p>项目信息</p>
-        <div style="width:100%;height:200px" >
+        <div class="box" style="width:100%;" >
             <Table 
-                 
+                size="small" 
                 height="200"
                 :columns="columns" 
                 :data="data"
@@ -42,24 +47,24 @@ export default {
                     address: 'New York No. 1 Lake Park',
                     date: '2016-10-03'
                 },
-                {
-                    name: 'Jim Green',
-                    age: 24,
-                    address: 'London No. 1 Lake Park',
-                    date: '2016-10-01'
-                },
-                {
-                    name: 'Joe Black',
-                    age: 30,
-                    address: 'Sydney No. 1 Lake Park',
-                    date: '2016-10-02'
-                },
-                {
-                    name: 'Jon Snow',
-                    age: 26,
-                    address: 'Ottawa No. 2 Lake Park',
-                    date: '2016-10-04'
-                }
+                // {
+                //     name: 'Jim Green',
+                //     age: 24,
+                //     address: 'London No. 1 Lake Park',
+                //     date: '2016-10-01'
+                // },
+                // {
+                //     name: 'Joe Black',
+                //     age: 30,
+                //     address: 'Sydney No. 1 Lake Park',
+                //     date: '2016-10-02'
+                // },
+                // {
+                //     name: 'Jon Snow',
+                //     age: 26,
+                //     address: 'Ottawa No. 2 Lake Park',
+                //     date: '2016-10-04'
+                // }
             ]
                   
         }
