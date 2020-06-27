@@ -13,7 +13,7 @@
         <div class="box" style="width:100%;" >
             <Table 
                 size="small" 
-                height="180"
+                height="150"
                 :columns="columns" 
                 :data="data"
             ></Table>

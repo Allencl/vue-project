@@ -33,21 +33,21 @@
 
     <Row>
       <Col span="8">
-        <div class="module-box" style="height:230px">
+        <div class="module-box" style="height:210px">
           <TodoPage 
             :config="config_todo"
           />
         </div>
       </Col>
       <Col span="8">
-        <div class="module-box" style="height:230px">
+        <div class="module-box" style="height:210px">
           <ProjectPage 
             :config="config_project"
           />
         </div>
       </Col>      
       <Col span="8">
-        <div class="module-box" style="height:230px">
+        <div class="module-box" style="height:210px">
           <NoticePage 
             :config="config_notice"
           />

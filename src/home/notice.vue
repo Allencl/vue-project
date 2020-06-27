@@ -75,31 +75,6 @@ export default {
                 },
                 {
                     name:"3、hhhhhhhhhhQSI 系统上线"
-                },
-                                {
-                    name:"1、xxxxxxxQSI 系统提示"
-                },
-                {
-                    name:"2、rrrrrrrrrQSI 邮件提示"
-                },
-                {
-                    name:"3、hhhhhhhhhhQSI 系统上线"
-                }               , {
-                    name:"1、xxxxxxxQSI 系统提示"
-                },
-                {
-                    name:"2、rrrrrrrrrQSI 邮件提示"
-                },
-                {
-                    name:"3、hhhhhhhhhhQSI 系统上线"
-                }               , {
-                    name:"1、xxxxxxxQSI 系统提示"
-                },
-                {
-                    name:"2、rrrrrrrrrQSI 邮件提示"
-                },
-                {
-                    name:"3、hhhhhhhhhhQSI 系统上线"
                 }
             ];
         },
