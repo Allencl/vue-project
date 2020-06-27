@@ -3,9 +3,11 @@
     .module-box{
       // height: 150px;
       // background: wheat;
-      border: 1px solid red;
+      // border: 1px solid red;
+      border: 1px solid #eee;
       // border: 1px solid #eee;
       margin: 6px 4px;
+      box-shadow: 4px 6px 3px 1px rgba(184, 184, 184, 0.4);
 
       &.detail{
         height: 120px;
