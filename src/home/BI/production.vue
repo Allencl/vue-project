@@ -1,10 +1,18 @@
 <style lang="scss">
 
-
+    .bi-module-box{
+       .head-title{
+            -moz-user-select: none; 
+            -webkit-user-select: none; 
+            -ms-user-select: none; 
+            -khtml-user-select: none; 
+            user-select: none;            
+       } 
+    }
 </style>
 <template>
     <div class="bi-module-box">
-        <p>各产品生产进度表</p>
+        <p class="head-title">各产品生产进度表</p>
         <div style="width:100%;height:100%;" id="productionID"></div>
     </div>
 </template>
@@ -31,7 +39,9 @@ export default {
         // 监听 模板
         'currentTpl'(){
             console.log(`模板切换了 ${this.currentTpl}`);
-            this.echartObj && this.echartObj.resize();
+            this.$nextTick(()=>{
+                this.echartObj && this.echartObj.resize();
+            });
 
         },
         // 监听 配置参数

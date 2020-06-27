@@ -33,12 +33,20 @@
 
 
         }
+
+        .head-title{
+            -moz-user-select: none; 
+            -webkit-user-select: none; 
+            -ms-user-select: none; 
+            -khtml-user-select: none; 
+            user-select: none;            
+       } 
     }
 
 </style>
 <template>
     <div class="weima-home-notice bi-module-box">
-        <p>系统公告</p>
+        <p class="head-title">系统公告</p>
         <div style="width:100%;" class="box">
             <ul>
                 <li v-for="(o,i) in data" :key="i" :title="o['name']">

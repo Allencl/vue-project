@@ -1,6 +1,7 @@
 <style lang="scss">
   .weima-home{
     .module-box{
+          background: #fff;
       // height: 150px;
       // background: wheat;
       // border: 1px solid red;

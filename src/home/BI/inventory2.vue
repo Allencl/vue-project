@@ -1,10 +1,18 @@
 <style lang="scss">
 
-
+    .bi-module-box{
+       .head-title{
+            -moz-user-select: none; 
+            -webkit-user-select: none; 
+            -ms-user-select: none; 
+            -khtml-user-select: none; 
+            user-select: none;            
+       } 
+    }
 </style>
 <template>
     <div class="bi-module-box">
-        <p>配件库存表</p>
+        <p class="head-title">配件库存表</p>
         <div style="width:100%;height:100%;" id="inventory2ID"></div>
     </div>
 </template>
@@ -32,7 +40,9 @@ export default {
         // 监听 模板
         'currentTpl'(){
             console.log(`模板切换了 ${this.currentTpl}`);
-            this.echartObj && this.echartObj.resize();
+            this.$nextTick(()=>{
+                this.echartObj && this.echartObj.resize();
+            });
 
         },
         // 监听 配置参数
@@ -64,33 +74,19 @@ export default {
                     top: '30px',
                     bottom: '50px'
                 },
-                dataset: {
-                    source: [
-                        ['score', 'amount', 'product'],
-                        [89.3, 58212, 'Matcha Latte'],
-                        [57.1, 78254, 'Milk Tea'],
-                        [74.4, 41032, 'Cheese Cocoa'],
-                        [50.1, 12755, 'Cheese Brownie'],
-                        [89.7, 20145, 'Matcha Cocoa'],
-                        [68.1, 79146, 'Tea'],
-                        [19.6, 91852, 'Orange Juice'],
-                        [10.6, 101852, 'Lemon Juice'],
-                        [32.7, 20112, 'Walnut Brownie']
-                    ]
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                 },
-                xAxis: {name: 'amount'},
-                yAxis: {type: 'category'},
-                series: [
-                    {
-                        type: 'bar',
-                        encode: {
-                            // Map the "amount" column to X axis.
-                            x: 'amount',
-                            // Map the "product" column to Y axis
-                            y: 'product'
-                        }
-                    }
-                ]
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    type: 'line',
+                    areaStyle: {}
+                }]
             };
 
             echartObj.setOption(option);

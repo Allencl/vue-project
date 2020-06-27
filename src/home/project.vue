@@ -4,12 +4,20 @@
             padding: 10px;
             
         }
+
+        .head-title{
+            -moz-user-select: none; 
+            -webkit-user-select: none; 
+            -ms-user-select: none; 
+            -khtml-user-select: none; 
+            user-select: none;            
+       } 
     }
 
 </style>
 <template>
     <div class="weima-home-project bi-module-box">
-        <p>项目信息</p>
+        <p class="head-title">项目信息</p>
         <div class="box" style="width:100%;" >
             <Table 
                 size="small" 

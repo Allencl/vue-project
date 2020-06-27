@@ -41,13 +41,21 @@
             margin-top: 10px;
             padding: 16px;
         }
+
+        .head-title{
+            -moz-user-select: none; 
+            -webkit-user-select: none; 
+            -ms-user-select: none; 
+            -khtml-user-select: none; 
+            user-select: none;            
+       } 
     }
 
 
 </style>
 <template>
     <div class="weima-home-todo bi-module-box">
-        <p>处理事项</p>
+        <p class="head-title">处理事项</p>
         <div style="width:100%;" class="box">
             <Badge overflow-count="999" :count="28" type="warning">
                 <a href="#" class="demo-badge">代办</a>
