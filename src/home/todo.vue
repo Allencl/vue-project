@@ -6,10 +6,10 @@
             text-align: center;
             padding: 6px;
             float: left;
-            margin-right: 28px;
-            margin-bottom: 18px;
-            width: 56px;
-            height: 56px;
+            margin-right: 22px;
+            margin-bottom: 14px;
+            width: 54px;
+            height: 54px;
             line-height: 42px;
             background: #eee;
             border-radius: 6px;
@@ -31,7 +31,9 @@
 
         .ivu-badge{
             .ivu-badge-count {
-                right: 28px;
+                right: 36px;
+                top: -4px;
+                font-size: 10px;
             }
         }
 

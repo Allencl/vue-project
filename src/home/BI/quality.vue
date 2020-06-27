@@ -17,6 +17,7 @@ import echarts from 'echarts';
 export default {
     data () {
         return {
+            echartObj:undefined,   // echart 对象
 
             
             
@@ -31,6 +32,8 @@ export default {
         // 监听 模板
         'currentTpl'(){
             console.log(`模板切换了 ${this.currentTpl}`);
+            this.echartObj && this.echartObj.resize();
+
         },
         // 监听 配置参数
         'config'(){
@@ -120,6 +123,7 @@ export default {
             };
 
             echartObj.setOption(option);
+            this.echartObj=echartObj;    // 缓存 对象
             window.addEventListener('resize', function () {
                 echartObj.resize();
             });

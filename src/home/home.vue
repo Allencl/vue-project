@@ -33,21 +33,21 @@
 
     <Row>
       <Col span="8">
-        <div class="module-box" style="height:210px">
+        <div class="module-box" style="height:200px">
           <TodoPage 
             :config="config_todo"
           />
         </div>
       </Col>
       <Col span="8">
-        <div class="module-box" style="height:210px">
+        <div class="module-box" style="height:200px">
           <ProjectPage 
             :config="config_project"
           />
         </div>
       </Col>      
       <Col span="8">
-        <div class="module-box" style="height:210px">
+        <div class="module-box" style="height:200px">
           <NoticePage 
             :config="config_notice"
           />
@@ -67,89 +67,242 @@
     </Row>     -->
 
 
-    <!-- 报表 begin -->
-    <Row>
-        <Col span="12">
-            <div 
-              class="module-box"
-              style="height:300px"
-              @drop="dropHandle($event,'foreign')"
-              @dragover.prevent
-            >
-              <ForeignTrade 
-                :currentTpl="currentTpl"
-                :config="config_foreign"
-              />
-            </div>
-        </Col>
-        <Col span="12">
-            <div 
-              class="module-box"
-              style="height:300px"
-              @drop="dropHandle($event,'domestic')"
-              @dragover.prevent
-            >
-              <DomesticTrade 
-                :currentTpl="currentTpl"
-                :config="config_domestic"
-              />
-            </div>
-        </Col>  
-        <Col span="12">
-            <div 
-              class="module-box"
-              style="height:300px"
-              @drop="dropHandle($event,'inventory')"
-              @dragover.prevent
-            >
-              <Inventory 
-                :currentTpl="currentTpl"
-                :config="config_inventory"
-              />
-            </div>
-        </Col> 
-        <Col span="12">
-            <div 
-              class="module-box"
-              style="height:300px"
-              @drop="dropHandle($event,'production')"
-              @dragover.prevent
-            >
-              <Production 
-                :currentTpl="currentTpl"
-                :config="config_production"
-              />
-            </div>
-        </Col>                 
-        <Col span="12">
-            <div 
-              class="module-box"
-              style="height:300px"
-              @drop="dropHandle($event,'inventory2')"
-              @dragover.prevent
-            >
-              <Inventory2 
-                :currentTpl="currentTpl"
-                :config="config_inventory2"
-              />
-            </div>
-        </Col> 
-        <Col span="12">
-            <div 
-              class="module-box"
-              style="height:300px"
-              @drop="dropHandle($event,'puality')"
-              @dragover.prevent
-            >
-              <Puality 
-                :currentTpl="currentTpl"
-                :config="config_puality"
-              />
-            </div>
-        </Col>                       
-    </Row>
-    <!-- 报表 end -->
+    <!-- 报表 模板1 begin -->
+    <div v-if="currentTpl==1">
+      <Row>
+          <Col span="12">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'production')"
+                @dragover.prevent
+              >
+                <Production 
+                  :currentTpl="currentTpl"
+                  :config="config_production"
+                />
+              </div>
+          </Col>   
+          <Col span="12">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'inventory')"
+                @dragover.prevent
+              >
+                <Inventory 
+                  :currentTpl="currentTpl"
+                  :config="config_inventory"
+                />
+              </div>
+          </Col>              
+          <Col span="12">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'foreign')"
+                @dragover.prevent
+              >
+                <ForeignTrade 
+                  :currentTpl="currentTpl"
+                  :config="config_foreign"
+                />
+              </div>
+          </Col>
+          <Col span="12">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'domestic')"
+                @dragover.prevent
+              >
+                <DomesticTrade 
+                  :currentTpl="currentTpl"
+                  :config="config_domestic"
+                />
+              </div>
+          </Col>                                       
+      </Row>
+    </div>
+    <!-- 报表 模板1  end -->
 
+
+    <!-- 报表 模板2 begin -->
+    <div v-if="currentTpl==2">
+      <Row>
+          <Col span="8">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'production')"
+                @dragover.prevent
+              >
+                <Production 
+                  :currentTpl="currentTpl"
+                  :config="config_production"
+                />
+              </div>
+          </Col>   
+          <Col span="8">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'inventory')"
+                @dragover.prevent
+              >
+                <Inventory 
+                  :currentTpl="currentTpl"
+                  :config="config_inventory"
+                />
+              </div>
+          </Col>     
+          <Col span="8">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'inventory2')"
+                @dragover.prevent
+              >
+                <Inventory2 
+                  :currentTpl="currentTpl"
+                  :config="config_inventory2"
+                />
+              </div>
+          </Col>   
+          <Col span="8">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'puality')"
+                @dragover.prevent
+              >
+                <Puality 
+                  :currentTpl="currentTpl"
+                  :config="config_puality"
+                />
+              </div>
+          </Col>                            
+          <Col span="8">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'foreign')"
+                @dragover.prevent
+              >
+                <ForeignTrade 
+                  :currentTpl="currentTpl"
+                  :config="config_foreign"
+                />
+              </div>
+          </Col>
+          <Col span="8">
+              <div 
+                class="module-box"
+                style="height:300px"
+                @drop="dropHandle($event,'domestic')"
+                @dragover.prevent
+              >
+                <DomesticTrade 
+                  :currentTpl="currentTpl"
+                  :config="config_domestic"
+                />
+              </div>
+          </Col> 
+
+      </Row>
+     </div>
+    <!-- 报表 模板2  end -->
+
+
+    <!-- 报表 模板3 begin -->
+    <div v-if="currentTpl==3">
+      <Row>
+          <Col span="12">
+              <div 
+                class="module-box"
+                style="height:612px"
+                @drop="dropHandle($event,'production')"
+                @dragover.prevent
+              >
+                <Production 
+                  :currentTpl="currentTpl"
+                  :config="config_production"
+                />
+              </div>
+          </Col> 
+          <Col span="12">
+            <Row>
+              <Col span="12">
+                  <div 
+                    class="module-box"
+                    style="height:300px"
+                    @drop="dropHandle($event,'inventory')"
+                    @dragover.prevent
+                  >
+                    <Inventory 
+                      :currentTpl="currentTpl"
+                      :config="config_inventory"
+                    />
+                  </div>
+              </Col>  
+             <Col span="12">
+                <div 
+                  class="module-box"
+                  style="height:300px"
+                  @drop="dropHandle($event,'inventory2')"
+                  @dragover.prevent
+                >
+                  <Inventory2 
+                    :currentTpl="currentTpl"
+                    :config="config_inventory2"
+                  />
+                </div>
+              </Col>                           
+              <Col span="12">
+                  <div 
+                    class="module-box"
+                    style="height:300px"
+                    @drop="dropHandle($event,'foreign')"
+                    @dragover.prevent
+                  >
+                    <ForeignTrade 
+                      :currentTpl="currentTpl"
+                      :config="config_foreign"
+                    />
+                  </div>
+              </Col>
+              <Col span="12">
+                  <div 
+                    class="module-box"
+                    style="height:300px"
+                    @drop="dropHandle($event,'domestic')"
+                    @dragover.prevent
+                  >
+                    <DomesticTrade 
+                      :currentTpl="currentTpl"
+                      :config="config_domestic"
+                    />
+                  </div>
+              </Col>                 
+ 
+ 
+            </Row>
+          </Col>
+
+
+                     
+      </Row>
+
+    </div>
+    <!-- 报表 模板3  end -->
+
+
+
+
+
+
+     <Row v-else></Row>
+    
   </div>  
 </template>
 <script>
