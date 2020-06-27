@@ -1,9 +1,13 @@
 <style lang="scss">
   .weima-home-table{
     text-align:center;
-    width: 210px;
+    width: 230px;
     // height: 500px;
-    background: burlywood;
+    // background: burlywood;
+    background: white;
+    border: 1px solid #eee;
+    box-shadow: 4px 6px 3px 1px rgba(184, 184, 184, 0.4);
+
 
     .title{
         text-align: left;
@@ -66,6 +70,13 @@
     }
 
     ul{
+        max-height: 300px;
+        min-height: 150px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        // padding: 10px 0px;
+        padding-bottom: 10px;
+
         li{
             -moz-user-select: none; 
             -webkit-user-select: none; 
@@ -107,11 +118,11 @@
     }
 
     .content-box{
-        min-height: 300;
+        // min-height: 300;
         overflow-x: hidden;
         overflow-y: auto;
-        padding: 10px 0px;
-        border-top: 1px solid red;
+        // padding: 10px 0px;
+        border-top: 1px solid #eee;
 
 
        &.hidden{
@@ -180,19 +191,18 @@
             class="title"
         >
             <Icon type="ios-hand" />
-            <b style="padding-left: 6px;">报表选择（拖拽填充）</b>
+            <b style="padding-left: 6px;">报表选择 <span style="font-weight: normal;">（拖拽填充）</span> </b>
             <Icon v-if="toggle_icon" class="toggle-icon" type="ios-arrow-up" @click="_toggleIcon" />
             <Icon v-else class="toggle-icon" type="ios-arrow-down"  @click="_toggleIcon" />
         </p>
 
         <div slot="content">
 
-            <customTemplate 
-              :currentTpl="currentTpl"
-              @templateChange="_templateChange"
-            />
-
             <div style="overflow-y: hidden;" :class="`content-box ${toggle_icon?'hidden':''}`">
+                <customTemplate 
+                    :currentTpl="currentTpl"
+                    @templateChange="_templateChange"
+                />
                 <Row>
                     <Col span="24"> 
                         <ul>
@@ -277,34 +287,31 @@ export default {
                 {
                     name:"aakiucn 数据报表",
                 },
-                {
-                    name:"22323进度表 数据报表",
-                },
-                {
-                    name:"yyy库存表 数据报表",
-                },
-                {
-                    name:"ytrgdg 数据报表",
-                }                                                                   
+                // {
+                //     name:"uu22323进度表 数据报表",
+                // },
+                // {
+                //     name:"rereryyy库存表 数据报表",
+                // },
+                // {
+                //     name:" 数据报表",
+                // },
+                // {
+                //     name:"aakiucn 数据报表",
+                // },
+                // {
+                //     name:"mkkmm22323进度表 数据报表",
+                // },
+                // {
+                //     name:"lllyyy库存表 数据报表",
+                // },
+                // {
+                //     name:"rrrrrrytrgdg 数据报表",
+                // }                                                                                    
             ];
 
-            this.data2=[
-                {
-                    name:"8434订单 数据报表",
-                },
-                {
-                    name:"3232内贸订单 数据报表",
-                } 
-            ];
-            
-            this.data3=[
-                {
-                    name:"1q订单 数据报表",
-                },
-                {
-                    name:"w2内贸订单 数据报表",
-                } 
-            ];            
+
+                   
         },
         /**
          * icon 切换

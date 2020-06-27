@@ -65,11 +65,14 @@
           </div>
         </Col>
     </Row>     -->
+
+
+    <!-- 报表 begin -->
     <Row>
         <Col span="12">
             <div 
               class="module-box"
-              style="height:250px"
+              style="height:300px"
               @drop="dropHandle($event,'foreign')"
               @dragover.prevent
             >
@@ -82,7 +85,7 @@
         <Col span="12">
             <div 
               class="module-box"
-              style="height:250px"
+              style="height:300px"
               @drop="dropHandle($event,'domestic')"
               @dragover.prevent
             >
@@ -95,7 +98,7 @@
         <Col span="12">
             <div 
               class="module-box"
-              style="height:250px"
+              style="height:300px"
               @drop="dropHandle($event,'inventory')"
               @dragover.prevent
             >
@@ -108,7 +111,7 @@
         <Col span="12">
             <div 
               class="module-box"
-              style="height:250px"
+              style="height:300px"
               @drop="dropHandle($event,'production')"
               @dragover.prevent
             >
@@ -121,7 +124,7 @@
         <Col span="12">
             <div 
               class="module-box"
-              style="height:250px"
+              style="height:300px"
               @drop="dropHandle($event,'inventory2')"
               @dragover.prevent
             >
@@ -134,7 +137,7 @@
         <Col span="12">
             <div 
               class="module-box"
-              style="height:250px"
+              style="height:300px"
               @drop="dropHandle($event,'puality')"
               @dragover.prevent
             >
@@ -145,7 +148,8 @@
             </div>
         </Col>                       
     </Row>
- 
+    <!-- 报表 end -->
+
   </div>  
 </template>
 <script>

@@ -1,12 +1,21 @@
 <style lang="scss">
 
     .weima-home-tpl{
+        margin-top: 10px;
+        margin-bottom: 16px;
+
         .switch-box{
-            padding-top: 30px;
+            // padding-top: 30px;
             text-align: center;
 
             .mark-text{
-                padding-right: 12px;
+                font-size: 12px;
+                -moz-user-select: none; 
+                -webkit-user-select: none; 
+                -ms-user-select: none; 
+                -khtml-user-select: none; 
+                user-select: none;                
+                // padding-right: 12px;
             }
         } 
     }
@@ -17,21 +26,21 @@
         <Row>
             <Col span="8" class="switch-box">
                 <span class="mark-text">模板一</span>
-                <i-switch v-model="tep1" @on-change="changeHandle" :before-change="handleBeforeChange">
+                <i-switch size="default" v-model="tep1" @on-change="changeHandle" :before-change="handleBeforeChange">
                     <Icon type="md-checkmark" slot="open"></Icon>
                     <Icon type="md-close" slot="close"></Icon>
                 </i-switch>        
             </Col>
             <Col span="8" class="switch-box">
                 <span class="mark-text">模板二</span>
-                <i-switch v-model="tep2" @on-change="changeHandle" :before-change="handleBeforeChange">
+                <i-switch size="default" v-model="tep2" @on-change="changeHandle" :before-change="handleBeforeChange">
                     <Icon type="md-checkmark" slot="open"></Icon>
                     <Icon type="md-close" slot="close"></Icon>
                 </i-switch>        
             </Col>
             <Col span="8" class="switch-box">
                 <span class="mark-text">模板三</span>
-                <i-switch v-model="tep3" @on-change="changeHandle" :before-change="handleBeforeChange">
+                <i-switch size="default" v-model="tep3" @on-change="changeHandle" :before-change="handleBeforeChange">
                     <Icon type="md-checkmark" slot="open"></Icon>
                     <Icon type="md-close" slot="close"></Icon>
                 </i-switch>        

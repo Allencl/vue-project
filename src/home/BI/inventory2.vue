@@ -77,18 +77,6 @@ export default {
                 },
                 xAxis: {name: 'amount'},
                 yAxis: {type: 'category'},
-                visualMap: {
-                    orient: 'horizontal',
-                    left: 'center',
-                    min: 10,
-                    max: 100,
-                    text: ['High Score', 'Low Score'],
-                    // Map the score column to color
-                    dimension: 0,
-                    inRange: {
-                        color: ['#D7DA8B', '#E15457']
-                    }
-                },
                 series: [
                     {
                         type: 'bar',
