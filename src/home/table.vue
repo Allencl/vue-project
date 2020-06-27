@@ -7,7 +7,7 @@
 
     .title{
         text-align: left;
-        padding: 12px 16px;
+        padding: 12px 10px;
         cursor: all-scroll;
         // border-bottom: 1px solid red;
 
@@ -77,7 +77,7 @@
             width: 100%;
             // width: 50%;
             // float: left;
-            padding: 3px 26px;
+            padding: 3px 18px;
             text-align: left;
             cursor: all-scroll;
             font-size: 13px;
@@ -180,7 +180,7 @@
             class="title"
         >
             <Icon type="ios-hand" />
-            <b>报表选择（拖拽填充）</b>
+            <b style="padding-left: 6px;">报表选择（拖拽填充）</b>
             <Icon v-if="toggle_icon" class="toggle-icon" type="ios-arrow-up" @click="_toggleIcon" />
             <Icon v-else class="toggle-icon" type="ios-arrow-down"  @click="_toggleIcon" />
         </p>
@@ -197,7 +197,7 @@
                                 @dragend="dragEnd"
                             >
                                 <Icon type="ios-hand-outline" />
-                                {{ o["name"] }}
+                                <span style="padding-left: 6px;">{{ o["name"] }}</span>
                             </li>
                         </ul>
                     </Col>  

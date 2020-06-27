@@ -10,7 +10,7 @@
         }
 
         ul{
-            max-height: 202px;
+            max-height: 170px;
             overflow-x: hidden;
             overflow-y: auto;
         }

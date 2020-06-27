@@ -5,7 +5,7 @@
       // background: wheat;
       border: 1px solid red;
       // border: 1px solid #eee;
-      margin: 6px 8px;
+      margin: 6px 4px;
 
       &.detail{
         height: 120px;
@@ -29,21 +29,21 @@
 
     <Row>
       <Col span="8">
-        <div class="module-box" style="height:250px">
+        <div class="module-box" style="height:230px">
           <TodoPage 
             :config="config_todo"
           />
         </div>
       </Col>
       <Col span="8">
-        <div class="module-box" style="height:250px">
+        <div class="module-box" style="height:230px">
           <ProjectPage 
             :config="config_project"
           />
         </div>
       </Col>      
       <Col span="8">
-        <div class="module-box" style="height:250px">
+        <div class="module-box" style="height:230px">
           <NoticePage 
             :config="config_notice"
           />
