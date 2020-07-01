@@ -39,7 +39,7 @@
       margin: 6px 4px;
       // box-shadow: 4px 6px 3px 1px rgba(184, 184, 184, 0.4);1
       position: relative;
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.7) inset;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7) inset;
 
 
       .head-tittle{
