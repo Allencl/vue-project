@@ -1,5 +1,11 @@
 <style lang="scss">
   .weima-large-screen{
+    background: url(./Img/bag.png);
+
+    .text-color{
+      color: blue;
+    }
+
     .head-box{
       position: relative;
 
@@ -24,14 +30,88 @@
     }
 
     .module-box{
-          background: #fff;
+      // background: #fff;
       // height: 150px;
       // background: wheat;
       // border: 1px solid red;
-      border: 1px solid #eee;
+      // border: 1px solid #eee;
       // border: 1px solid #eee;
       margin: 6px 4px;
-      box-shadow: 4px 6px 3px 1px rgba(184, 184, 184, 0.4);
+      // box-shadow: 4px 6px 3px 1px rgba(184, 184, 184, 0.4);1
+      position: relative;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.7) inset;
+
+
+      .head-tittle{
+        text-align: center;
+
+        .right-box{
+          position: absolute;
+          right: 0px;
+
+          img{
+            margin-left: 3px;
+          }
+        }
+
+        >div{
+          position: relative;
+          min-width: 100px;
+          display: inline-block;
+          padding: 3px 14px;
+
+            img.s-left-top{
+              position: absolute;
+              top: 0px;
+              left: 0px;
+            }
+
+            img.s-left-bottom{
+              position: absolute;
+              left: 0px;
+              bottom: 0px;        
+            }
+
+            img.s-right-top{
+              position: absolute;
+              top: 0px;
+              right: 0px;        
+            }
+
+            img.s-right-bottom{
+              position: absolute;
+              right: 0px;
+              bottom: 0px;        
+            }           
+
+        }
+      }
+
+      
+      img.l-left-top{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+
+      img.l-left-bottom{
+        position: absolute;
+        left: 0px;
+        bottom: 0px;        
+      }
+
+      img.l-right-top{
+        position: absolute;
+        top: 0px;
+        right: 0px;        
+      }
+
+      img.l-right-bottom{
+        position: absolute;
+        right: 0px;
+        bottom: 0px;        
+      }            
+
 
       &.detail{
         height: 120px;
@@ -72,6 +152,30 @@
                 @drop="dropHandle($event,'production')"
                 @dragover.prevent
               >
+
+
+                <img class="l-left-top" :src="imgleft_top_L" alt="">
+                <img class="l-left-bottom" :src="imgleft_bottom_L" alt="">
+                <img class="l-right-top" :src="imgright_top_L" alt="">
+                <img class="l-right-bottom" :src="imgright_bottom_L" alt="">
+                <div class="head-tittle">
+                  <div>
+                    <span class="text-color">楼层监控数据</span>
+                    <img class="s-left-top" :src="imgleft_top_S" alt="">
+                    <img class="s-left-bottom" :src="imgleft_bottom_S" alt="">
+                    <img class="s-right-top" :src="imgright_top_S" alt="">
+                    <img class="s-right-bottom" :src="imgright_bottom_S" alt="">
+                  </div>
+                  <div class="right-box">
+                      <img :src="imgMark2" alt="">
+                      <img :src="imgMark1" alt="">
+                      <img :src="imgMark1" alt="">
+                      <img :src="imgMark1" alt="">
+                  </div>                  
+                </div>
+
+
+
                 <Production 
                   :currentTpl="currentTpl"
                   :config="config_production"
@@ -324,6 +428,18 @@
         imgBag: require("./Img/top.png"),   // 头 背景
         imgIcon: require("./Img/logo.png"),   // 头 icon
 
+        imgMark1: require("./Img/mark1.png"),   // mark1
+        imgMark2: require("./Img/mark2.png"),   // mark2
+
+        imgleft_top_L: require("./Img/l_left_top.png"),           // 左上 大
+        imgleft_bottom_L: require("./Img/l_left_bottom.png"),     // 左下 大
+        imgright_top_L: require("./Img/l_right_top.png"),         // 右上 大
+        imgright_bottom_L: require("./Img/l_right_bottom.png"),   // 右下 大
+
+        imgleft_top_S: require("./Img/s_left_top.png"),           // 左上 小
+        imgleft_bottom_S: require("./Img/s_left_bottom.png"),     // 左下 小
+        imgright_top_S: require("./Img/s_right_top.png"),         // 右上 小
+        imgright_bottom_S: require("./Img/s_right_bottom.png"),   // 右下 小
         
 
         config_foreign:{},   // 配置文件 外贸订单
