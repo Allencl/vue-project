@@ -21,6 +21,13 @@
                 </iframe>  
             </div>          
         </div>
+        <div v-show="typeHTML=='HTML2'" style="width:100%;height:100%;position: relative;">
+            <div style="width:96%;height:100%;position:absolute;z-index:3"></div>
+            <div style="width:100%;height:100%;position:absolute;z-index:1">
+                <iframe src ="https://www.baidu.com" width="100%" height="90%" frameborder="0">
+                </iframe>  
+            </div>          
+        </div>        
         <!-- <div v-else></div> -->
     </div>
 </template>
@@ -57,7 +64,7 @@ export default {
             console.log("各产品生产进度表 配置参数切换了");
             console.log(this.config);
 
-            this.typeHTML = (this.config["type"]=="html")?"HTML":"BI";
+            this.typeHTML = (this.config["type"])?this.config["type"]:"BI";
             this.$nextTick(()=>{
                 setTimeout(()=>{
                     // document.querySelector("#productionID").style.visibility="hidden"; 

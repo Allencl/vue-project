@@ -271,11 +271,11 @@ export default {
             this.data=[
                 {
                     name:"外贸订单 数据报表",
-                    type:"html"
+                    type:"HTML"
                 },
                 {
                     name:"内贸订单 数据报表",
-                    // type:"html"
+                    type:"HTML2"
                 },
                 {
                     name:"配件库存表 数据报表",
