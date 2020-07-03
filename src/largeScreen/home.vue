@@ -92,6 +92,9 @@
       <img :src="imgMark22" alt="" style="margin-left:30px;">
       <img :src="imgMark222" alt="" style="margin-left:30px;">
 
+      <img :src="imgMark33" alt="" style="margin-left:30px;">
+      <img :src="imgMark333" alt="" style="margin-left:30px;">
+
       <Row>
         <Col span="4">
           <Row> 
@@ -284,6 +287,9 @@
 
         imgMark22: require("./Img/l_left_bottom.png"),   // mark2
         imgMark222: require("./Img/s_left_bottom.png"),   // mark2
+
+        imgMark33: require("./Img/mark1.png"),   // mark2
+        imgMark333: require("./Img/222.png"),   // mark2
 
         config_foreign:{},   // 配置文件 外贸订单
         config_domestic:{},   // 配置文件 内贸订单
