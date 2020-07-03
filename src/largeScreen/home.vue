@@ -288,8 +288,8 @@
         imgMark22: require("./Img/l_left_bottom.png"),   // mark2
         imgMark222: require("./Img/s_left_bottom.png"),   // mark2
 
-        imgMark33: require("./Img/mark1.png"),   // mark2
-        imgMark333: require("./Img/222.png"),   // mark2
+        imgMark33: require("./Img/tt.png"),   // mark2
+        imgMark333: require("./Img/ttt.png"),   // mark2
 
         config_foreign:{},   // 配置文件 外贸订单
         config_domestic:{},   // 配置文件 内贸订单
