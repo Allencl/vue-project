@@ -85,6 +85,13 @@
 
     <!-- 报表 模板1 begin -->
     <div v-if="currentTpl==1">
+      <div style="background:#ccc;margin-bottom:10px;">111</div>
+      <div style="background:#ccc">222</div>
+
+
+      <img :src="imgMark22" alt="" style="margin-left:30px;">
+      <img :src="imgMark222" alt="" style="margin-left:30px;">
+
       <Row>
         <Col span="4">
           <Row> 
@@ -264,7 +271,7 @@
     },
     data () {
       return {
-        currentTpl:2,
+        currentTpl:1,
 
         imgBorder: require("./Img/border1-1.png"),   // 头 背景
 
@@ -275,8 +282,8 @@
         imgMark1: require("./Img/mark1.png"),   // mark1
         imgMark2: require("./Img/mark2.png"),   // mark2
 
-
-        
+        imgMark22: require("./Img/l_left_bottom.png"),   // mark2
+        imgMark222: require("./Img/s_left_bottom.png"),   // mark2
 
         config_foreign:{},   // 配置文件 外贸订单
         config_domestic:{},   // 配置文件 内贸订单
