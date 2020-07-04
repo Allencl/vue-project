@@ -32,6 +32,9 @@
     .module-box{
       // margin: 6px 4px;
       position: relative;
+      margin: 0px 12px;
+      margin-bottom: 10px;
+      box-shadow:0px 0px 4px 0px rgba(0,180,255,0.44);
 
       .img-border{
         position: absolute;
@@ -41,15 +44,60 @@
         height: 100%;
       }
 
-      .head-tittle{
-        text-align: center;
+      .img-l-r-t{
+        position: absolute;
+        right: -6px;
+        top: -5px;
+      }
+      .img-l-r-b{
+        position: absolute;
+        right: -6px;
+        bottom: -5px;
+      }
+      .img-l-l-t{
+        position: absolute;
+        left: -6px;
+        top: -5px;
+      }
+      .img-l-l-b{
+        position: absolute;
+        left: -6px;
+        bottom: -5px;
+      }
 
-        >div{
+
+      .head-tittle{
+        .text-box{
           position: relative;
-          min-width: 100px;
-          display: inline-block;
-          padding: 3px 14px;
+          text-align: center;
+          height: 38px;
+          line-height: 38px;
+          color: #01C4F7;
+          font-size: 14px;
+
+          .img-s-r-t{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+          }
+          .img-s-r-b{
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+          }
+          .img-s-l-t{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+          }
+          .img-s-l-b{
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+          }
+
         }
+
       }
 
       
@@ -65,6 +113,11 @@
     .bi-module-box{
       padding: 5px 8px;
       height: 100%;
+    }
+
+    .bi-box-page{
+      padding: 0px 12px;
+      padding-bottom: 6px;
     }
   }
 
@@ -84,47 +137,66 @@
     </Row>  
 
     <!-- 报表 模板1 begin -->
-    <div v-if="currentTpl==1">
-      <div style="background:#ccc;margin-bottom:10px;">111</div>
-      <div style="background:#ccc">222</div>
-
-
-      <img :src="imgMark22" alt="" style="margin-left:30px;">
-      <img :src="imgMark222" alt="" style="margin-left:30px;">
-
-      <img :src="imgMark33" alt="" style="margin-left:30px;">
-      <img :src="imgMark333" alt="" style="margin-left:30px;">
-
+    <div v-if="currentTpl==1" class="bi-box-page">
       <Row>
         <Col span="4">
           <Row> 
             <Col span="24"> 
               <div class="module-box" style="height:300px">
-                <img class="img-border" :src="imgBorder" alt="">
+                <div class="head-tittle">
+                  <Row>
+                     <Col push="6" span="12" class="text-box"> 
+                        <span>楼层监控数据</span>
+                          <img :src="imgS_r_t" class="img-s-r-t">
+                          <img :src="imgS_r_b" class="img-s-r-b">
+                          <img :src="imgS_l_t" class="img-s-l-t">
+                          <img :src="imgS_l_b" class="img-s-l-b">
+                     </Col>
+                  </Row>
+                </div>                
+                <img :src="imgL_r_t" class="img-l-r-t">
+                <img :src="imgL_r_b" class="img-l-r-b">
+                <img :src="imgL_l_t" class="img-l-l-t">
+                <img :src="imgL_l_b" class="img-l-l-b">
+
+
+  
               </div>               
             </Col>    
             <Col span="24">    
               <div class="module-box" style="height:300px">
-                <img class="img-border" :src="imgBorder" alt="">
+                <img :src="imgL_r_t" class="img-l-r-t">
+                <img :src="imgL_r_b" class="img-l-r-b">
+                <img :src="imgL_l_t" class="img-l-l-t">
+                <img :src="imgL_l_b" class="img-l-l-b">
               </div>            
             </Col> 
           </Row>   
         </Col>  
         <Col span="16">
           <div class="module-box" style="height:600px">
-            <img class="img-border" :src="imgBorder" alt="">
+            <img :src="imgL_r_t" class="img-l-r-t">
+            <img :src="imgL_r_b" class="img-l-r-b">
+            <img :src="imgL_l_t" class="img-l-l-t">
+            <img :src="imgL_l_b" class="img-l-l-b">
           </div>        
         </Col> 
         <Col span="4">
           <Row> 
             <Col span="24">    
               <div class="module-box" style="height:300px">
-                <img class="img-border" :src="imgBorder" alt="">
+                <img :src="imgL_r_t" class="img-l-r-t">
+                <img :src="imgL_r_b" class="img-l-r-b">
+                <img :src="imgL_l_t" class="img-l-l-t">
+                <img :src="imgL_l_b" class="img-l-l-b">
               </div>            
             </Col>    
             <Col span="24">   
               <div class="module-box" style="height:300px">
-                <img class="img-border" :src="imgBorder" alt="">
+                <img :src="imgL_r_t" class="img-l-r-t">
+                <img :src="imgL_r_b" class="img-l-r-b">
+                <img :src="imgL_l_t" class="img-l-l-t">
+                <img :src="imgL_l_b" class="img-l-l-b">
               </div>             
             </Col> 
           </Row>   
@@ -133,17 +205,26 @@
       <Row> 
         <Col span="8">
           <div class="module-box" style="height:300px">
-            <img class="img-border" :src="imgBorder" alt="">
+            <img :src="imgL_r_t" class="img-l-r-t">
+            <img :src="imgL_r_b" class="img-l-r-b">
+            <img :src="imgL_l_t" class="img-l-l-t">
+            <img :src="imgL_l_b" class="img-l-l-b">
           </div>         
         </Col>
         <Col span="8">
           <div class="module-box" style="height:300px">
-            <img class="img-border" :src="imgBorder" alt="">
+            <img :src="imgL_r_t" class="img-l-r-t">
+            <img :src="imgL_r_b" class="img-l-r-b">
+            <img :src="imgL_l_t" class="img-l-l-t">
+            <img :src="imgL_l_b" class="img-l-l-b">
           </div>         
         </Col>
         <Col span="8">
           <div class="module-box" style="height:300px">
-            <img class="img-border" :src="imgBorder" alt="">
+            <img :src="imgL_r_t" class="img-l-r-t">
+            <img :src="imgL_r_b" class="img-l-r-b">
+            <img :src="imgL_l_t" class="img-l-l-t">
+            <img :src="imgL_l_b" class="img-l-l-b">
           </div>         
         </Col>                
       </Row>       
@@ -243,11 +324,7 @@
 
 
     <Row v-else></Row>
-    <!-- <div class="head-tittle">
-      <div>
-        <span class="text-color">楼层监控数据</span>
-      </div>               
-    </div> -->
+
   </div>  
 </template>
 <script>
@@ -277,19 +354,22 @@
         currentTpl:1,
 
         imgBorder: require("./Img/border1-1.png"),   // 头 背景
-
-
         imgBag: require("./Img/top.png"),   // 头 背景
         imgIcon: require("./Img/logo.png"),   // 头 icon
+
 
         imgMark1: require("./Img/mark1.png"),   // mark1
         imgMark2: require("./Img/mark2.png"),   // mark2
 
-        imgMark22: require("./Img/l_left_bottom.png"),   // mark2
-        imgMark222: require("./Img/s_left_bottom.png"),   // mark2
-
-        imgMark33: require("./Img/tt.png"),   // mark2
-        imgMark333: require("./Img/ttt.png"),   // mark2
+        imgL_r_t: require("./Img/l_r_t.png"),   // 大 右上
+        imgL_r_b: require("./Img/l_r_b.png"),   // 大 右下
+        imgL_l_t: require("./Img/l_l_t.png"),   // 大 左上
+        imgL_l_b: require("./Img/l_l_b.png"),   // 大 左下
+  
+        imgS_r_t: require("./Img/s_r_t.png"),   // 小 右上
+        imgS_r_b: require("./Img/s_r_b.png"),   // 小 右下
+        imgS_l_t: require("./Img/s_l_t.png"),   // 小 左上
+        imgS_l_b: require("./Img/s_l_b.png"),   // 小 左下  
 
         config_foreign:{},   // 配置文件 外贸订单
         config_domestic:{},   // 配置文件 内贸订单
