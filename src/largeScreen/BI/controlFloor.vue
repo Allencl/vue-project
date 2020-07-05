@@ -12,16 +12,22 @@
 </style>
 <template>
     <div class="bi-module-box">
+        <CarouselComponent 
+            :carouselCurrent="1"
+            :carouselAll="3"
+        />        
         <div style="width:100%;height:100%;" id="controlFloorID"></div>
     </div>
 </template>
 <script>
 
 import echarts from 'echarts';
+import CarouselComponent from "./../carousel.vue";          // 轮播组件 
 
 
 // 监控楼层
 export default {
+    components: {CarouselComponent},    
     data () {
         return {
             echartObj:undefined,   // echart 对象

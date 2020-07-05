@@ -782,7 +782,6 @@
     </div>
     <!-- 报表 模板3  end -->
 
-
     <Row v-else></Row>
 
   </div>  
@@ -817,9 +816,6 @@
         imgBag: require("./Img/top.png"),   // 头 背景
         imgIcon: require("./Img/logo.png"),   // 头 icon
 
-
-        imgMark1: require("./Img/mark1.png"),   // mark1
-        imgMark2: require("./Img/mark2.png"),   // mark2
 
         imgL_r_t: require("./Img/l_r_t.png"),   // 大 右上
         imgL_r_b: require("./Img/l_r_b.png"),   // 大 右下
