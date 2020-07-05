@@ -12,10 +12,13 @@
 </style>
 <template>
     <div class="bi-module-box">
+        <!-- 轮播 组件  -->
         <CarouselComponent 
             :carouselCurrent="1"
             :carouselAll="3"
         />
+        <!-- 轮播 组件  -->
+
         <div style="width:100%;height:100%;" id="controlAreaID"></div>
     </div>
 </template>
