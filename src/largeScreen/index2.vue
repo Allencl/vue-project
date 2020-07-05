@@ -18,7 +18,7 @@ export default {
          *  进入全屏
          */
         clickHandle: function(){
-            this.$router.push('/largeScreen')
+            this.$router.push('/largeScreenPage')
         }
     },
 }

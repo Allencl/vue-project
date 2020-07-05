@@ -10,7 +10,7 @@ import LargeScreenPage2 from './largeScreen/index2.vue';   // 大屏
 const routes = [
   // { path: '/', component: RegisterPage },   // 注册页面
   { path: '/', component: LargeScreenPage2 },   // home 页面
-  { path: '/largeScreen', component: LargeScreenPage },   // home 页面
+  { path: '/largeScreenPage', component: LargeScreenPage },   // home 页面
 ]
 
 export const router = new VueRouter({
