@@ -204,8 +204,7 @@
 
 </style>
 <template>
-  <div class="weima-large-screen">
-    <h1>{{ bodyHeight }}</h1>
+  <div class="weima-large-screen" :style="`height:${windHeight}px`">
     <Row>
       <div class="head-box">
         <img :src="imgBag" alt="" style="width:100%">
@@ -222,7 +221,7 @@
         <Col span="4">
           <Row> 
             <Col span="24"> 
-              <div class="module-box" style="height:300px">
+              <div class="module-box" :style="`height:${parseInt(bodyHeight*0.3)}px`">
                 <div class="head-tittle">
                   <div class="text-box"> 
                     <div class="mark-top"><span></span></div>
@@ -247,7 +246,7 @@
               </div>               
             </Col>    
             <Col span="24">    
-              <div class="module-box" style="height:300px">
+              <div class="module-box" :style="`height:${parseInt(bodyHeight*0.3)}px`">
                 <div class="head-tittle">
                   <div class="text-box"> 
                     <div class="mark-top"><span></span></div>
@@ -271,7 +270,7 @@
           </Row>   
         </Col>  
         <Col span="16">
-          <div class="module-box" style="height:600px">
+          <div class="module-box" :style="`height:${parseInt(bodyHeight*0.6)+9}px`">
                 <div class="head-tittle">
                   <div class="text-box"> 
                     <div class="mark-top"><span></span></div>
@@ -297,10 +296,10 @@
         <Col span="4">
           <Row> 
             <Col span="24">    
-              <div class="module-box" style="height:300px">
+              <div class="module-box" :style="`height:${parseInt(bodyHeight*0.3)}px`">
                 <div class="head-tittle">
                   <div class="text-box"> 
-                    <div class="mark-top"><span></span></div>
+                    <div class="mark-top"><span style="background: #091232;"></span></div>
                     <span class="mark-left"></span>
                     <span class="mark-right"></span>
                     <div class="mark-bottom"><span></span></div>
@@ -319,10 +318,10 @@
               </div>            
             </Col>    
             <Col span="24">   
-              <div class="module-box" style="height:300px">
+              <div class="module-box" :style="`height:${parseInt(bodyHeight*0.3)}px`">
                 <div class="head-tittle">
                   <div class="text-box"> 
-                    <div class="mark-top"><span></span></div>
+                    <div class="mark-top"><span style="background: #0E1E51;"></span></div>
                     <span class="mark-left"></span>
                     <span class="mark-right"></span>
                     <div class="mark-bottom"><span></span></div>
@@ -345,7 +344,7 @@
       </Row>
       <Row> 
         <Col span="8">
-          <div class="module-box" style="height:300px">
+          <div class="module-box" :style="`height:${parseInt(bodyHeight*0.3)}px`">
             <img :src="imgL_r_t" class="img-l-r-t">
             <img :src="imgL_r_b" class="img-l-r-b">
             <img :src="imgL_l_t" class="img-l-l-t">
@@ -353,7 +352,7 @@
           </div>         
         </Col>
         <Col span="8">
-          <div class="module-box" style="height:300px">
+          <div class="module-box" :style="`height:${parseInt(bodyHeight*0.3)}px`">
             <img :src="imgL_r_t" class="img-l-r-t">
             <img :src="imgL_r_b" class="img-l-r-b">
             <img :src="imgL_l_t" class="img-l-l-t">
@@ -361,7 +360,7 @@
           </div>         
         </Col>
         <Col span="8">
-          <div class="module-box" style="height:300px">
+          <div class="module-box" :style="`height:${parseInt(bodyHeight*0.3)}px`">
             <img :src="imgL_r_t" class="img-l-r-t">
             <img :src="imgL_r_b" class="img-l-r-b">
             <img :src="imgL_l_t" class="img-l-l-t">
@@ -493,7 +492,8 @@
     data () {
       return {
         currentTpl:1,
-        bodyHeight:document.body.scrollHeight,    // 屏幕高度
+        windHeight:window.innerHeight,      // 屏幕高度
+        bodyHeight: window.innerHeight-40,    // 屏幕高度
 
         imgBorder: require("./Img/border1-1.png"),   // 头 背景
         imgBag: require("./Img/top.png"),   // 头 背景
@@ -524,7 +524,14 @@
       }
     },
     created() {
+      let that=this;
       this.initPage();  // 初始化
+
+      window.onresize = function () {
+        that.windHeight=window.innerHeight;
+        that.bodyHeight=window.innerHeight-40;
+      };
+
     }, 	        
     methods: {
       /**
