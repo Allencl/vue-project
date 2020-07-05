@@ -12,8 +12,7 @@
 </style>
 <template>
     <div class="bi-module-box">
-        <p class="head-title">内贸订单</p>
-        <div style="width:100%;height:100%;" id="foreignID"></div>
+        <div style="width:100%;height:100%;" id="controlLayoutID"></div>
     </div>
 </template>
 <script>
@@ -21,7 +20,7 @@
 import echarts from 'echarts';
 
 
-// 内贸 订单
+// 监控区域
 export default {
     data () {
         return {
@@ -51,9 +50,9 @@ export default {
             console.log(this.config);
 
             // 模拟刷新 后面可以删掉
-            document.querySelector("#foreignID").style.visibility="hidden"; 
+            document.querySelector("#controlLayoutID").style.visibility="hidden"; 
             setTimeout(()=>{
-                document.querySelector("#foreignID").style.visibility="inherit"
+                document.querySelector("#controlLayoutID").style.visibility="inherit"
             },500);
             // 模拟刷新 后面可以删掉
 
@@ -65,13 +64,13 @@ export default {
          * 初始化
          */
         initPage: function(){
-            var echartObj = echarts.init(document.querySelector('#foreignID'));
+            var echartObj = echarts.init(document.querySelector('#controlLayoutID'));
 
             const option = {
                 grid: {
-                    left: '30px',
-                    right: '30px',
-                    top: '30px',
+                    left: '10px',
+                    right: '10px',
+                    top: '15px',
                     bottom: '50px'
                 },
                 xAxis: {

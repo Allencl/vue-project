@@ -12,8 +12,7 @@
 </style>
 <template>
     <div class="bi-module-box">
-        <p class="head-title">月度质量趋势表</p>
-        <div style="width:100%;height:100%;" id="qualityID"></div>
+        <div style="width:100%;height:100%;" id="controlFloorID"></div>
     </div>
 </template>
 <script>
@@ -21,7 +20,7 @@
 import echarts from 'echarts';
 
 
-// 月度质量趋势表 
+// 监控楼层
 export default {
     data () {
         return {
@@ -47,13 +46,13 @@ export default {
         },
         // 监听 配置参数
         'config'(){
-            console.log("月度质量趋势表 配置参数切换了");
+            console.log("外贸订单 配置参数切换了");
             console.log(this.config);
 
             // 模拟刷新 后面可以删掉
-            document.querySelector("#qualityID").style.visibility="hidden"; 
+            document.querySelector("#controlFloorID").style.visibility="hidden"; 
             setTimeout(()=>{
-                document.querySelector("#qualityID").style.visibility="inherit"
+                document.querySelector("#controlFloorID").style.visibility="inherit"
             },500);
             // 模拟刷新 后面可以删掉
 
@@ -65,29 +64,27 @@ export default {
          * 初始化
          */
         initPage: function(){
-            var echartObj = echarts.init(document.querySelector('#qualityID'));
+            var echartObj = echarts.init(document.querySelector('#controlFloorID'));
 
             const option = {
                 grid: {
-                    left: '30px',
-                    right: '30px',
-                    top: '30px',
+                    left: '10px',
+                    right: '10px',
+                    top: '15px',
                     bottom: '50px'
                 },
                 xAxis: {
                     type: 'category',
+                    boundaryGap: false,
                     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                 },
                 yAxis: {
                     type: 'value'
                 },
                 series: [{
-                    data: [120, 200, 150, 80, 70, 110, 130],
-                    type: 'bar',
-                    showBackground: true,
-                    backgroundStyle: {
-                        color: 'rgba(220, 220, 220, 0.8)'
-                    }
+                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    type: 'line',
+                    areaStyle: {}
                 }]
             };
 
