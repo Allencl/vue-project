@@ -25,6 +25,17 @@
         span{
           font-size: 26px;
           font-weight: bold;
+          font-family:Source Han Sans CN;
+          font-weight:bold;
+          color:rgba(1,196,247,1);
+          line-height:12px;
+          opacity:0.9;
+
+          background:linear-gradient(0deg,rgba(127,235,173,1) 0%, rgba(1,240,255,1) 54.39453125%, rgba(77,145,252,1) 100%);
+          -webkit-text-fill-color:transparent;
+          -webkit-background-clip:text; 
+
+
         }   
       }
     }
@@ -34,7 +45,7 @@
       position: relative;
       margin: 0px 12px;
       margin-bottom: 10px;
-      box-shadow:0px 0px 4px 0px rgba(0,180,255,0.44);
+      box-shadow: 0px 0px 3px 2px rgba(0, 180, 255, 0.44);
 
       .img-border{
         position: absolute;
@@ -46,54 +57,123 @@
 
       .img-l-r-t{
         position: absolute;
-        right: -6px;
-        top: -5px;
+        right: -7px;
+        top: -7px;
       }
       .img-l-r-b{
         position: absolute;
-        right: -6px;
-        bottom: -5px;
+        right: -7px;
+        bottom: -7px;
       }
       .img-l-l-t{
         position: absolute;
-        left: -6px;
-        top: -5px;
+        left: -7px;
+        top: -7px;
       }
       .img-l-l-b{
         position: absolute;
-        left: -6px;
-        bottom: -5px;
+        left: -7px;
+        bottom: -7px;
       }
 
 
       .head-tittle{
+        text-align: center;
+
         .text-box{
+          display: inline-block;
           position: relative;
           text-align: center;
-          height: 38px;
-          line-height: 38px;
+          height: 20px;
+          line-height: 20px;
           color: #01C4F7;
           font-size: 14px;
+          padding: 0px 22px;
+          // background: red;
+
+          .conten-title{
+            top: -4px;
+            position: relative;
+            display: block;
+          }
+
+          .mark-top{
+            position: absolute;
+            left: 0px;
+            top: -6px;
+            display: inline-block;
+            height: 10px;
+            width: 100%;
+            padding: 0px 6px;
+
+
+            >span{
+              display: block;
+              height: 100%;
+              width: 100%;
+              background: #091334;     
+            } 
+          }
+
+          .mark-left{
+            position: absolute;
+            top: 0px;
+            left: 12px;
+            display: inline-block;
+            height: 100%;
+            width: 0px;
+            transform: rotate(-15deg);
+            box-shadow: -2px 0px 2px 1px rgba(0, 180, 255, 0.44);
+          }
+
+          .mark-right{
+            position: absolute;
+            top: 0px;
+            right: 8px;
+            display: inline-block;
+            height: 100%;
+            width: 0px;
+            transform: rotate(15deg);
+            box-shadow: -2px 0px 2px 1px rgba(0, 180, 255, 0.44);           
+          }
+
+          .mark-bottom{
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            display: inline-block;
+            height: 0px;
+            width: 100%;
+            padding: 0px 18px;
+
+
+            >span{
+              display: block;
+              height: 100%;
+              width: 100%;
+              box-shadow: -2px 0px 2px 1px rgba(0, 180, 255, 0.44);
+            }            
+          }
 
           .img-s-r-t{
             position: absolute;
-            right: 0px;
-            top: 0px;
+            right: -3px;
+            top: -6px;
           }
           .img-s-r-b{
             position: absolute;
-            right: 0px;
-            bottom: 0px;
+            right: 7px;
+            bottom: -5px;
           }
           .img-s-l-t{
             position: absolute;
-            left: 0px;
-            top: 0px;
+            left: -4px;
+            top: -6px;
           }
           .img-s-l-b{
             position: absolute;
-            left: 0px;
-            bottom: 0px;
+            left: 7px;
+            bottom: -5px;
           }
 
         }
@@ -125,7 +205,7 @@
 </style>
 <template>
   <div class="weima-large-screen">
-
+    <h1>{{ bodyHeight }}</h1>
     <Row>
       <div class="head-box">
         <img :src="imgBag" alt="" style="width:100%">
@@ -144,15 +224,18 @@
             <Col span="24"> 
               <div class="module-box" style="height:300px">
                 <div class="head-tittle">
-                  <Row>
-                     <Col push="6" span="12" class="text-box"> 
-                        <span>楼层监控数据</span>
-                          <img :src="imgS_r_t" class="img-s-r-t">
-                          <img :src="imgS_r_b" class="img-s-r-b">
-                          <img :src="imgS_l_t" class="img-s-l-t">
-                          <img :src="imgS_l_b" class="img-s-l-b">
-                     </Col>
-                  </Row>
+                  <div class="text-box"> 
+                    <div class="mark-top"><span></span></div>
+                    <span class="mark-left"></span>
+                    <span class="mark-right"></span>
+                    <div class="mark-bottom"><span></span></div>
+
+                    <span class="conten-title">楼层监控数据</span>
+                    <img :src="imgS_r_t" class="img-s-r-t">
+                    <img :src="imgS_r_b" class="img-s-r-b">
+                    <img :src="imgS_l_t" class="img-s-l-t">
+                    <img :src="imgS_l_b" class="img-s-l-b">
+                  </div>
                 </div>                
                 <img :src="imgL_r_t" class="img-l-r-t">
                 <img :src="imgL_r_b" class="img-l-r-b">
@@ -165,6 +248,20 @@
             </Col>    
             <Col span="24">    
               <div class="module-box" style="height:300px">
+                <div class="head-tittle">
+                  <div class="text-box"> 
+                    <div class="mark-top"><span></span></div>
+                    <span class="mark-left"></span>
+                    <span class="mark-right"></span>
+                    <div class="mark-bottom"><span></span></div>
+
+                    <span class="conten-title">区域监控量</span>
+                    <img :src="imgS_r_t" class="img-s-r-t">
+                    <img :src="imgS_r_b" class="img-s-r-b">
+                    <img :src="imgS_l_t" class="img-s-l-t">
+                    <img :src="imgS_l_b" class="img-s-l-b">
+                  </div>
+                </div>                 
                 <img :src="imgL_r_t" class="img-l-r-t">
                 <img :src="imgL_r_b" class="img-l-r-b">
                 <img :src="imgL_l_t" class="img-l-l-t">
@@ -175,6 +272,22 @@
         </Col>  
         <Col span="16">
           <div class="module-box" style="height:600px">
+                <div class="head-tittle">
+                  <div class="text-box"> 
+                    <div class="mark-top"><span></span></div>
+                    <span class="mark-left"></span>
+                    <span class="mark-right"></span>
+                    <div class="mark-bottom"><span></span></div>
+
+                    <span class="conten-title">楼层监控布局</span>
+                    <img :src="imgS_r_t" class="img-s-r-t">
+                    <img :src="imgS_r_b" class="img-s-r-b">
+                    <img :src="imgS_l_t" class="img-s-l-t">
+                    <img :src="imgS_l_b" class="img-s-l-b">
+                  </div>
+                </div> 
+
+
             <img :src="imgL_r_t" class="img-l-r-t">
             <img :src="imgL_r_b" class="img-l-r-b">
             <img :src="imgL_l_t" class="img-l-l-t">
@@ -185,6 +298,20 @@
           <Row> 
             <Col span="24">    
               <div class="module-box" style="height:300px">
+                <div class="head-tittle">
+                  <div class="text-box"> 
+                    <div class="mark-top"><span></span></div>
+                    <span class="mark-left"></span>
+                    <span class="mark-right"></span>
+                    <div class="mark-bottom"><span></span></div>
+
+                    <span class="conten-title">监控事件处理</span>
+                    <img :src="imgS_r_t" class="img-s-r-t">
+                    <img :src="imgS_r_b" class="img-s-r-b">
+                    <img :src="imgS_l_t" class="img-s-l-t">
+                    <img :src="imgS_l_b" class="img-s-l-b">
+                  </div>
+                </div>                 
                 <img :src="imgL_r_t" class="img-l-r-t">
                 <img :src="imgL_r_b" class="img-l-r-b">
                 <img :src="imgL_l_t" class="img-l-l-t">
@@ -193,6 +320,20 @@
             </Col>    
             <Col span="24">   
               <div class="module-box" style="height:300px">
+                <div class="head-tittle">
+                  <div class="text-box"> 
+                    <div class="mark-top"><span></span></div>
+                    <span class="mark-left"></span>
+                    <span class="mark-right"></span>
+                    <div class="mark-bottom"><span></span></div>
+
+                    <span class="conten-title">监控动态显示</span>
+                    <img :src="imgS_r_t" class="img-s-r-t">
+                    <img :src="imgS_r_b" class="img-s-r-b">
+                    <img :src="imgS_l_t" class="img-s-l-t">
+                    <img :src="imgS_l_b" class="img-s-l-b">
+                  </div>
+                </div>                 
                 <img :src="imgL_r_t" class="img-l-r-t">
                 <img :src="imgL_r_b" class="img-l-r-b">
                 <img :src="imgL_l_t" class="img-l-l-t">
@@ -352,6 +493,7 @@
     data () {
       return {
         currentTpl:1,
+        bodyHeight:document.body.scrollHeight,    // 屏幕高度
 
         imgBorder: require("./Img/border1-1.png"),   // 头 背景
         imgBag: require("./Img/top.png"),   // 头 背景
