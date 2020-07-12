@@ -30,7 +30,7 @@
                     left: 0px;
                     top: 0px;                    
                     height: 100%;
-                    width: 360px;
+                    // width: 360px;
 
 
                     height: inherit;
@@ -293,12 +293,12 @@
                                 <b v-for="(o,i) in c['scaleX']" :key="i">{{o}}</b>
                             </div> 
                             
-                            <div class="center-left">
+                            <div class="center-left" :style="`width:${15*c['storageX']}px;`">
                                 <li v-for="(q,z) in c['boxLeft']" :key="z" :style="`background:${q['background']};height:${15*q['height']}px;width:${15*q['width']}px;top:${15*q['top']}px;left:${15*q['left']}px`">
                                     <p v-for="(t,x) in q['text']||[]" :key="x">{{t}}</p>
                                 </li>                                      
                             </div>                             
-                            <div class="center-right" :style="`width:${15*(c['scaleX']-24)}px;`">
+                            <div class="center-right" :style="`left:${15*(c['storageX'])}px;width:${15*(c['scaleX']-(c['storageX']))}px;`">
                                 <ul>
                                     <li v-for="(q2,z2) in c['boxRight']" :key="z2" :style="`background:${q2['background']};height:${15*q2['height']}px;width:${15*q2['width']}px;top:${15*q2['top']}px;left:${15*q2['left']}px`">
                                         <p v-for="(t2,x2) in q2['text']||[]" :key="x2">{{t2}}</p>
@@ -329,12 +329,7 @@ export default {
         },
     },                
     methods: {
-        /**
-         *  进入全屏
-         */
-        clickHandle: function(){
-            this.$router.push('/largeScreenPage')
-        }
+
     },
 }
 </script>

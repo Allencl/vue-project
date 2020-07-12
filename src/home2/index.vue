@@ -32,6 +32,7 @@ export default {
                         {
                             titleLeft:"车头—F5",   // 左边 标题
                             titleRight:"车尾—F5",  // 右边边 标题
+                            storageX:27,    // 货架区域 x 轴标尺数
                             scaleX:85,   // x 轴标尺数
                             scaleY:24,   // y 轴标尺数
                             // 左边盒子
@@ -87,6 +88,7 @@ export default {
                         {
                             titleLeft:"车头—F5",   // 左边 标题
                             titleRight:"车尾—F5",  // 右边边 标题
+                            storageX:25,    // 货架区域 x 轴标尺数
                             scaleX:95,   // x 轴标尺数
                             scaleY:37,   // y 轴标尺数
                             // 左边盒子
@@ -141,6 +143,7 @@ export default {
                         {
                             titleLeft:"车头—F5",   // 左边 标题
                             titleRight:"车尾—F5",  // 右边边 标题
+                            storageX:28,    // 货架区域 x 轴标尺数
                             scaleX:85,   // x 轴标尺数
                             scaleY:24,   // y 轴标尺数
                             // 左边盒子
