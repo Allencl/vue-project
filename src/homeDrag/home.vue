@@ -68,6 +68,7 @@
           border-style: dashed;
           box-shadow: none;
           border-color: rgba(100,149,237,0.8);
+          border-radius: 0px;
 
           .controller-box{
             position: absolute;
