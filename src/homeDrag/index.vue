@@ -21,8 +21,7 @@ export default {
         return {
             configData:configJson,   // 配置文件
         }
-    },
-               
+    },               
     methods: {
         /**
          *  初始化
