@@ -220,8 +220,11 @@ export default {
         var disH=option.value.data["height"];
 
         document.onmousemove = function (e){
-          option.value.data["width"]=disW+(e.pageX-disX);
-          option.value.data["height"]=disH+(e.pageY-disY);
+          var newW=disW+(e.pageX-disX);
+          var newH=disH+(e.pageY-disY);
+
+          option.value.data["width"]=newW>=200?newW:200;
+          option.value.data["height"]=newH>=200?newH:200;
         }
 
         document.onmouseup = function(){
