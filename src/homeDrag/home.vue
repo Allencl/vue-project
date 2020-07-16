@@ -127,6 +127,10 @@
     <!-- <div>
       <button class="btn btn-secondary button" @click="resetHandle">重置</button>
     </div> -->
+    <customTable 
+
+    />
+
 
     <div v-if="config['chidden']['length']">
       <draggable
@@ -146,7 +150,8 @@
             :style="`height:${o.height}px;width:${o.width}px;`"
             v-on:click="groupItemClick(o,$event)"
             v-on:dblclick="groupItemDblclick(o,$event)"
-
+            @drop="dropHandle(o,$event)"
+            @dragover.prevent
           >
             <div class="handle move-handle"><Icon type="md-move" /></div>
             <div class="controller-box">
@@ -168,13 +173,17 @@
 
 <script>
 import draggable from "vuedraggable";
+import customTable from "./table.vue";             // table
+
 
 export default {
   // name: "transition-example-2",
   // display: "Transitions",
   // order: 7,
   components: {
-    draggable
+    draggable,
+    customTable,
+
   },
   props: {
     // 配置文件
@@ -246,7 +255,17 @@ export default {
     resetHandle: function(){
       // console.log(this.list);
       this.list = this.list.sort((a, b) => a._key - b._key);
-    }
+    },
+    /**
+     *  面板 拖拽
+     */ 
+    dropHandle: function (option,event) {
+      let row = JSON.parse( event.dataTransfer.getData('item') );  
+
+      console.log( option );
+      console.log( row );
+
+    },    
   },
   directives:{
     drag_arrows(el,option){
