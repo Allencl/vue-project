@@ -2,6 +2,7 @@
 
   .custom-drag-home{
     // position: relative;
+    width: fit-content;
 
     &.gridding{
       background-image: 
@@ -48,6 +49,12 @@
           display: none;
           position: relative;
 
+          .ivu-tooltip{
+            position: absolute;
+            right: 20px;
+            bottom: -12px;     
+          }
+
           .right-bottom{
             position: absolute;
             right: -5px;
@@ -70,6 +77,10 @@
           border-color: rgba(100,149,237,0.8);
           border-radius: 0px;
 
+          .move-handle{
+            display: block;
+          }
+
           .controller-box{
             position: absolute;
             top: 0px;
@@ -78,11 +89,12 @@
             display: block;
             width: 100%;
             height: 100%;
-            background: yellow;
+            background: rgba(240,250,255,0.9);
           }
         }
 
         .move-handle{
+          display: none;
           position: absolute;
           top: 0px;
           left: 0px;
@@ -92,7 +104,14 @@
           cursor: all-scroll;
           width: 30px;
           height: 30px;
-          background: burlywood;
+          transition: all 0.2s;
+          color: #fff;
+          font-size: 22px;
+          background-color: #FFD700;
+
+          &:hover{
+            transform: rotate(45deg);
+          }
         }
       }
     }
@@ -104,7 +123,7 @@
 
 </style>
 <template>
-  <div class="custom-drag-home gridding">
+  <div :class="`custom-drag-home ${tooltipAction?'gridding':''}`">
     <!-- <div>
       <button class="btn btn-secondary button" @click="resetHandle">重置</button>
     </div> -->
@@ -125,11 +144,14 @@
             :key="i"
             :class="`custom-home-list-group-item ${keyChecked==o['_key']?'is-checked':''}`"
             :style="`height:${o.height}px;width:${o.width}px;`"
-            v-on:click.self="groupItemHandle(o,$event)"
+            v-on:click="groupItemClick(o,$event)"
+            v-on:dblclick="groupItemDblclick(o,$event)"
+
           >
             <div class="handle move-handle"><Icon type="md-move" /></div>
             <div class="controller-box">
               <b v-drag_arrows="{data:o}" class="right-bottom" :title="`${o['width']} x ${o['height']}`"></b>
+              <Tooltip v-if="tooltipAction" :content="`${o['width']} x ${o['height']}`" placement="bottom-start" always></Tooltip>
             </div>
             <!-- <div><Icon type="md-move" /></div> -->
             <div>
@@ -165,7 +187,8 @@ export default {
     return {
       drag: false,
       keyChecked: undefined,      // 选中的 盒子
-      eventTarget: undefined,     // 目标 event
+      tooltipAction:false,        // 
+
 
       // list 数据
       list:(_this.config['chidden']||[]).map((o,i)=> Object.assign({},o,{_key:i})),
@@ -183,24 +206,39 @@ export default {
       };
     }
   },  
+  watch: {
+      // 监听 控制器
+      'keyChecked'(){
+          if( this.keyChecked!=undefined ){
+            this.tooltipAction=false;
+            this.$nextTick(()=>{
+              this.tooltipAction=true;
+            });            
+          }else{
+            this.tooltipAction=false;
+          }
+      },    
+  },   
   created() {
-      // document.addEventListener("click",(e)=>{
-      //     // this.$el.contains();
-      //     setTimeout(() => {
-      //       console.log( 'ninini' );
-      //         // console.log(e); 
-      //         // console.log( this.$el.contains(this.eventTarget)  );
-      //     },300);
-      // });
+      let that=this;
+
+      document.addEventListener("click",(event)=>{
+        that.keyChecked=undefined;
+      });
   }, 
   methods: {
-    /**
-     * 选中 盒子
+    /*
+      * 选中 盒子 双击
      */
-    groupItemHandle: function(option,event){
+    groupItemDblclick: function(option,event){
       this.keyChecked=option['_key'];
-      this.eventTarget=event.target;
-      event.stopPropagation();
+      event.stopPropagation();    
+    }, 
+    /**
+     * 选中 盒子 单机
+     */
+    groupItemClick: function(option,event){
+      event.stopPropagation();  
     },
     /**
      * 重置
@@ -227,7 +265,7 @@ export default {
           option.value.data["height"]=newH>=200?newH:200;
         }
 
-        document.onmouseup = function(){
+        document.onmouseup = function(event){
           document.onmousemove = document.onmouseup = null;
         }
       }
