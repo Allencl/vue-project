@@ -12,11 +12,27 @@
 export default {  
     components: {
 
-    },   
+    }, 
+    props: {
+        // 配置文件
+        config:{
+            type: Object,
+            default:()=>{}      
+        },
+    },        
     data () {
         return {
         }
-    },            
+    },  
+     watch:{
+        // 监听 配置参数
+        'config':{ 
+            deep:true,
+            handler:function(newV){
+                console.log('watch中：',newV);
+            }
+        }
+    },             
     methods: {
         /**
          *  初始化

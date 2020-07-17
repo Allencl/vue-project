@@ -160,7 +160,11 @@
             </div>
             <!-- <div><Icon type="md-move" /></div> -->
             <div>
-              <h1>ninini</h1>
+              <h1>
+                <BIPage 
+                  :config="o['config_chart']"
+                />
+              </h1>
             </div>
           </div>
         </transition-group>
@@ -173,7 +177,8 @@
 
 <script>
 import draggable from "vuedraggable";
-import customTable from "./table.vue";             // table
+import customTable from "./table.vue";        // table
+import BIPage from "./BI/index.vue";          // BI 报表
 
 
 export default {
@@ -183,7 +188,7 @@ export default {
   components: {
     draggable,
     customTable,
-
+    BIPage
   },
   props: {
     // 配置文件
