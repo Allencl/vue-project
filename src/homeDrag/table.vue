@@ -199,7 +199,9 @@
         <div slot="content">
 
             <div style="overflow-y: hidden;" :class="`content-box ${toggle_icon?'hidden':''}`">
-
+                <Row>
+                    <Button @click="addModle" size="large" icon="md-add" type="primary" shape="circle" title="添加"></Button>
+                </Row>    
                 <Row>
                     <Col span="24"> 
                         <ul>
@@ -258,6 +260,12 @@ export default {
         this.initPage();  // 初始化
     }, 	        
     methods: {
+        /**
+         * 添加 模型
+         */
+        addModle: function(){
+            this.$emit('addModle');
+        },
         /**
          * 初始化
          */

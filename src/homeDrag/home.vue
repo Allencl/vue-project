@@ -128,7 +128,7 @@
       <button class="btn btn-secondary button" @click="resetHandle">重置</button>
     </div> -->
     <customTable 
-
+      @addModle="addModleHandle"
     />
 
 
@@ -241,6 +241,12 @@ export default {
       });
   }, 
   methods: {
+    /**
+     * 添加 模型
+     */
+    addModleHandle: function(){
+      console.log("aaaa");
+    },
     /*
       * 选中 盒子 双击
      */
