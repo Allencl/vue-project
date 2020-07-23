@@ -66,8 +66,8 @@
                     //     linear-gradient(-90deg, transparent 75%, rgba(0,0,0,0.3) 75%);   
                     height: inherit;
                     background: 
-                        -webkit-linear-gradient(top, transparent 10px, #000 15px),
-                        -webkit-linear-gradient(left, transparent 10px, #000 15px);
+                        -webkit-linear-gradient(top, transparent 14px, #000 15px),
+                        -webkit-linear-gradient(left, transparent 14px, #000 15px);
                     background-size: 15px 15px;
 
 
