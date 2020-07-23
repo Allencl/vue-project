@@ -1,6 +1,7 @@
 <style lang="scss">
     .home-page{
         padding: 0px 10px;
+        padding-bottom: 30px;
 
         .content-box{
             position: relative;
@@ -31,6 +32,7 @@
                     top: 0px;                    
                     height: 100%;
                     // width: 360px;
+                    z-index: 2;
 
 
                     height: inherit;
@@ -48,10 +50,12 @@
                 }
 
                 .center-right{
+                    position: relative;
                     position: absolute;
                     top: 0px;
                     left: 360px;
                     height: 100%;
+                    z-index: 1;
 
                     // height: 360px;
                     // background-size: 10px 10px;
@@ -68,7 +72,7 @@
 
 
                     ul{
-                        position: relative;
+                        // position: relative;
                         height: 100%;
                         width: 100%;
                        
@@ -90,6 +94,7 @@
                 border:1px solid #000;
                 padding-top: 116px;
                 height: 100%;
+                margin-top: 30px;
             }
 
             .right{
@@ -105,6 +110,8 @@
                 border:1px solid #000;
                 padding-top: 116px;
                 height: 100%;
+                margin-top: 30px;
+
 
             }   
 
@@ -230,6 +237,7 @@
                 padding-left: 6px;
                 border: 1px solid #000;
                 font-weight: bold;
+                z-index: 3;
                 
                 p{
                     margin-bottom: 3px;
@@ -280,8 +288,8 @@
 
             <span v-for="(c,k) in (o['children']||[])" :key="k">
                 <div class="content-page">
-                    <div class="left">{{c["titleLeft"]}}</div>
-                    <div class="right">{{c["titleRight"]}}</div>                   
+                    <div class="left" :style="`height:${15*c['scaleY']}px;`">{{c["titleLeft"]}}</div>
+                    <div class="right" :style="`height:${15*c['scaleY']}px;`">{{c["titleRight"]}}</div>                   
                         <div class="number-left">
                             <b v-for="(o,i) in c['scaleY']" :key="i">{{o}}</b>
                         </div> 
@@ -292,18 +300,27 @@
                             <div class="number-top">
                                 <b v-for="(o,i) in c['scaleX']" :key="i">{{o}}</b>
                             </div> 
+
+                            <!-- 所有的盒子  放在一起 -->
+                            <div style="width:100%;height:100%;position:absolute;top:0px;left:0px;z-index:5;">
+                                <li v-for="(q2,z2) in c['boxAll']" :key="z2" :style="`background:${q2['background']};height:${15*q2['height']}px;width:${15*q2['width']}px;top:${15*q2['top']}px;left:${15*q2['left']}px`">
+                                    <p v-for="(t2,x2) in q2['text']||[]" :key="x2">{{t2}}</p>
+                                </li>  
+                            </div>
+                            <!-- 所有的盒子  放在一起 -->
+
                             
-                            <div class="center-left" :style="`width:${15*c['storageX']}px;`">
-                                <li v-for="(q,z) in c['boxLeft']" :key="z" :style="`background:${q['background']};height:${15*q['height']}px;width:${15*q['width']}px;top:${15*q['top']}px;left:${15*q['left']}px`">
+                            <div v-for="(m,n) in c['areaRack']" :key="n" class="center-left" :style="`top:${15*m['top']}px;left:${15*m['left']}px;width:${15*m['width']}px;height:${15*m['height']}px;`">
+                                <!-- <li v-for="(q,z) in m['children']" :key="z" :style="`background:${q['background']};height:${15*q['height']}px;width:${15*q['width']}px;top:${15*q['top']}px;left:${15*q['left']}px`">
                                     <p v-for="(t,x) in q['text']||[]" :key="x">{{t}}</p>
-                                </li>                                      
+                                </li>                                       -->
                             </div>                             
-                            <div class="center-right" :style="`left:${15*(c['storageX'])}px;width:${15*(c['scaleX']-(c['storageX']))}px;`">
-                                <ul>
+                            <div class="center-right" :style="`left:0px;width:${15*(c['scaleX'])}px;`">
+                                <!-- <ul>
                                     <li v-for="(q2,z2) in c['boxRight']" :key="z2" :style="`background:${q2['background']};height:${15*q2['height']}px;width:${15*q2['width']}px;top:${15*q2['top']}px;left:${15*q2['left']}px`">
                                         <p v-for="(t2,x2) in q2['text']||[]" :key="x2">{{t2}}</p>
                                     </li>  
-                                </ul>                                                                                
+                                </ul>                                                                                 -->
                             </div>
                         </div>
                     </div>
