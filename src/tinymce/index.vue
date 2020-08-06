@@ -2,15 +2,23 @@
 
 </style>
 <template>
-    <div class='tinymce'>
-        <tinymce-editor 
-            v-model='tinymceHtml' 
-            id='tinymce' 
-            api-key="no-api-key"
-            :init='init'
-        />
-        <div v-html='tinymceHtml'></div>
-    </div>
+    <span>
+        <div>
+            <Button type="primary" @click="changeHandle">切换</Button>
+            <Button type="primary" @click="saveHandle">保存</Button>
+
+        </div>
+        <div class='tinymce' v-show="toggle">
+            <tinymce-editor 
+                v-model='tinymceHtml' 
+                id='tinymce' 
+                api-key="no-api-key"
+                :init='init'
+            />
+            <div v-html='tinymceHtmlEdit' style="display:none"></div>
+        </div> 
+        <div v-show="!toggle" v-html='tinymceHtmlEdit' id="formatHTMLID"></div>       
+    </span>
 </template>
 <script>
 
@@ -32,7 +40,10 @@ export default {
     components: {TinymceEditor},
     data () {
         return {
-            tinymceHtml: '请输入内容',
+            tinymceHtml: '',        // 富文本内容
+            tinymceHtmlEdit: '',    // 保存的内容
+            toggle:true,
+
             init: {
                 // theme: 'modern',
                 content_css: '/tinymce/skins/content/default/content.css',
@@ -68,7 +79,53 @@ export default {
         tinymce.init({});
     },           
     methods: {
+        /**
+         * 格式化
+         */
+        formatHandle: function(){
+            var obj=document.querySelectorAll("#formatHTMLID span[style]");
 
+            Array.from(obj).map((o)=>{
+                if( o.style.textDecoration == "underline" ){
+                    o.setAttribute("contenteditable", "true");
+                }
+            }); 
+        },
+        /**
+         * 切换
+         */
+        changeHandle: function(){
+            this.toggle=!this.toggle;
+
+            if( !this.toggle ){
+               this.tinymceHtmlEdit=this.tinymceHtml; 
+                this.$nextTick(()=>{
+                    this.formatHandle();
+                });               
+            }
+        },
+        /**
+         * 获取 数据
+         */
+        getData: function(){
+            return Array.from(document.querySelectorAll("#formatHTMLID span[contenteditable]")).map(o=>o.innerText);
+        },
+        /**
+         * 保存
+         */
+        saveHandle: function(){
+            let template=this.tinymceHtml;            // 原始模板
+            let templatePrint=document.querySelector("#formatHTMLID").innerHTML;   // 打印模板
+            let data=this.getData();   // 带下划线 的数据
+
+
+            // 拿到的数据
+            this.$Notice.open({
+                title: '下划线的数据',
+                duration:30,
+                desc: `<pre>${data}</pre>`
+            });
+        }
     },
 }
 </script>
