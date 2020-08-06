@@ -1,12 +1,13 @@
 <style lang="scss">
-
+    // #formatHTMLID span[contentEditable="true"]:hover {
+    //     outline: 1px solid #2276d2;
+    // }
 </style>
 <template>
     <span>
         <div>
             <Button type="primary" @click="changeHandle">切换</Button>
             <Button type="primary" @click="saveHandle">保存</Button>
-
         </div>
         <div class='tinymce' v-show="toggle">
             <tinymce-editor 
@@ -29,7 +30,10 @@
 
 
     import 'tinymce/plugins/table';
-    // import 'tinymce/plugins/image';
+    import 'tinymce/plugins/fullscreen';
+    import 'tinymce/plugins/preview';
+    import 'tinymce/plugins/print';
+  
     //   import 'tinymce/plugins/lists'
     //   import 'tinymce/plugins/contextmenu'
     //   import 'tinymce/plugins/wordcount'
@@ -53,13 +57,11 @@ export default {
                 height: 300,
                 branding: false,  
                 menubar: false, 
-                plugins:`
-                    table
-                `,  
+                plugins:['table','fullscreen','preview','print'],  
                 toolbar:
                     'undo redo | formatselect fontsizeselect fontselect  | bold italic underline strikethrough forecolor backcolor | \
                     alignleft aligncenter alignright | \
-                    outdent indent | table | \
+                    outdent indent | table | fullscreen preview print | \
                     removeformat',                
                 
                 // menu: {
