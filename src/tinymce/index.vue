@@ -58,8 +58,8 @@ export default {
                 `,  
                 toolbar:
                     'undo redo | formatselect fontsizeselect fontselect  | bold italic underline strikethrough forecolor backcolor | \
-                    alignleft aligncenter alignright alignjustify | \
-                    bullist numlist outdent indent | table | \
+                    alignleft aligncenter alignright | \
+                    outdent indent | table | \
                     removeformat',                
                 
                 // menu: {
