@@ -150,6 +150,7 @@
             saveHead: function(){
                 localStorage.setItem("signature",document.querySelector("#signature").innerText);
                 this.signatureInit();
+                this.editActionHead=false;
             },
             /**
              * 添加 定时器
