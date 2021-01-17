@@ -58,7 +58,7 @@
                         <InputNumber :step="1" :max="60" :min="0" v-model="InputNumber"></InputNumber>
                         <Button style="margin-left:16px" @click="addTimerArrayHandle" title="添加" type="success" icon="md-add" shape="circle"></Button>
                     </div>
-                    <div v-show="false">
+                    <div>
                         <audio ref="audioID" :src="audioMp3">
                             Your browser does not support the audio element.
                         </audio>
