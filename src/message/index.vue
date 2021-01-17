@@ -58,6 +58,11 @@
                         <InputNumber :step="1" :max="60" :min="0" v-model="InputNumber"></InputNumber>
                         <Button style="margin-left:16px" @click="addTimerArrayHandle" title="添加" type="success" icon="md-add" shape="circle"></Button>
                     </div>
+                    <div v-show="false">
+                        <audio ref="audioID" :src="audioMp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
                 </div>
             </Card>            
         </div>
@@ -74,6 +79,7 @@
                 editActionHead:false, // 可编辑 标题
                 timerGlobal1:null,   // 计时器
                 sandClockImage: require('./../assets/sandclock.gif'),  // 沙漏
+                audioMp3: require('./../assets/mp3.mp3'),  // 音乐
 
             }
         },
@@ -136,6 +142,7 @@
                     new Notification(`⏳ ${_date}`,{
                         icon:"https://gw.alipayobjects.com/zos/rmsportal/UTjFYEzMSYVwzxIGVhMu.png"
                     });
+                    this.$refs["audioID"].play();
                 }
             },
             /**
