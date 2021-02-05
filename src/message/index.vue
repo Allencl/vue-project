@@ -1,7 +1,7 @@
 <style lang="scss">
     .sand-clock-card{
         width: 500px;
-        height: 200px;
+        height: 300px;
         margin-left: 52px;
         margin-top: 40px;
 
@@ -32,6 +32,10 @@
                 top: 0px;
             }
         }
+
+        .top-contariner{
+            padding-bottom: 18px;
+        }
     }
 </style>
 <template>
@@ -47,6 +51,15 @@
                     <Button v-show="editActionHead" title="保存" class="save-signature" @click="saveHead" type="success" icon="md-checkmark" shape="circle"></Button>
                 </div>
                 <div>
+                    <div class="top-contariner">
+                        <Tag v-for="(o,index) in currencyArray" :key="index" 
+                            type="dot"
+                            color="warning"
+                            :closable="switch1" @on-close="closeCurrency(index)"
+                        >
+                            {{o}}
+                        </Tag>
+                    </div>
                     <div class="timer-tag-box">
                         <Tag v-for="(o,index) in timerArray" :key="index" @on-close="closeTag(index)"  :closable="switch1" color="warning">{{o}}</Tag>
                         <i-switch style="margin-left:12px" v-model="switch1" @on-change="changeSwitch" size="large" true-color="#13ce66" false-color="#CC0000">
@@ -57,6 +70,26 @@
                     <div v-show="switch1">
                         <InputNumber :step="1" :max="60" :min="0" v-model="InputNumber"></InputNumber>
                         <Button style="margin-left:16px" @click="addTimerArrayHandle" title="添加" type="success" icon="md-add" shape="circle"></Button>
+                    </div>
+                    <div v-show="switch1">
+                        <Dropdown
+                            style="margin-top:18px"
+                            @on-click="dropdownChange"
+                        >
+                            <Button type="dashed">
+                                select
+                                <Icon type="ios-arrow-down"></Icon>
+                            </Button>
+
+                            <DropdownMenu slot="list">
+                                <DropdownItem name="GBP">GBP</DropdownItem>
+                                <DropdownItem name="EUR">EUR</DropdownItem>
+                                <DropdownItem name="USD">USD</DropdownItem>
+                                <DropdownItem name="JPY">JPY</DropdownItem>
+                                <DropdownItem name="XAU" divided>XAU</DropdownItem>
+                                <DropdownItem name="XAG">XAG</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
                     </div>
                 </div>
             </Card>            
@@ -69,6 +102,7 @@
             return {
                 switch1:false,  //
                 InputNumber:0,  // 
+                currencyArray:[],  // list
                 timerArray:[],  // 计时器
                 signatureStr:"",  // 签名
                 editActionHead:false, // 可编辑 标题
@@ -84,6 +118,9 @@
         },
         methods: {
             /**
+             * 
+             */
+            /**
              * 初始化 计时器
              */
             timerInit: function(){
@@ -96,6 +133,17 @@
                 } catch (error) {
                    console.error(error);     
                 }
+
+                try {
+                    if( !localStorage.getItem("currencyArray") ){
+                        localStorage.setItem("currencyArray","[]");
+                    }
+
+                    this.currencyArray=JSON.parse(localStorage.getItem("currencyArray"));                
+                } catch (error) {
+                   console.error(error);     
+                }
+                
             },
             /**
              * 始化 签名
@@ -153,6 +201,26 @@
                 this.editActionHead=false;
             },
             /**
+             * 下拉
+             */
+            dropdownChange:function(name){
+                try {
+                    var _array=JSON.parse(localStorage.getItem("currencyArray"));
+
+                    if(_array.filter((o)=>name==o)["length"]){
+                        this.$Message.warning({
+                            // background: true,
+                            content: '已存在！'
+                        });
+                        return;
+                    }
+                    localStorage.setItem("currencyArray",JSON.stringify(this.currencyArray.concat([name])))
+                    this.timerInit();   
+                } catch (error) {
+                    console.error(error);
+                }
+            },
+            /**
              * 添加 定时器
             */
             addTimerArrayHandle:function(){
@@ -175,10 +243,16 @@
 
             },
             /**
-             * 删除 tag
+             */
+            closeCurrency: function(index){
+                localStorage.setItem("currencyArray",JSON.stringify(this.currencyArray.filter((o,i)=>i!=index)));
+                this.timerInit();  
+            },
+            /**
+             * 删除 tag 
             */
             closeTag:function(index){
-                localStorage.setItem("timerArray",JSON.stringify(this.timerArray.filter((o,i)=>i!=index)));
+                localStorage.setItem("timerArray",JSON.stringify(this.currencyArray.filter((o,i)=>i!=index)));
                 this.timerInit();   
             },
             /**
