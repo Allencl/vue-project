@@ -108,6 +108,7 @@
                 editActionHead:false, // 可编辑 标题
                 timerGlobal1:null,   // 计时器
                 sandClockImage: require('./../assets/sandclock.gif'),  // 沙漏
+                audioMp3: require('./../assets/mp3.mp3'),  // 音乐
 
             }
         },
@@ -184,6 +185,7 @@
                     new Notification(`⏳ ${_date}`,{
                         icon:"https://gw.alipayobjects.com/zos/rmsportal/UTjFYEzMSYVwzxIGVhMu.png"
                     });
+                    this.$refs["audioID"].play();
                 }
             },
             /**
