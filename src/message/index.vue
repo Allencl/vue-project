@@ -254,7 +254,7 @@
              * 删除 tag 
             */
             closeTag:function(index){
-                localStorage.setItem("timerArray",JSON.stringify(this.currencyArray.filter((o,i)=>i!=index)));
+                localStorage.setItem("timerArray",JSON.stringify(this.timerArray.filter((o,i)=>i!=index)));
                 this.timerInit();   
             },
             /**
