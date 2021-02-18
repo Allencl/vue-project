@@ -96,7 +96,11 @@
         </div>
 
         <div style="visibility:hidden;">
-            <audio ref="audioID" :src="audioMp3">
+            <audio 
+                ref="audioID" 
+                :src="audioMp3"
+                muted="muted"
+            >
                 Your browser does not support the audio element.
             </audio>
         </div>
