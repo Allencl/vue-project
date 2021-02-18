@@ -94,6 +94,12 @@
                 </div>
             </Card>            
         </div>
+
+        <div style="visibility:hidden;">
+            <audio ref="audioID" :src="audioMp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     </div>
 </template>
 <script>
