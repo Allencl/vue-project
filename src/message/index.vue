@@ -27,6 +27,7 @@
         }
 
         .timer-tag-box{
+            margin-top: 10px;
             height: 38px;
             .ivu-icon-ios-close{
                 top: 0px;
@@ -34,7 +35,7 @@
         }
 
         .top-contariner{
-            padding-bottom: 18px;
+            padding-bottom: 3px;
         }
     }
 </style>
@@ -52,14 +53,26 @@
                 </div>
                 <div>
                     <div class="top-contariner">
-                        <Tag v-for="(o,index) in currencyArray" :key="index" 
-                            type="dot"
-                            color="warning"
-                            :closable="switch1" @on-close="closeCurrency(index)"
+                        <Tag v-for="(o,index) in currencyArrayUp" :key="index" 
+                        
+                            color="success"
+                            :closable="switch1" @on-close="closeCurrencyUp(index)"
                         >
+                            <Icon type="md-trending-up" />
                             {{o}}
                         </Tag>
                     </div>
+                    <div class="top-contariner">
+                        <Tag v-for="(o,index) in currencyArrayDown" :key="index" 
+                        
+                            color="success"
+                            :closable="switch1" @on-close="closeCurrencyDown(index)"
+                        >
+                            <Icon type="md-trending-down" />
+                            {{o}}
+                        </Tag>
+                    </div>
+
                     <div class="timer-tag-box">
                         <Tag v-for="(o,index) in timerArray" :key="index" @on-close="closeTag(index)"  :closable="switch1" color="warning">{{o}}</Tag>
                         <i-switch style="margin-left:12px" v-model="switch1" @on-change="changeSwitch" size="large" true-color="#13ce66" false-color="#CC0000">
@@ -72,24 +85,50 @@
                         <Button style="margin-left:16px" @click="addTimerArrayHandle" title="添加" type="success" icon="md-add" shape="circle"></Button>
                     </div>
                     <div v-show="switch1">
-                        <Dropdown
-                            style="margin-top:18px"
-                            @on-click="dropdownChange"
-                        >
-                            <Button type="dashed">
-                                select
-                                <Icon type="ios-arrow-down"></Icon>
-                            </Button>
+                        <Row>
+                            <i-col span="6">
+                                <Dropdown
+                                    style="margin-top:18px"
+                                    @on-click="dropdownChangeUp"
+                                >
+                                    <Button type="dashed">
+                                        <Icon type="md-trending-up" />
+                                        选择
+                                        <Icon type="ios-arrow-down"></Icon>
+                                    </Button>
+                                    <DropdownMenu slot="list">
+                                        <DropdownItem name="GBP">GBP</DropdownItem>
+                                        <DropdownItem name="EUR">EUR</DropdownItem>
+                                        <DropdownItem name="USD">USD</DropdownItem>
+                                        <DropdownItem name="JPY">JPY</DropdownItem>
+                                        <DropdownItem name="XAU" divided>XAU</DropdownItem>
+                                        <DropdownItem name="XAG">XAG</DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </i-col>
+                            <i-col span="6">
+                                <Dropdown
+                                    style="margin-top:18px"
+                                    @on-click="dropdownChangeDown"
+                                >
+                                    <Button type="dashed">
+                                        <Icon type="md-trending-down" />
+                                        选择
+                                        <Icon type="ios-arrow-down"></Icon>
+                                    </Button>
+                                    <DropdownMenu slot="list">
+                                        <DropdownItem name="GBP">GBP</DropdownItem>
+                                        <DropdownItem name="EUR">EUR</DropdownItem>
+                                        <DropdownItem name="USD">USD</DropdownItem>
+                                        <DropdownItem name="JPY">JPY</DropdownItem>
+                                        <DropdownItem name="XAU" divided>XAU</DropdownItem>
+                                        <DropdownItem name="XAG">XAG</DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </i-col>
+                        </Row>
 
-                            <DropdownMenu slot="list">
-                                <DropdownItem name="GBP">GBP</DropdownItem>
-                                <DropdownItem name="EUR">EUR</DropdownItem>
-                                <DropdownItem name="USD">USD</DropdownItem>
-                                <DropdownItem name="JPY">JPY</DropdownItem>
-                                <DropdownItem name="XAU" divided>XAU</DropdownItem>
-                                <DropdownItem name="XAG">XAG</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
+
                     </div>
                 </div>
             </Card>            
@@ -112,7 +151,9 @@
             return {
                 switch1:false,  //
                 InputNumber:0,  // 
-                currencyArray:[],  // list
+                currencyArrayUp:[],  // list up
+                currencyArrayDown:[],  // list down
+
                 timerArray:[],  // 计时器
                 signatureStr:"",  // 签名
                 editActionHead:false, // 可编辑 标题
@@ -146,11 +187,17 @@
                 }
 
                 try {
-                    if( !localStorage.getItem("currencyArray") ){
-                        localStorage.setItem("currencyArray","[]");
+                    if( !localStorage.getItem("currencyArrayUp") ){
+                        localStorage.setItem("currencyArrayUp","[]");
                     }
+                    this.currencyArrayUp=JSON.parse(localStorage.getItem("currencyArrayUp")); 
+                    
 
-                    this.currencyArray=JSON.parse(localStorage.getItem("currencyArray"));                
+                    if( !localStorage.getItem("currencyArrayDown") ){
+                        localStorage.setItem("currencyArrayDown","[]");
+                    }
+                    this.currencyArrayDown=JSON.parse(localStorage.getItem("currencyArrayDown"));                     
+                    
                 } catch (error) {
                    console.error(error);     
                 }
@@ -215,9 +262,9 @@
             /**
              * 下拉
              */
-            dropdownChange:function(name){
+            dropdownChangeUp:function(name){
                 try {
-                    var _array=JSON.parse(localStorage.getItem("currencyArray"));
+                    var _array=JSON.parse(localStorage.getItem("currencyArrayUp"));
 
                     if(_array.filter((o)=>name==o)["length"]){
                         this.$Message.warning({
@@ -226,11 +273,28 @@
                         });
                         return;
                     }
-                    localStorage.setItem("currencyArray",JSON.stringify(this.currencyArray.concat([name])))
+                    localStorage.setItem("currencyArrayUp",JSON.stringify(this.currencyArrayUp.concat([name])))
                     this.timerInit();   
                 } catch (error) {
                     console.error(error);
                 }
+            },
+            dropdownChangeDown: function(name){
+                try {
+                    var _array=JSON.parse(localStorage.getItem("currencyArrayDown"));
+
+                    if(_array.filter((o)=>name==o)["length"]){
+                        this.$Message.warning({
+                            // background: true,
+                            content: '已存在！'
+                        });
+                        return;
+                    }
+                    localStorage.setItem("currencyArrayDown",JSON.stringify(this.currencyArrayDown.concat([name])))
+                    this.timerInit();   
+                } catch (error) {
+                    console.error(error);
+                }                
             },
             /**
              * 添加 定时器
@@ -256,8 +320,12 @@
             },
             /**
              */
-            closeCurrency: function(index){
-                localStorage.setItem("currencyArray",JSON.stringify(this.currencyArray.filter((o,i)=>i!=index)));
+            closeCurrencyUp: function(index){
+                localStorage.setItem("currencyArrayUp",JSON.stringify(this.currencyArrayUp.filter((o,i)=>i!=index)));
+                this.timerInit();  
+            },
+            closeCurrencyDown: function(index){
+                localStorage.setItem("currencyArrayDown",JSON.stringify(this.currencyArrayDown.filter((o,i)=>i!=index)));
                 this.timerInit();  
             },
             /**
