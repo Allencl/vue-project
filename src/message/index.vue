@@ -1,7 +1,7 @@
 <style lang="scss">
     .sand-clock-card{
         width: 500px;
-        height: 300px;
+        height: 380px;
         margin-left: 52px;
         margin-top: 40px;
 
@@ -52,6 +52,17 @@
                     <Button v-show="editActionHead" title="保存" class="save-signature" @click="saveHead" type="success" icon="md-checkmark" shape="circle"></Button>
                 </div>
                 <div>
+                    <div class="top-contariner" style="paddingBottom:13px;">
+                        <span  v-for="(o,index) in currencyArraySort" :key="index">
+                            <Tag
+                                color="warning"
+                                :closable="switch1" @on-close="closeCurrencySort(index)"
+                            >
+                                {{o}}
+                            </Tag>
+                            <Icon style="color:#19be6b" v-show="currencyArraySort['length'] && (index!=currencyArraySort['length']-1)" type="ios-arrow-forward" />
+                        </span>
+                    </div>
                     <div class="top-contariner">
                         <Tag v-for="(o,index) in currencyArrayUp" :key="index" 
                         
@@ -126,6 +137,28 @@
                                     </DropdownMenu>
                                 </Dropdown>
                             </i-col>
+
+                            <i-col span="6">
+                                <Dropdown
+                                    style="margin-top:18px"
+                                    @on-click="dropdownChangeSort"
+                                >
+                                    <Button type="dashed">
+                         
+                                        排序
+                                        <Icon type="ios-arrow-down"></Icon>
+                                    </Button>
+                                    <DropdownMenu slot="list">
+                                        <DropdownItem name="GBP">GBP</DropdownItem>
+                                        <DropdownItem name="EUR">EUR</DropdownItem>
+                                        <DropdownItem name="USD">USD</DropdownItem>
+                                        <DropdownItem name="JPY">JPY</DropdownItem>
+                                        <DropdownItem name="XAU" divided>XAU</DropdownItem>
+                                        <DropdownItem name="XAG">XAG</DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </i-col>
+
                         </Row>
 
 
@@ -153,6 +186,7 @@
                 InputNumber:0,  // 
                 currencyArrayUp:[],  // list up
                 currencyArrayDown:[],  // list down
+                currencyArraySort:[],  // list sort
 
                 timerArray:[],  // 计时器
                 signatureStr:"",  // 签名
@@ -198,6 +232,13 @@
                     }
                     this.currencyArrayDown=JSON.parse(localStorage.getItem("currencyArrayDown"));                     
                     
+
+                    if( !localStorage.getItem("currencyArraySort") ){
+                        localStorage.setItem("currencyArraySort","[]");
+                    }
+                    this.currencyArraySort=JSON.parse(localStorage.getItem("currencyArraySort"));                     
+                                   
+               
                 } catch (error) {
                    console.error(error);     
                 }
@@ -296,6 +337,23 @@
                     console.error(error);
                 }                
             },
+            dropdownChangeSort: function(name){
+                try {
+                    var _array=JSON.parse(localStorage.getItem("currencyArraySort"));
+
+                    if(_array.filter((o)=>name==o)["length"]){
+                        this.$Message.warning({
+                            // background: true,
+                            content: '已存在！'
+                        });
+                        return;
+                    }
+                    localStorage.setItem("currencyArraySort",JSON.stringify(this.currencyArraySort.concat([name])))
+                    this.timerInit();   
+                } catch (error) {
+                    console.error(error);
+                }  
+            },
             /**
              * 添加 定时器
             */
@@ -326,6 +384,10 @@
             },
             closeCurrencyDown: function(index){
                 localStorage.setItem("currencyArrayDown",JSON.stringify(this.currencyArrayDown.filter((o,i)=>i!=index)));
+                this.timerInit();  
+            },
+            closeCurrencySort: function(index){
+                localStorage.setItem("currencyArraySort",JSON.stringify(this.currencyArraySort.filter((o,i)=>i!=index)));
                 this.timerInit();  
             },
             /**
