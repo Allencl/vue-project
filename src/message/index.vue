@@ -1,6 +1,6 @@
 <style lang="scss">
     .sand-clock-card{
-        width: 500px;
+        width: 610px;
         height: 380px;
         margin-left: 52px;
         margin-top: 40px;
