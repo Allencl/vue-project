@@ -6,13 +6,13 @@ import VueRouter from 'vue-router';
 // import LargeScreenPage2 from './home2/index.vue';   // 大屏
 // import TinymcePage from './tinymce/index.vue';   // 富文本 编辑器
 
-// import TablePage from './table/index.vue';
-import MessagePage from './message/index.vue';
+import CalendarPage from './calendar/index.vue';
+// import MessagePage from './message/index.vue';
 
 
 const routes = [
   // { path: '/', component: RegisterPage },   // 注册页面
-  { path: '/', component: MessagePage },   // home 页面
+  { path: '/', component: CalendarPage },   // home 页面
 
 ]
 
