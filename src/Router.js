@@ -6,7 +6,7 @@ import VueRouter from 'vue-router';
 // import LargeScreenPage2 from './home2/index.vue';   // 大屏
 // import TinymcePage from './tinymce/index.vue';   // 富文本 编辑器
 
-import CalendarPage from './calendar/index.vue';
+import CalendarPage from './BI/index.vue';
 // import MessagePage from './message/index.vue';
 
 
