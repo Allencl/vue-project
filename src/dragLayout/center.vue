@@ -43,7 +43,7 @@
         class="test3">
       </vue-draggable-resizable>
       <!--辅助线-->
-      <span class="ref-line v-line"
+      <!-- <span class="ref-line v-line"
             v-for="item in vLine"
             v-show="item.display"
             :style="{ left: item.position, top: item.origin, height: item.lineLength}"
@@ -52,7 +52,7 @@
             v-for="item in hLine"
             v-show="item.display"
             :style="{ top: item.position, left: item.origin, width: item.lineLength}"
-       />
+       /> -->
       <!--辅助线END-->
     </div>
   </div>

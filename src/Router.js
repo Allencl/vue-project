@@ -5,14 +5,16 @@ import VueRouter from 'vue-router';
 // import LargeScreenPage from './largeScreen/index.vue';   // 大屏
 // import LargeScreenPage2 from './home2/index.vue';   // 大屏
 // import TinymcePage from './tinymce/index.vue';   // 富文本 编辑器
+// import DragLayout from './dragLayout/index.vue';   // 自定义 拖拽布局
 
-import CalendarPage from './BI/index.vue';
+
+import Page from './dragLayout/index.vue';
 // import MessagePage from './message/index.vue';
 
 
 const routes = [
   // { path: '/', component: RegisterPage },   // 注册页面
-  { path: '/', component: CalendarPage },   // home 页面
+  { path: '/', component: Page },   // home 页面
 
 ]
 
