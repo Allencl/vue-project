@@ -3,8 +3,8 @@ import Vue from 'vue/dist/vue.js';
 import VueRouter from 'vue-router';
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
-// import 'vue-draggable-resizable/src/components/vue-draggable-resizable.css';
-import 'vue-draggable-resizable-gorkys/dist/VueDraggableResizable.css'
+import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+
 
 
 import App from './App.vue';

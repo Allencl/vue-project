@@ -59,7 +59,7 @@
 </template>
 
 <script>
-  import VueDraggableResizable from 'vue-draggable-resizable-gorkys'
+  import VueDraggableResizable from 'vue-draggable-resizable'
 export default {
   components: {
     VueDraggableResizable
