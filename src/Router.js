@@ -8,7 +8,7 @@ import VueRouter from 'vue-router';
 // import DragLayout from './dragLayout/index.vue';   // 自定义 拖拽布局
 
 
-import Page from './dragLayout/index.vue';
+import Page from './calendar/index2.vue';
 // import MessagePage from './message/index.vue';
 
 
