@@ -32,24 +32,17 @@ export default {
         initPage: function(){
             var obj=this.$refs["main"];
             var myChart = echarts.init(obj);
+            let _option=this.option;    
 
-
-            var option = {
-                xAxis: {
-                    type: 'category',
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                series: [{
-                    data: [150, 230, 224, 218, 135, 147, 260],
-                    type: 'line'
-                }]
-            };
-
-            option && myChart.setOption(option);
+            _option && myChart.setOption(_option);
         },                
-    },        
+    },   
+    props: {
+        // 配置 参数
+        option:{
+            type: Object,
+            default:()=>{}         
+        }
+    }         
 }
 </script>

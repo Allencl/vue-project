@@ -5,7 +5,9 @@
                 .title-content{
                     padding-bottom: 8px;
                     span{
-                        border-bottom: 3px solid red;
+                        height: 26px;
+                        display: inline-block;
+                        border-bottom: 3px solid #2d8cf0;
                     }
                 }
 

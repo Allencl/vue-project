@@ -2,6 +2,10 @@
   .drag-content-iframe{
     .top-box{
       height: 30px;
+
+      label{
+        padding-right: 8px;
+      }
     }
 
     .box-content{
@@ -23,26 +27,28 @@
 <template>
   <div class="drag-content-iframe">
     <Row class="top-box">
-        <i-col span="2">
+        <span>
           <Checkbox v-model="configJson['grid']">网格</Checkbox>
-        </i-col>
-        <i-col span="4">
-          <label>宽</label>
+        </span>
+        <span style="margin-left:10px">
+          <label>宽:</label>
           <InputNumber 
             v-model="configJson['width']"
             :min="600"  
             size="small"
           ></InputNumber>
-        </i-col>
-        <i-col span="4">
-          <label>高</label>
+        </span>
+        <span style="margin-left:20px">
+          <label>高:</label>
           <InputNumber 
             v-model="configJson['height']"
             :min="600" 
             size="small"
           ></InputNumber>
-        </i-col>
-
+        </span>
+        <span style="margin-left:50px">
+          <Button type="primary" size="small" @click="onSave">保存</Button>
+        </span>
     </Row>
     <div 
       :class="`box-content ${configJson['grid']?'gridding':''}`" 
@@ -75,22 +81,7 @@ export default {
       },
 
       // 组件 列表
-      children:[
-        {
-            x:0,
-            y:0,
-            h:200, 
-            w:200,
-            z:1,       
-        },
-        {
-            x:20,
-            y:20,
-            h:200, 
-            w:200,
-            z:2,       
-        },            
-      ]
+      children:[]
 
 
     }
@@ -110,17 +101,30 @@ export default {
 
 
       this.children=this.children.concat([{
+        _key:`element_${new Date().getTime()}`,
         x:x,
         y:y,
         h:200, 
         w:200,
-        z:len+1
+        z:len+1,
+        option:row["option"]
       }])
 
-      console.log(this.children);
+      // console.log(this.children);
 
-      console.log(row);
+      // console.log(row);
       // console.log(event);
+    },
+    /**
+     * 保存 数据
+     */
+    onSave:function(){
+      let params={
+        ...this.configJson,
+        children:this.children
+      };
+
+      console.log(params);
     }
   },
   props: {
