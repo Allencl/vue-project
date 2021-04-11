@@ -17,7 +17,12 @@
                     height: 66px;
                     float: left;
                     margin-right: 15px;
-                    cursor: pointer;
+                    cursor: all-scroll;
+                    transition: all 0.3s ease-out;
+
+                    &:hover{
+                        transform: scale(1.1,1.1)
+                    }
 
                     img{
                         width: 100%;
@@ -40,6 +45,7 @@
 </style>
 <template>
     <div class="left-side">
+
         <ul
             v-for="(obj,i) in data"
             :key="i"

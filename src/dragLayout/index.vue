@@ -4,8 +4,12 @@
             background: #fff;
         }
 
-        .side-column{
+        .side-column-left{
             padding: 12px 12px;
+        }
+
+        .side-column-right{
+            padding: 8px 8px;
         }
     }
 </style>
@@ -16,7 +20,7 @@
                 <Sider 
                     hide-trigger
                     :width="200"
-                    class="side-column"
+                    class="side-column-left"
                 >
                     <LeftPage />             
                 </Sider>
@@ -25,10 +29,10 @@
                 </Content>
                 <Sider 
                     hide-trigger
-                    :width="200"
-                    class="side-column"
+                    :width="220"
+                    class="side-column-right"
                 >
-                    Sider
+                    <RightPage />
                 </Sider>
             </Layout>
         </Layout>
@@ -37,12 +41,14 @@
 <script>
   import LeftPage from "./left.vue";      // 左边侧栏
   import CenterPage from "./center.vue";  // 中间
+  import RightPage from "./right.vue";  // 中间
 
 
     export default {
         components: {
            LeftPage,
-           CenterPage 
+           CenterPage,
+           RightPage 
         },
         data (_this) {
             return {
