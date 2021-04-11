@@ -1,96 +1,122 @@
+<style lang="scss">
+  .drag-content-iframe{
+    .box-content{
+      width:600px;
+      height:600px;
+      border:1px solid red;
+
+      &.gridding{
+        // position: relative; background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px) 10px 10px / 20px 20px, linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) 0% 0% / 20px 20px; height: 400px; width: 400px; border: 1px solid blue; box-sizing: content-box;
+        // position: relative; background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px) 10px 10px / 20px 20px, linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) 0% 0% / 20px 20px; height: 400px; width: 400px; border: 1px solid blue; box-sizing: content-box;
+        position: relative;background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px) 0% 0% / 20px 20px, linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) 0% 0% / 20px 20px;
+      }
+    }
+  }
+
+
+</style>
+
 <template>
-  <div id="app">
-    <div style="height: 800px; width: 1200px; border: 1px solid red; position: relative;margin: 0 auto">
-      <vue-draggable-resizable
-        :w="200"
-        :h="200"
+  <div class="drag-content-iframe">
+    <Row>
+        <i-col span="2">
+          <Checkbox v-model="configJson['grid']">网格</Checkbox>
+        </i-col>
+        <i-col span="4">
+          <label>宽</label>
+          <InputNumber 
+            v-model="configJson['width']"
+            :min="600"  
+            size="small"
+          ></InputNumber>
+        </i-col>
+        <i-col span="4">
+          <label>高</label>
+          <InputNumber 
+            v-model="configJson['height']"
+            :min="600" 
+            size="small"
+          ></InputNumber>
+        </i-col>
+
+    </Row>
+    <div 
+      :class="`box-content ${configJson['grid']?'gridding':''}`" 
+    >
+      <vue-draggable-resizable 
         :parent="true"
-        :debug="false"
-        :min-width="200"
-        :min-height="200"
-        :isConflictCheck="true"
-        :snap="true"
-        :snapTolerance="10"
-        @refLineParams="getRefLineParams"
-        class="test1">
+        :grid=[20,20] 
+
+        :x="0"
+        :y="0"
+
+
+        @dragging="onDragElement" 
+        @resizing="onResizeElement"     
+      >
+        <div style="width: 100%;height: 100%;">
+          <div style="width:100%;height:100%;" id="main"></div>
+        </div>
       </vue-draggable-resizable>
-      <vue-draggable-resizable
-        :w="200"
-        :h="200"
-        :parent="true"
-        :x="210"
-        :debug="false"
-        :min-width="200"
-        :min-height="200"
-        :isConflictCheck="true"
-        :snap="true"
-        :snapTolerance="10"
-        @refLineParams="getRefLineParams"
-        class="test2">
-      </vue-draggable-resizable>
-      <vue-draggable-resizable
-        :w="200"
-        :h="200"
-        :parent="true"
-        :x="420"
-        :debug="false"
-        :min-width="200"
-        :min-height="200"
-        :isConflictCheck="true"
-        :snap="true"
-        :snapTolerance="10"
-        @refLineParams="getRefLineParams"
-        class="test3">
-      </vue-draggable-resizable>
-      <!--辅助线-->
-      <!-- <span class="ref-line v-line"
-            v-for="item in vLine"
-            v-show="item.display"
-            :style="{ left: item.position, top: item.origin, height: item.lineLength}"
-      />
-      <span class="ref-line h-line"
-            v-for="item in hLine"
-            v-show="item.display"
-            :style="{ top: item.position, left: item.origin, width: item.lineLength}"
-       /> -->
-      <!--辅助线END-->
     </div>
   </div>
+
 </template>
 
 <script>
-  import VueDraggableResizable from 'vue-draggable-resizable'
+import VueDraggableResizable from 'vue-draggable-resizable';
+import * as echarts from 'echarts';
+
+
 export default {
   components: {
-    VueDraggableResizable
+      VueDraggableResizable 
   },
-  data () {
+  data: function () {
     return {
-      vLine: [],
-      hLine: []
+
+      //数据
+      configJson:{
+        width:600,  
+        height:600,
+        grid: true, // 网格
+      }
     }
   },
+  created() {
+    setTimeout(()=>{
+      this.initPage();  // 初始化
+    },2000);
+  }, 
   methods: {
-    /**
-     * 辅助线回调事件
-     */
-    getRefLineParams: function(params){
-      const { vLine, hLine } = params;
-      this.vLine = vLine;
-      this.hLine = hLine;
+    initPage: function(){
+      var chartDom = document.getElementById('main');
+      var myChart = echarts.init(chartDom);
+      var option;
+
+      option = {
+          xAxis: {
+              type: 'category',
+              data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              data: [150, 230, 224, 218, 135, 147, 260],
+              type: 'line'
+          }]
+      };
+
+      option && myChart.setOption(option);
+    },
+    onDragElement:function(...aaa){
+      console.log(aaa);
+    },
+    onResizeElement:function(){
+      console.log(222);
+
     }
   }
 }
 </script>
-
-<style>
-  .test1 {
-    background-color: rgb(239, 154, 154);
-  }
-  .test2{
-    background-color: rgb(129, 212, 250);
-  }
-  .test3{
-    background-color: rgb(174, 213, 129);
-  }
-</style>
