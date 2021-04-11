@@ -59,44 +59,34 @@
     </div>
 </template>
 <script>
-    export default {
-        data () {
-            return {
-                zhexian_1: require('./assets/zhexian_1.png'),  // 折线1
+import EchartsConfig from "./echartsConfig.js";  // 报表配置数据
+export default {
+    data () {
+        return {
+            zhexian_1: require('./assets/zhexian_1.png'),  // 折线1
+            
+            // 配置数据
+            data:[]
 
-                data:[
-                    {
-                        title:"柱状图",
-                        children:[
-                            {
-                                title:"基础柱状图",
-                                img: require('./assets/zhexian_1.png'),  // 折线1
-                            },
-                            {
-                                title:"基础柱状图",
-                                img: require('./assets/zhexian_1.png'),  // 折线1
-                            }                            
-                        ]
-                    }
-                ]
- 
-            }
+        }
+    },
+    created(){
+        this.$nextTick(()=>{
+            this.data=EchartsConfig;
+        });
+    },        
+    methods: {   
+        /**
+         *  面板 拖拽
+         */
+        dragStart: function (event, item={}) {
+            event.stopPropagation();   
+            event.dataTransfer.setData('item', JSON.stringify(item) );
         },
-        created(){
-
-        },        
-        methods: {   
-            /**
-             *  面板 拖拽
-             */
-            dragStart: function (event, item={}) {
-                event.stopPropagation();   
-                event.dataTransfer.setData('item', JSON.stringify(item) );
-            },
-            dragEnd: function (event) {
-                event.stopPropagation();  
-                event.dataTransfer.clearData();
-            },                   
-        },        
-    }
+        dragEnd: function (event) {
+            event.stopPropagation();  
+            event.dataTransfer.clearData();
+        },                   
+    },        
+}
 </script>

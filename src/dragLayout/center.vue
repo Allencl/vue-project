@@ -1,5 +1,9 @@
 <style lang="scss">
   .drag-content-iframe{
+    .top-box{
+      height: 30px;
+    }
+
     .box-content{
       width:600px;
       height:600px;
@@ -18,7 +22,7 @@
 
 <template>
   <div class="drag-content-iframe">
-    <Row>
+    <Row class="top-box">
         <i-col span="2">
           <Checkbox v-model="configJson['grid']">网格</Checkbox>
         </i-col>
@@ -42,81 +46,85 @@
     </Row>
     <div 
       :class="`box-content ${configJson['grid']?'gridding':''}`" 
+      @drop="dropHandle($event)"
+      @dragover.prevent
     >
-      <vue-draggable-resizable 
-        :parent="true"
-        :grid=[20,20] 
-
-        :x="0"
-        :y="0"
-
-
-        @dragging="onDragElement" 
-        @resizing="onResizeElement"     
-      >
-        <div style="width: 100%;height: 100%;">
-          <div style="width:100%;height:100%;" id="main"></div>
-        </div>
-      </vue-draggable-resizable>
+        <RendererPage 
+           :children="children" 
+        />
     </div>
   </div>
 
 </template>
 
 <script>
-import VueDraggableResizable from 'vue-draggable-resizable';
-import * as echarts from 'echarts';
-
+import RendererPage from "./rendererResizable.vue";  // 渲染器
 
 export default {
   components: {
-      VueDraggableResizable 
+    RendererPage 
   },
   data: function () {
     return {
-
       //数据
       configJson:{
-        width:600,  
-        height:600,
-        grid: true, // 网格
-      }
+          width:600,  
+          height:600,
+          grid: true, // 网格
+
+      },
+
+      // 组件 列表
+      children:[
+        {
+            x:0,
+            y:0,
+            h:200, 
+            w:200,
+            z:1,       
+        },
+        {
+            x:20,
+            y:20,
+            h:200, 
+            w:200,
+            z:2,       
+        },            
+      ]
+
+
     }
   },
   created() {
-    setTimeout(()=>{
-      this.initPage();  // 初始化
-    },2000);
+
   }, 
   methods: {
-    initPage: function(){
-      var chartDom = document.getElementById('main');
-      var myChart = echarts.init(chartDom);
-      var option;
+    /**
+     * 报表拖拽
+     */
+    dropHandle:function(event){
+      let row = JSON.parse(event.dataTransfer.getData('item'));  
+      let x=Math.round((event["clientX"]-210)/20)*20;
+      let y=Math.round((event["clientY"]-40)/20)*20;
+      let len=this.children["length"];
 
-      option = {
-          xAxis: {
-              type: 'category',
-              data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-          },
-          yAxis: {
-              type: 'value'
-          },
-          series: [{
-              data: [150, 230, 224, 218, 135, 147, 260],
-              type: 'line'
-          }]
-      };
 
-      option && myChart.setOption(option);
-    },
-    onDragElement:function(...aaa){
-      console.log(aaa);
-    },
-    onResizeElement:function(){
-      console.log(222);
+      this.children=this.children.concat([{
+        x:x,
+        y:y,
+        h:200, 
+        w:200,
+        z:len+1
+      }])
 
+      console.log(this.children);
+
+      console.log(row);
+      // console.log(event);
     }
-  }
+  },
+  props: {
+
+  }  
 }
 </script>

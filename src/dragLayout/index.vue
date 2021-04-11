@@ -20,9 +20,8 @@
                 >
                     <LeftPage />             
                 </Sider>
-                <Content :style="{overflow:'auto',height:documentHeight+'px',padding: '8px 8px', minHeight: '280px', background: '#fff'}">
-                    <CenterPage 
-                    />
+                <Content :style="{overflow:'auto',height:documentHeight+'px',padding:'10px 10px', minHeight:'280px',background:'#fff'}">
+                    <CenterPage />
                 </Content>
                 <Sider 
                     hide-trigger
@@ -48,6 +47,8 @@
         data (_this) {
             return {
                 documentHeight:document.documentElement.clientHeight-(_this.tabsArray?116:68),  // 窗口高度
+
+
 
             }
         },
