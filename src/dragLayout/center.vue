@@ -1,96 +1,134 @@
+<style lang="scss">
+  .drag-content-iframe{
+    .top-box{
+      height: 30px;
+
+      label{
+        padding-right: 8px;
+      }
+    }
+
+    .box-content{
+      width:600px;
+      height:600px;
+      border:1px solid red;
+
+      &.gridding{
+        // position: relative; background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px) 10px 10px / 20px 20px, linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) 0% 0% / 20px 20px; height: 400px; width: 400px; border: 1px solid blue; box-sizing: content-box;
+        // position: relative; background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px) 10px 10px / 20px 20px, linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) 0% 0% / 20px 20px; height: 400px; width: 400px; border: 1px solid blue; box-sizing: content-box;
+        position: relative;background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px) 0% 0% / 20px 20px, linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) 0% 0% / 20px 20px;
+      }
+    }
+  }
+
+
+</style>
+
 <template>
-  <div id="app">
-    <div style="height: 800px; width: 1200px; border: 1px solid red; position: relative;margin: 0 auto">
-      <vue-draggable-resizable
-        :w="200"
-        :h="200"
-        :parent="true"
-        :debug="false"
-        :min-width="200"
-        :min-height="200"
-        :isConflictCheck="true"
-        :snap="true"
-        :snapTolerance="10"
-        @refLineParams="getRefLineParams"
-        class="test1">
-      </vue-draggable-resizable>
-      <vue-draggable-resizable
-        :w="200"
-        :h="200"
-        :parent="true"
-        :x="210"
-        :debug="false"
-        :min-width="200"
-        :min-height="200"
-        :isConflictCheck="true"
-        :snap="true"
-        :snapTolerance="10"
-        @refLineParams="getRefLineParams"
-        class="test2">
-      </vue-draggable-resizable>
-      <vue-draggable-resizable
-        :w="200"
-        :h="200"
-        :parent="true"
-        :x="420"
-        :debug="false"
-        :min-width="200"
-        :min-height="200"
-        :isConflictCheck="true"
-        :snap="true"
-        :snapTolerance="10"
-        @refLineParams="getRefLineParams"
-        class="test3">
-      </vue-draggable-resizable>
-      <!--辅助线-->
-      <!-- <span class="ref-line v-line"
-            v-for="item in vLine"
-            v-show="item.display"
-            :style="{ left: item.position, top: item.origin, height: item.lineLength}"
-      />
-      <span class="ref-line h-line"
-            v-for="item in hLine"
-            v-show="item.display"
-            :style="{ top: item.position, left: item.origin, width: item.lineLength}"
-       /> -->
-      <!--辅助线END-->
+  <div class="drag-content-iframe">
+    <Row class="top-box">
+        <span>
+          <Checkbox v-model="configJson['grid']">网格</Checkbox>
+        </span>
+        <span style="margin-left:10px">
+          <label>宽:</label>
+          <InputNumber 
+            v-model="configJson['width']"
+            :min="600"  
+            size="small"
+          ></InputNumber>
+        </span>
+        <span style="margin-left:20px">
+          <label>高:</label>
+          <InputNumber 
+            v-model="configJson['height']"
+            :min="600" 
+            size="small"
+          ></InputNumber>
+        </span>
+        <span style="margin-left:50px">
+          <Button type="primary" size="small" @click="onSave">保存</Button>
+        </span>
+    </Row>
+    <div 
+      :class="`box-content ${configJson['grid']?'gridding':''}`" 
+      @drop="dropHandle($event)"
+      @dragover.prevent
+    >
+        <RendererPage 
+           :children="children" 
+        />
     </div>
   </div>
+
 </template>
 
 <script>
-  import VueDraggableResizable from 'vue-draggable-resizable'
+import RendererPage from "./rendererResizable.vue";  // 渲染器
+
 export default {
   components: {
-    VueDraggableResizable
+    RendererPage 
   },
-  data () {
+  data: function () {
     return {
-      vLine: [],
-      hLine: []
+      //数据
+      configJson:{
+          width:600,  
+          height:600,
+          grid: true, // 网格
+
+      },
+
+      // 组件 列表
+      children:[]
+
+
     }
   },
+  created() {
+
+  }, 
   methods: {
     /**
-     * 辅助线回调事件
+     * 报表拖拽
      */
-    getRefLineParams: function(params){
-      const { vLine, hLine } = params;
-      this.vLine = vLine;
-      this.hLine = hLine;
+    dropHandle:function(event){
+      let row = JSON.parse(event.dataTransfer.getData('item'));  
+      let x=Math.round((event["clientX"]-210)/20)*20;
+      let y=Math.round((event["clientY"]-40)/20)*20;
+      let len=this.children["length"];
+
+
+      this.children=this.children.concat([{
+        _key:`element_${new Date().getTime()}`,
+        x:x,
+        y:y,
+        h:200, 
+        w:200,
+        z:len+1,
+        option:row["option"]
+      }])
+
+      // console.log(this.children);
+
+      // console.log(row);
+      // console.log(event);
+    },
+    /**
+     * 保存 数据
+     */
+    onSave:function(){
+      let params={
+        ...this.configJson,
+        children:this.children
+      };
+
+      console.log(params);
     }
-  }
+  },
+  props: {
+
+  }  
 }
 </script>
-
-<style>
-  .test1 {
-    background-color: rgb(239, 154, 154);
-  }
-  .test2{
-    background-color: rgb(129, 212, 250);
-  }
-  .test3{
-    background-color: rgb(174, 213, 129);
-  }
-</style>
