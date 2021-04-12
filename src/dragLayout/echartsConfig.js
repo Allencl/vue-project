@@ -4,7 +4,8 @@ export default [
         children:[
             {
                 title:"基础折线图",
-                img: require('./assets/zhexian_1.png'),  
+                img: require('./assets/zhexian_1.png'), 
+                type:'dragEchart', 
                 option:{
                     xAxis: {
                         type: 'category',
@@ -21,7 +22,8 @@ export default [
             },
             {
                 title:"基础平滑折线图",
-                img: require('./assets/zhexian_2.png'),  
+                img: require('./assets/zhexian_2.png'), 
+                type:'dragEchart', 
                 option: {
                     xAxis: {
                         type: 'category',
@@ -40,6 +42,7 @@ export default [
             {
                 title:"基础面积图",
                 img: require('./assets/zhexian_3.png'),  
+                type:'dragEchart', 
                 option: {
                     xAxis: {
                         type: 'category',

@@ -6,7 +6,11 @@
         .data-search-box{
             padding-left: 6px;
             padding-right: 6px; 
-            margin-bottom: 16px;           
+            margin-bottom: 16px;  
+
+            .ivu-input-search,.ivu-input{
+                font-size: 12px;
+            }          
         }
 
         .data-list{
@@ -22,9 +26,10 @@
                 border-radius: 4px;
                 transition: all 0.3s ease-out;
                 cursor: all-scroll;
+                height: 28px;
             
                 &:hover{
-                    transform: scale(1.07,1.07)
+                    transform: scale(1.05,1.05)
                 }    
 
                 .head{
@@ -33,11 +38,11 @@
                     i{
                         position: absolute;
                         left: 0px;
-                        top: 9px;
+                        top: 5px;
                     }
 
                     span{
-                        width: 100%;
+                        width: 90%;
                         display: inline-block;
                         overflow: hidden;
                         text-overflow:ellipsis;
@@ -45,7 +50,8 @@
                         padding-left: 22px;
                         font-weight: 700;
                         position: relative;
-                        top: 5px;
+                        top: 2px;
+                        font-size: 12px;
                     } 
                 }
 
@@ -68,6 +74,7 @@
                     <div class="data-search-box">
                         <Input 
                             v-model="searchDate"
+                            size="small"
                             @on-search="onSearch" search enter-button="查询" placeholder="查询..." />
                     </div>
 
@@ -75,6 +82,9 @@
                         <li 
                             v-for="(o,i) in data"
                             :key="i"
+                            :draggable="true"
+                            @dragstart="dragStart($event,o)"
+                            @dragend="dragEnd"
                         >
                             <div>
                                 <div class="head" :title="o['lable']">
@@ -104,19 +114,40 @@ export default {
             // 数据源
             data:[
                 {
-                    lable:"数据源1"
+                    lable:"数据源1",
+                    type:'dragData', 
+                    option:{
+                        xAxis: {
+                            type: 'category',
+                            data: ['星期一', '星期二', '星期三']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            data: [150, 230, 224],
+                            type: 'line'
+                        }]
+                    }
                 },
                 {
-                    lable:"数据源2"
+                    lable:"数据源2",
+                    type:'dragData', 
                 },
                 {
-                    lable:"数据源3"
+                    lable:"数据源3",
+                    type:'dragData', 
+
                 },
                 {
-                    lable:"数据源4"
+                    lable:"数据源4",
+                    type:'dragData', 
+
                 },  
                 {
-                    lable:"数据源5"
+                    lable:"数据源5",
+                    type:'dragData', 
+
                 }                                                                
             ]
 
@@ -131,7 +162,18 @@ export default {
          * */  
         onSearch:function(){
             console.log( this.searchDate.trim() );
-        }      
+        },
+        /**
+         *  面板 拖拽
+         */
+        dragStart: function (event, item={}) {
+            event.stopPropagation();   
+            event.dataTransfer.setData('item', JSON.stringify(item) );
+        },
+        dragEnd: function (event) {
+            event.stopPropagation();  
+            event.dataTransfer.clearData();
+        },               
     },   
     props: {
 

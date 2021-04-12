@@ -94,26 +94,27 @@ export default {
      * 报表拖拽
      */
     dropHandle:function(event){
+
       let row = JSON.parse(event.dataTransfer.getData('item'));  
-      let x=Math.round((event["clientX"]-210)/20)*20;
-      let y=Math.round((event["clientY"]-40)/20)*20;
-      let len=this.children["length"];
+
+      // 报表 拖拽
+      if(row["type"]=="dragEchart"){
+        let x=Math.round((event["clientX"]-210)/20)*20;
+        let y=Math.round((event["clientY"]-40)/20)*20;
+        let len=this.children["length"];
 
 
-      this.children=this.children.concat([{
-        _key:`element_${new Date().getTime()}`,
-        x:x,
-        y:y,
-        h:200, 
-        w:200,
-        z:len+1,
-        option:row["option"]
-      }])
+        this.children=this.children.concat([{
+          _key:`element_${new Date().getTime()}`,
+          x:x,
+          y:y,
+          h:200, 
+          w:200,
+          z:len+1,
+          option:row["option"]
+        }]);
+      }
 
-      // console.log(this.children);
-
-      // console.log(row);
-      // console.log(event);
     },
     /**
      * 保存 数据

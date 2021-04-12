@@ -19,7 +19,7 @@ import * as echarts from 'echarts';
 export default {
     data () {
         return {
-
+            echartObj:undefined  // echart
 
         }
     },
@@ -28,14 +28,25 @@ export default {
             this.initPage();  // 初始化
         });
     },        
-    methods: {   
-        initPage: function(){
+    methods: { 
+        /**
+         * 刷新
+         */
+        updateFunc:function(option){
+            // this.initPage(option);
+            this.echartObj.resize();
+        },
+        /**
+         * 初始化
+         *  */  
+        initPage: function(option){
             var obj=this.$refs["main"];
             var myChart = echarts.init(obj);
             let _option=this.option;    
 
-            _option && myChart.setOption(_option);
-        },                
+            this.echartObj=myChart;
+            _option && myChart.setOption(option||_option);
+        },       
     },   
     props: {
         // 配置 参数
