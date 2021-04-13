@@ -48,9 +48,12 @@
         </span>
         <span style="margin-left:50px">
           <Button type="primary" size="small" @click="onSave">保存</Button>
+          <Button type="primary" size="small" @click="onChange">切换</Button>
+
         </span>
     </Row>
     <div 
+      v-if="aaa"
       :class="`box-content ${configJson['grid']?'gridding':''}`" 
       @drop="dropHandle($event)"
       @dragover.prevent
@@ -72,6 +75,8 @@ export default {
   },
   data: function () {
     return {
+      aaa:!false,
+
       //数据
       configJson:{
           width:600,  
@@ -126,6 +131,13 @@ export default {
       };
 
       console.log(params);
+    },
+    onChange:function(){
+      this.aaa=false;
+      
+      this.$nextTick(()=>{
+        this.aaa=true;
+      })
     }
   },
   props: {
