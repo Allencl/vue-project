@@ -131,6 +131,8 @@ export default {
       };
 
       console.log(params);
+      console.log( JSON.stringify(params) );
+
     },
     onChange:function(){
       this.aaa=false;
