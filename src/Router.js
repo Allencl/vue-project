@@ -8,9 +8,8 @@ import VueRouter from 'vue-router';
 // import DragLayout from './dragLayout/index.vue';   // 自定义 拖拽布局
 
 
-import Page from './dragLayout/index.vue';
+import Page from './board/index1.vue';
 // import MessagePage from './message/index.vue';
-
 
 const routes = [
   // { path: '/', component: RegisterPage },   // 注册页面
