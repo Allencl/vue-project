@@ -88,22 +88,27 @@
         <div>
             <h1>Model X10-1 舒适版 投产日期2021-03-29</h1>
             <Row>
-                <i-col span="12">
-                    <Table :columns="columns1" :data="data1"></Table>
+                <i-col span="12" style="height:370px;">
+                    <Table 
+                        size="small"
+                        :columns="columns" 
+                        :data="data"
+                        stripe
+                    ></Table>
                 </i-col>
-                <i-col span="12">
-                        1
+                <i-col span="12" style="height:370px;">
+                    <div style="width:100%;height:100%" id="echarts1"></div>
                 </i-col>                
             </Row>   
             <Row>
-                <i-col span="8">
-                        1
+                <i-col span="8" style="height:270px;">
+                    <div style="width:100%;height:100%" id="echarts2"></div>
                 </i-col>
-                <i-col span="8">
-                        1
+                <i-col span="8" style="height:270px;">
+                    <div style="width:100%;height:100%" id="echarts3"></div>
                 </i-col>      
-                <i-col span="8">
-                        1
+                <i-col span="8" style="height:270px;">
+                    <div style="width:100%;height:100%" id="echarts4"></div>
                 </i-col>                           
             </Row>
 
@@ -112,67 +117,338 @@
     </div>
 </template>
 <script>
-    export default {
-        data () {
-            return {
-                // 表单
-                formItem: {
-                    project: '',
-                    type:'',
-                    group:'',
+import * as echarts from 'echarts';
+
+export default {
+    data () {
+        return {
+            // 表单
+            formItem: {
+                project: '',
+                type:'',
+                group:'',
+            },
+
+            // table
+            columns: [
+                {
+                    title: '专业组',
+                    key: 'group',
+                    align: 'center',
+                    // width: 200,
                 },
+                {
+                    title: '总数量',
+                    children: [
+                        {
+                            title: '零件数',
+                            key: 'part1',
+                            align: 'center',
+                            // width: 200,
+                        },
+                        {
+                            title: '总目标成本',
+                            key: 'cost1',
+                            align: 'center',
+                            // width: 200
+                        },
+                        {
+                            title: '零件数',
+                            key: 'part2',
+                            align: 'center',
+                            // width: 200
+                        },  
+                        {
+                            title: '定点比例',
+                            key: 'proportion1',
+                            align: 'center',
+                            // width: 200
+                        }                                                      
+                    ]
+                },
+                {
+                    title: '定点数量',
+                    children: [
+                        {
+                            title: '总目标成本',
+                            key: 'cost2',
+                            align: 'center',
+                            // width: 200,
+                        },
+                        {
+                            title: '总定点成本',
+                            key: 'cost3',
+                            align: 'center',
+                            // width: 200
+                        },
+                        {
+                            title: '节省金额',
+                            key: 'money',
+                            align: 'center',
+                            // width: 200
+                        },  
+                        {
+                            title: '节省比例',
+                            key: 'proportion2',
+                            align: 'center',
+                            // width: 200
+                        }                                                      
+                    ]
+                },
+            ],
 
-                // table
-                columns1: [
+            // table数据
+            data: [
+                {
+                    group: '车身',
+                    part1: "800",
+                    cost1:"12,000",
+                    part2:"7,200",
+                    proportion1:'90.00%',
+                    cost2:"10,800",
+                    cost3:"10,260",
+                    money:"540",
+                    proportion2:"5.00%"
+                },
+                {
+                    group: '底盘',
+                    part1: "100",
+                    cost1:"12,000",
+                    part2:"920",
+                    proportion1:'92.00%',
+                    cost2:"11,040",
+                    cost3:"10,598",
+                    money:"442",
+                    proportion2:"4.00%"
+                },
+                {
+                    group: '动力总成',
+                    part1: "50",
+                    cost1:"30,000",
+                    part2:"480",
+                    proportion1:'96.00%',
+                    cost2:"28,800",
+                    cost3:"26,957",
+                    money:"1,843",
+                    proportion2:"6.40%"
+                },
+                {
+                    group: '内饰',
+                    part1: "200",
+                    cost1:"10,000",
+                    part2:"1,800",
+                    proportion1:'90.00%',
+                    cost2:"9,000",
+                    cost3:"8,883",
+                    money:"117",
+                    proportion2:"1.30%"
+                },  
+                {
+                    group: '外饰',
+                    part1: "200",
+                    cost1:"8,000",
+                    part2:"1,680",
+                    proportion1:'84.00%',
+                    cost2:"6,720",
+                    cost3:"6,478",
+                    money:"242",
+                    proportion2:"3.60%"
+                },  
+                {
+                    group: '电子电器',
+                    part1: "100",
+                    cost1:"20,000",
+                    part2:"930",
+                    proportion1:'93.00%',
+                    cost2:"18,600",
+                    cost3:"17,168",
+                    money:"1,432",
+                    proportion2:"7.70%"
+                },  
+                {
+                    group: '总计',
+                    part1: "1,450",
+                    cost1:"92,000",
+                    part2:"13,010",
+                    proportion1:'93.83%',
+                    cost2:"84,960",
+                    cost3:"80,344",
+                    money:"4,616",
+                    proportion2:"5.43%"
+                },                                                                                                 
+            ],
+
+
+
+        }
+    },
+    created(){
+        this.$nextTick(()=>{
+            this.initEchart1();   // echarts 初始化
+            this.initEchart2();   // echarts 初始化
+            this.initEchart3();   // echarts 初始化
+            this.initEchart4();   // echarts 初始化
+
+        });
+    },
+    methods: {
+        initEchart1:function(){
+            var obj=document.querySelector("#echarts1");
+            var myChart = echarts.init(obj);
+
+            let _option={
+                legend: {},
+                tooltip: {},
+                dataset: {
+                    source: [
+
+                
+                        ['Milk Tea', 83.1, 73.4,],
+                        ['Cheese Cocoa', 86.4, 65.2],
+                        ['Walnut Brownie', 72.4, 53.9]
+                    ]
+                },
+                xAxis: {type: 'category'},
+                yAxis: {},
+                // Declare several bar series, each will be mapped
+                // to a column of dataset.source by default.
+                series: [
+                    {type: 'bar'},
+                    {type: 'bar'},
+
+                ]
+            };    
+
+            _option && myChart.setOption(_option);
+        },
+        initEchart2:function(){
+            var obj=document.querySelector("#echarts2");
+            var myChart = echarts.init(obj);
+
+            let _option={
+                title: {
+                    text: '某站点用户访问来源',
+                    subtext: '纯属虚构',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                },
+                series: [
                     {
-                        title: 'Name',
-                        key: 'name'
-                    },
+                        name: '访问来源',
+                        type: 'pie',
+                        radius: '50%',
+                        data: [
+                            {value: 1048, name: '搜索引擎'},
+                            {value: 735, name: '直接访问'},
+                            {value: 580, name: '邮件营销'},
+                            {value: 484, name: '联盟广告'},
+                            {value: 300, name: '视频广告'}
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };   
+
+            _option && myChart.setOption(_option);
+        },
+        initEchart3:function(){
+            var obj=document.querySelector("#echarts3");
+            var myChart = echarts.init(obj);     
+            
+            let _option={
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [
                     {
-                        title: 'Age',
-                        key: 'age'
-                    },
-                    {
-                        title: 'Address',
-                        key: 'address'
+                        type: 'category',
+                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        axisTick: {
+                            alignWithLabel: true
+                        }
                     }
                 ],
-                data1: [
+                yAxis: [
                     {
-                        name: 'John Brown',
-                        age: 18,
-                        address: 'New York No. 1 Lake Park',
-                        date: '2016-10-03'
-                    },
-                    {
-                        name: 'Jim Green',
-                        age: 24,
-                        address: 'London No. 1 Lake Park',
-                        date: '2016-10-01'
-                    },
-                    {
-                        name: 'Joe Black',
-                        age: 30,
-                        address: 'Sydney No. 1 Lake Park',
-                        date: '2016-10-02'
-                    },
-                    {
-                        name: 'Jon Snow',
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park',
-                        date: '2016-10-04'
+                        type: 'value'
                     }
                 ],
+                series: [
+                    {
+                        name: '直接访问',
+                        type: 'bar',
+                        barWidth: '60%',
+                        data: [10, 52, 200, 334, 390, 330, 220]
+                    }
+                ]
+            };
 
-                sandClockImage: require('./../assets/sandclock.gif'),  // 沙漏
-
-            }
+            _option && myChart.setOption(_option);
         },
-        created(){
+        initEchart4:function(){
+            var obj=document.querySelector("#echarts4");
+            var myChart = echarts.init(obj);     
+            
+            let _option={
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        axisTick: {
+                            alignWithLabel: true
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        name: '直接访问',
+                        type: 'bar',
+                        barWidth: '60%',
+                        data: [10, 52, 200, 334, 390, 330, 220]
+                    }
+                ]
+            };
 
-        },
-        methods: {
-
-        },        
-    }
+            _option && myChart.setOption(_option);
+        }        
+    },        
+}
 </script>
