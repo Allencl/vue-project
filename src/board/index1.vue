@@ -436,39 +436,93 @@ export default {
 
             let _option={
                 title: {
-                    text: '某站点用户访问来源',
-                    subtext: '纯属虚构',
-                    left: 'center'
+                    text: '目标成本占比',
+                    left: 'left'
                 },
                 tooltip: {
                     trigger: 'item'
                 },
                 legend: {
                     orient: 'vertical',
-                    left: 'left',
+                    y: 'center',
+                    x: 'right',
+                    align:'left',
+                    icon:'circle'
                 },
                 series: [
                     {
-                        name: '访问来源',
+                        name: '目标成本占比',
                         type: 'pie',
-                        radius: '50%',
+                        radius: ['35%','50%'],
                         data: [
-                            {value: 1048, name: '搜索引擎'},
-                            {value: 735, name: '直接访问'},
-                            {value: 580, name: '邮件营销'},
-                            {value: 484, name: '联盟广告'},
-                            {value: 300, name: '视频广告'}
+                            {
+                                value: 9, 
+                                name: '外饰',
+                                itemStyle: {
+                                normal:{
+                                    color: "#c3d2ef"
+                                }
+                                },
+                            },
+                            {
+                                value: 11, 
+                                name: '内饰',
+                                itemStyle: {
+                                normal:{
+                                    color: "#9ab8ee"
+                                }
+                                },                    
+                            },
+                            {
+                                value: 13, 
+                                name: '底盘',
+                                itemStyle: {
+                                    normal:{
+                                        color: "#5d8fdc"
+                                    }
+                                },                    
+                            },
+                            {
+                                value: 13,
+                                name: '车身',
+                                itemStyle: {
+                                    normal:{
+                                        color: "#4a72d1"
+                                    }
+                                },                      
+                            },
+                            {
+                                value: 22, 
+                                name: '电子电器',
+                                itemStyle: {
+                                    normal:{
+                                        color: "#3f5996"
+                                    }
+                                },       
+                            },
+                            {
+                                value: 32, 
+                                name: '动力总成',
+                                itemStyle: {
+                                    normal:{
+                                        color: "#1c417b"
+                                    }
+                                },                  
+                            },
                         ],
+                        label: {
+                            formatter: '{b}\n{c}%',
+                        },
                         emphasis: {
                             itemStyle: {
                                 shadowBlur: 10,
-                                shadowOffsetX: 0,
+                                shadowOffsetX: 10,
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
                         }
                     }
                 ]
-            };   
+            };  
 
             _option && myChart.setOption(_option);
         },
@@ -477,40 +531,42 @@ export default {
             var myChart = echarts.init(obj);     
             
             let _option={
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    }
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                        axisTick: {
-                            alignWithLabel: true
+                xAxis: {
+                    type: 'category',
+                        axisLabel:{
+                        interval:0,
+                        rotate:45,
+                        margin:8,
+                        textStyle:{
+                            color:"#000000"
                         }
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value'
-                    }
-                ],
-                series: [
-                    {
-                        name: '直接访问',
-                        type: 'bar',
-                        barWidth: '60%',
-                        data: [10, 52, 200, 334, 390, 330, 220]
-                    }
-                ]
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    data: ['发动机总成','变数箱总成','驾驶舱模块总成', '车轿减震器', '悬挂总成', '副车架', '减震器支柱','仪表板总成','车身总成','后轿驱动总成']
+                },
+                yAxis: {
+                    type: 'value',
+                    min: 0,
+                    max: 20000,
+                    interval: 4000
+                },
+                title: {
+                    text: 'Top10成本物料',
+                    left: 'left'
+                },
+                series: [{
+                    barWidth:30,
+                    itemStyle:{
+                        normal: {
+                            color:"#2b879c",
+                            barBorderRadius:[2,2,2,2],
+                        }
+                    },
+                    data: [21000,11999, 8000, 6000, 5700, 5700, 3678,3899,2790,2679],
+                    type: 'bar'
+                }]
             };
 
             _option && myChart.setOption(_option);
@@ -520,40 +576,47 @@ export default {
             var myChart = echarts.init(obj);     
             
             let _option={
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                xAxis: {
+                    type: 'category',
+                    axisLabel:{
+                    interval:0,
+                    rotate:45,
+                    margin:8,
+                    textStyle:{
+                        //fontWeight:"bolder",
+                        color:"#000000"
                     }
+                    },
+                    axisTick: {show: false},
+                    data: ['大连发动机器...','大连自动变速...','汽车座舱系统...', '汽车制造公司...', '汽车部件有...', '汽车动力总成...', '电子股份有限...','内饰系统公司...','汽车系统公司...','金属成型公司...']
                 },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                        axisTick: {
-                            alignWithLabel: true
+                yAxis: {
+                    type: 'value',
+                    min: 0,
+                    max: 20000,
+                    interval: 4000,
+                    splitLine:{show:false} ,
+                    axisLabel : {
+                        formatter: function(){
+                            return "";
                         }
                     }
-                ],
-                yAxis: [
-                    {
-                        type: 'value'
-                    }
-                ],
-                series: [
-                    {
-                        name: '直接访问',
-                        type: 'bar',
-                        barWidth: '60%',
-                        data: [10, 52, 200, 334, 390, 330, 220]
-                    }
-                ]
+                },
+                title: {
+                    text: 'Top10成本物料',
+                    left: 'left'
+                },
+                series: [{
+                    barWidth:30,
+                    itemStyle:{
+                        normal: {
+                            color:"#48629f",
+                            barBorderRadius:[2,2,2,2],
+                        }
+                    },
+                    data: [21000,11000, 10000, 9600, 5700, 5100, 3678,3199,2790,2279],
+                    type: 'bar'
+                }]
             };
 
             _option && myChart.setOption(_option);
