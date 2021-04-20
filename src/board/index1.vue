@@ -297,27 +297,136 @@ export default {
             var myChart = echarts.init(obj);
 
             let _option={
-                legend: {},
-                tooltip: {},
-                dataset: {
-                    source: [
-
-                
-                        ['Milk Tea', 83.1, 73.4,],
-                        ['Cheese Cocoa', 86.4, 65.2],
-                        ['Walnut Brownie', 72.4, 53.9]
-                    ]
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        crossStyle: {
+                            color: '#999'
+                        }
+                    }
                 },
-                xAxis: {type: 'category'},
-                yAxis: {},
-                // Declare several bar series, each will be mapped
-                // to a column of dataset.source by default.
+                toolbox: {
+                    // feature: {
+                    //     dataView: {show: true, readOnly: false},
+                    //     magicType: {show: true, type: ['line', 'bar']},
+                    //     restore: {show: true},
+                    //     saveAsImage: {show: true}
+                    // }
+                },
+                legend: {
+                    data: ['已定点零件(节省比例)','已定点零件(总目标成本)', '已定点零件(总定点成本)',]
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: ['车身', '底盘', '动力总成', '内饰', '外饰', '电子电器', '整车'],
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: '',
+                        min: 0,
+                        max: 90000,
+                        interval: 15000,
+                        axisLabel: {
+                            formatter: '{value}'
+                        }
+                    },
+                    {
+                        type: 'value',
+                        name: '',
+                        min: 0,
+                        max: 12,
+                        interval: 2,
+                        axisLabel: {
+                            formatter: '{value}.00 %'
+                        }
+                    }
+                ],
                 series: [
-                    {type: 'bar'},
-                    {type: 'bar'},
+                    {
+                        name: '已定点零件(节省比例)',
+                        type: 'line',
+                        yAxisIndex: 1,
+                        lineStyle:{
+                        width:4, 
+                        },
+                        itemStyle:{
+                            normal: {
+                                color:"#0a1f77",
+                                barBorderRadius:[2,2,2,2],
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                    textStyle: {
+                                        fontSize : '10',
+                                        color:"#0a1f77",
+                                        fontFamily : '微软雅黑',
+                                    },
+                                    formatter:function(params){ //标签内容
+                                        return '   '+((params.data).toFixed(2)) +' %'+'   '
+                                    },
+                                    height:20,
+                                    lineHeight:16,
+                                    borderWidth: 1,
+                                    borderRadius:[2,2,2,2],
+                                    borderColor:'#d2d2d2',
+                                    backgroundColor:'#fff'
+                                }
+                            }
+                        },        
+                        data: [5.00,4.00,6.40,1.30,3.60,7.70, 5.43]
+                    },
+                    {
+                        name: '已定点零件(总目标成本)',
+                        type: 'bar',
+                        barWidth:26,
+                        itemStyle:{
+                            normal: {
+                                color:"#0ccaee",
+                                barBorderRadius:[2,2,2,2],
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                    textStyle: {
+                                        fontSize : '10',
+                                        color:"#0a1f77",
+                                        fontFamily : '微软雅黑',
+                                    }
+                                }
+                            }
+                        },
+                        data: [12000, 31000, 69789,71352, 75734, 80876, 87367]
+                    },
+                    {
+                        name: '已定点零件(总定点成本)',
+                        type: 'bar',
+                        barWidth:26,
+                        itemStyle:{
+                            normal: {
+                                color:"#169c91",
+                                barBorderRadius:[2,2,2,2],
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                    textStyle: {
+                                        fontSize : '10',
+                                        color:"#0a1f77",
+                                        fontFamily : '微软雅黑',
+                                    }
+                                }
+                            }
+                        },            
+                        data: [10800, 29589, 59632, 70897, 69879, 89678, 80876]
+                    },
 
                 ]
-            };    
+            };   
 
             _option && myChart.setOption(_option);
         },
