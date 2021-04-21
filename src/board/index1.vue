@@ -1,11 +1,10 @@
 <style lang="scss">
-    .board-page{
+    @import './index.scss';
 
-    }
 </style>
 <template>
-    <div>
-                <header>
+    <div class="board-page-html">
+        <header>
             <Row>
                 <i-col span="6">
                     <h1>产品外购件成本看板</h1>
