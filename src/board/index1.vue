@@ -383,9 +383,26 @@ export default {
                         data: [5.00,4.00,6.40,1.30,3.60,7.70, 5.43]
                     },
                     {
+                        name: '辅助',
+                        type: 'bar',
+                        stack: '总量1',
+                        itemStyle: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)'
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                barBorderColor: 'rgba(0,0,0,0)',
+                                color: 'rgba(0,0,0,0)'
+                            }
+                        },
+                        data: [0, 12000, 24000, 54000, 64000, 70000,0,]
+                    },
+                    {
                         name: '已定点零件(总目标成本)',
                         type: 'bar',
                         barWidth:26,
+                        stack: '总量1',
                         itemStyle:{
                             normal: {
                                 color:"#0ccaee",
@@ -401,12 +418,29 @@ export default {
                                 }
                             }
                         },
-                        data: [12000, 31000, 69789,71352, 75734, 80876, 87367]
+                        data: [12000,12000,30000,10000,8000,20000,90000]
                     },
+                    {
+                        name: '辅助',
+                        type: 'bar',
+                        stack: '总量2',
+                        itemStyle: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)'
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                barBorderColor: 'rgba(0,0,0,0)',
+                                color: 'rgba(0,0,0,0)'
+                            }
+                        },
+                        data: [0, 12000, 24000, 54000, 64000, 70000,0,]
+                    },        
                     {
                         name: '已定点零件(总定点成本)',
                         type: 'bar',
                         barWidth:26,
+                        stack: '总量2',
                         itemStyle:{
                             normal: {
                                 color:"#169c91",
@@ -422,11 +456,11 @@ export default {
                                 }
                             }
                         },            
-                        data: [10800, 29589, 59632, 70897, 69879, 89678, 80876]
+                        data: [10800, 10598, 26967, 8883, 6478, 17168, 80344]
                     },
 
                 ]
-            };   
+            };  
 
             _option && myChart.setOption(_option);
         },
