@@ -109,13 +109,13 @@
             </Row>   
             <Row class="bottom">
                 <i-col span="8" style="height:270px;">
-                    <div style="width:100%;height:100%" id="echarts2"></div>
+                    <div style="width:100%;height:100%;background:#fff;" id="echarts2"></div>
                 </i-col>
                 <i-col span="8" style="height:270px;">
-                    <div style="width:100%;height:100%" id="echarts3"></div>
+                    <div style="width:100%;height:100%;background:#fff;" id="echarts3"></div>
                 </i-col>      
                 <i-col span="8" style="height:270px;">
-                    <div style="width:100%;height:100%" id="echarts4"></div>
+                    <div style="width:100%;height:100%;background:#fff;" id="echarts4"></div>
                 </i-col>                           
             </Row>
 
@@ -307,6 +307,12 @@ export default {
             var myChart = echarts.init(obj);
 
             let _option={
+                grid: {
+                    top: '16%',
+                    bottom:'13%',
+                    left:'12%',
+                    right:'12%'
+                },
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
@@ -478,10 +484,11 @@ export default {
             var obj=document.querySelector("#echarts2");
             var myChart = echarts.init(obj);
 
-            let _option={
+            let _option={          
                 title: {
                     text: '目标成本占比',
-                    left: 'left'
+                    left: '2%',
+                    top:'6%'
                 },
                 tooltip: {
                     trigger: 'item'
@@ -497,7 +504,8 @@ export default {
                     {
                         name: '目标成本占比',
                         type: 'pie',
-                        radius: ['35%','50%'],
+                        radius: ['35%','56%'],
+                        center: ["35%", "56%"], 
                         data: [
                             {
                                 value: 9, 
@@ -575,6 +583,12 @@ export default {
             var myChart = echarts.init(obj);     
             
             let _option={
+                grid: {
+                    top: '23%',
+                    bottom:'30%',
+                    left:'13%',
+                    right:'13%'
+                },
                 xAxis: {
                     type: 'category',
                         axisLabel:{
@@ -598,7 +612,8 @@ export default {
                 },
                 title: {
                     text: 'Top10成本物料',
-                    left: 'left'
+                    left: '8%',
+                    top:'6%'
                 },
                 series: [{
                     barWidth:30,
@@ -620,6 +635,12 @@ export default {
             var myChart = echarts.init(obj);     
             
             let _option={
+                grid: {
+                    top: '23%',
+                    bottom:'30%',
+                    left:'12%',
+                    right:'6%'
+                },                
                 xAxis: {
                     type: 'category',
                     axisLabel:{
@@ -648,7 +669,8 @@ export default {
                 },
                 title: {
                     text: 'Top10成本物料',
-                    left: 'left'
+                    left: '8%',
+                    top:'6%'
                 },
                 series: [{
                     barWidth:30,
