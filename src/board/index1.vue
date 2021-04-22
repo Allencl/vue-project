@@ -142,6 +142,7 @@ export default {
                     title: '专业组',
                     key: 'group',
                     align: 'left',
+                    minWidth:50
                     // width: 200,
                 },
                 {
