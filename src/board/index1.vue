@@ -6,17 +6,20 @@
     <div class="board-page-html">
         <header>
             <Row>
-                <i-col span="6">
+                <i-col span="8" class="title-left">
                     <h1>产品外购件成本看板</h1>
                     <h3>Product purchase cost dashboard</h3>
                 </i-col>
-                <i-col span="18">
+                <i-col span="16" class="title-right">
 
                     <Form :model="formItem" label-position="top">
                         <Row>
                             <i-col span="6">
                                 <FormItem label="产品项目">
-                                    <Select v-model="formItem.project">
+                                    <Select 
+                                        v-model="formItem.project"
+                                        placeholder="请选择..." 
+                                    >
                                         <Option value="beijing">New York</Option>
                                         <Option value="shanghai">London</Option>
                                         <Option value="shenzhen">Sydney</Option>
@@ -25,7 +28,10 @@
                             </i-col>
                             <i-col span="6">
                                 <FormItem label="项目类型">
-                                    <Select v-model="formItem.type">
+                                    <Select 
+                                        v-model="formItem.type"
+                                        placeholder="请选择..." 
+                                    >
                                         <Option value="beijing">New York</Option>
                                         <Option value="shanghai">London</Option>
                                         <Option value="shenzhen">Sydney</Option>
@@ -34,7 +40,10 @@
                             </i-col>  
                             <i-col span="6">
                                 <FormItem label="专业组">
-                                    <Select v-model="formItem.group">
+                                    <Select 
+                                        v-model="formItem.group"
+                                        placeholder="请选择..." 
+                                    >
                                         <Option value="beijing">New York</Option>
                                         <Option value="shanghai">London</Option>
                                         <Option value="shenzhen">Sydney</Option>
@@ -46,8 +55,8 @@
                                     <DatePicker 
                                         v-model="formItem.date"
                                         type="datetime" 
-                                        placeholder="Select date" 
-                                        style="width: 200px"
+                                        placeholder="请选择..." 
+                                        
                                     >
                                     </DatePicker>
                                 </FormItem>
@@ -58,35 +67,34 @@
             </Row>
         </header>
         <nav>
-            <Row>
-                <i-col span="4">
-                    <p>总零件数</p>
-                    <p>1,450</p>
-                </i-col>
-                <i-col span="4">
-                    <p>定点完成比例</p>
-                    <p>90.83%</p>
-                </i-col>
-                <i-col span="4">
-                    <p>产品总目标成本</p>
-                    <p>92,000</p>
-                </i-col>                
-                <i-col span="4">
-                    <p>当前总成本</p>
-                    <p>84,344</p>
-                </i-col>
-                <i-col span="4">
-                    <p>成本节省金额</p>
-                    <p>4,616</p>
-                </i-col>                                                
-            </Row>
-            <a href="index.asp">Home</a>
-            <a href="html5_meter.asp">Previous</a>
-            <a href="html5_noscript.asp">Next</a>
+            <ul>
+                <li>
+                    <p class="title">总零件数</p>
+                    <p class="num">1,450</p>
+                </li>
+                <li>
+                    <p class="title">定点完成比例</p>
+                    <p class="num">90.83%</p>
+                </li>
+                <li>
+                    <p class="title">产品总目标成本</p>
+                    <p class="num">92,000</p>
+                </li>                
+                <li>
+                    <p class="title">当前总成本</p>
+                    <p class="num">84,344</p>
+                </li>
+                <li>
+                    <p class="title">成本节省金额</p>
+                    <p class="num">4,616</p>
+                </li>                                                
+            </ul>
         </nav>
-        <div>
-            <h1>Model X10-1 舒适版 投产日期2021-03-29</h1>
-            <Row>
+        <div class="content">
+            <div class="title">
+                <h1>Model X10-1 舒适版 投产日期2021-03-29</h1>
+            </div>
+            <Row class="top">
                 <i-col span="12" style="height:370px;">
                     <Table 
                         size="small"
@@ -99,7 +107,7 @@
                     <div style="width:100%;height:100%" id="echarts1"></div>
                 </i-col>                
             </Row>   
-            <Row>
+            <Row class="bottom">
                 <i-col span="8" style="height:270px;">
                     <div style="width:100%;height:100%" id="echarts2"></div>
                 </i-col>
@@ -133,11 +141,12 @@ export default {
                 {
                     title: '专业组',
                     key: 'group',
-                    align: 'center',
+                    align: 'left',
                     // width: 200,
                 },
                 {
                     title: '总数量',
+                    className:"num-all",                  
                     children: [
                         {
                             title: '零件数',
@@ -150,7 +159,13 @@ export default {
                             key: 'cost1',
                             align: 'center',
                             // width: 200
-                        },
+                        }                                                     
+                    ]
+                },
+                {
+                    title: '定点数量',
+                    className:"num-all no-right-border",                  
+                    children: [
                         {
                             title: '零件数',
                             key: 'part2',
@@ -162,12 +177,7 @@ export default {
                             key: 'proportion1',
                             align: 'center',
                             // width: 200
-                        }                                                      
-                    ]
-                },
-                {
-                    title: '定点数量',
-                    children: [
+                        },                         
                         {
                             title: '总目标成本',
                             key: 'cost2',
@@ -190,6 +200,7 @@ export default {
                             title: '节省比例',
                             key: 'proportion2',
                             align: 'center',
+                            className:"no-right-border",                  
                             // width: 200
                         }                                                      
                     ]
