@@ -482,7 +482,7 @@ export default {
                     {
                         name: '已定点零件(总目标成本)',
                         type: 'bar',
-                        barWidth:26,
+                        barWidth:22,
                         stack: '总量1',
                         itemStyle:{
                             normal: {
@@ -523,7 +523,7 @@ export default {
                     {
                         name: '已定点零件(总定点成本)',
                         type: 'bar',
-                        barWidth:26,
+                        barWidth:22,
                         stack: '总量2',
                         itemStyle:{
                             normal: {
@@ -698,7 +698,7 @@ export default {
                     top:'6%'
                 },
                 series: [{
-                    barWidth:30,
+                    barWidth:26,
                     itemStyle:{
                         normal: {
                             color:"#515055",
@@ -764,7 +764,7 @@ export default {
                     top:'6%'
                 },
                 series: [{
-                    barWidth:30,
+                    barWidth:26,
                     itemStyle:{
                         normal: {
                             color:"#333333",
