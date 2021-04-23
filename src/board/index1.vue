@@ -312,7 +312,7 @@ export default {
                     top: '16%',
                     bottom:'13%',
                     left:'12%',
-                    right:'12%'
+                    right:'9%'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -351,6 +351,9 @@ export default {
                     // }
                 },
                 legend: {
+                    formatter: function (params) {
+                        return params+'   ';
+                    },                    
                     data: ['已定点零件(节省比例)','已定点零件(总目标成本)', '已定点零件(总定点成本)',]
                 },
                 xAxis: [

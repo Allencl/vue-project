@@ -387,6 +387,9 @@ export default {
                     // }
                 },
                 legend: {
+                    formatter: function (params) {
+                        return params+'   ';
+                    },
                     data: ['已定点零件(节省比例)','已定点零件(总目标成本)', '已定点零件(总定点成本)',]
                 },
                 xAxis: [
