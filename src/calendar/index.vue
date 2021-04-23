@@ -188,16 +188,51 @@
                 ]
             }
         },
+        watch: {
+            "$http": function (newQuestion, oldQuestion) {
+                console.log("wwww");
+            }
+        },
+        created(){
+
+            // function perf_observer(list, observer) { 
+            //     let _getEntries=list.getEntries();
+            //     let _src=_getEntries[0]["name"];
+            //     console.log(_src);
+            // } 
+            // var observer2 = new PerformanceObserver(perf_observer); 
+            // observer2.observe({entryTypes: ["resource"]});
+
+            // Object.defineProperty(XMLHttpRequest.prototype,"status",{
+            //     get: function(...status) {
+            //         console.log(status);
+            //     }
+            // })
+
+
+        },
         methods: {           
             /**
              * 保存数据
              */
             saveData: function(){
                 // console.log(  );
-                this.$Notice.open({
-                    title: '保存数据',
-                    desc: JSON.stringify(this.data)
-                });                
+                // this.$Notice.open({
+                //     title: '保存数据',
+                //     desc: JSON.stringify(this.data)
+                // });    
+                
+                $.getScript("http://182.168.1.221/platform/aaa.js",function(){
+                    // $this.attr("disabled", "true");
+                    // console.log("aaaaaaa");
+                });    
+                
+                // $.get("http://182.168.1.221/platform/index3.html",function(data,status){
+                //     console.log('989');
+                // });                
+
+
+
             },
             /**
              *  初始化

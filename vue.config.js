@@ -7,7 +7,7 @@ module.exports = {
             proxy: {
                 '': {
                     // 此处的写法，目的是为了 将 /api 替换成 https://www.baidu.com/d
-                    target: 'http://10.4.11.207:8081',
+                    target: 'http://http://182.168.1.221:8080/',
 
                     // 允许跨域
                     changeOrigin: true,

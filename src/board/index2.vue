@@ -1,9 +1,44 @@
 <style lang="scss">
     @import './index.scss';
 
+    .board-page-html.pag2{
+        >header{
+            background: #000;
+        }
+
+        >nav{
+            background: #fff;
+            
+            p.title,p.num{
+                color: #000;
+            }
+        }
+
+        .content{
+            .title{
+                h1{
+                    color: #000;
+                }
+            }
+
+            .ivu-table{
+                thead{
+                    th{
+                        background: #000;
+                    }
+                }
+
+                .ivu-table-tbody{
+                    .ivu-table-cell{
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
 </style>
 <template>
-    <div class="board-page-html">
+    <div class="board-page-html pag2">
         <header>
             <Row>
                 <i-col span="8" class="title-left">
@@ -312,7 +347,7 @@ export default {
                     top: '16%',
                     bottom:'13%',
                     left:'12%',
-                    right:'12%'
+                    right:'9%'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -340,6 +375,12 @@ export default {
                         data: ['车身', '底盘', '动力总成', '内饰', '外饰', '电子电器', '整车'],
                         axisPointer: {
                             type: 'shadow'
+                        },
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                color: '#000'
+                            }
                         }
                     }
                 ],
@@ -375,14 +416,14 @@ export default {
                         },
                         itemStyle:{
                             normal: {
-                                color:"#0a1f77",
+                                color:"#7f7f7f",
                                 barBorderRadius:[2,2,2,2],
                                 label: {
                                     show: true,
                                     position: 'top',
                                     textStyle: {
                                         fontSize : '10',
-                                        color:"#0a1f77",
+                                        color:"#797979",
                                         fontFamily : '微软雅黑',
                                     },
                                     formatter:function(params){ //标签内容
@@ -392,7 +433,7 @@ export default {
                                     lineHeight:16,
                                     borderWidth: 1,
                                     borderRadius:[2,2,2,2],
-                                    borderColor:'#d2d2d2',
+                                    borderColor:'#c2c2c2',
                                     backgroundColor:'#fff'
                                 }
                             }
@@ -422,14 +463,14 @@ export default {
                         stack: '总量1',
                         itemStyle:{
                             normal: {
-                                color:"#0ccaee",
+                                color:"#000",
                                 barBorderRadius:[2,2,2,2],
                                 label: {
                                     show: true,
                                     position: 'top',
                                     textStyle: {
                                         fontSize : '10',
-                                        color:"#0a1f77",
+                                        color:"#000",
                                         fontFamily : '微软雅黑',
                                     }
                                 }
@@ -460,14 +501,14 @@ export default {
                         stack: '总量2',
                         itemStyle:{
                             normal: {
-                                color:"#169c91",
+                                color:"#505666",
                                 barBorderRadius:[2,2,2,2],
                                 label: {
                                     show: true,
                                     position: 'top',
                                     textStyle: {
                                         fontSize : '10',
-                                        color:"#0a1f77",
+                                        color:"#505666",
                                         fontFamily : '微软雅黑',
                                     }
                                 }
@@ -513,7 +554,7 @@ export default {
                                 name: '外饰',
                                 itemStyle: {
                                 normal:{
-                                    color: "#c3d2ef"
+                                    color: "#c9cdd8"
                                 }
                                 },
                             },
@@ -522,7 +563,7 @@ export default {
                                 name: '内饰',
                                 itemStyle: {
                                 normal:{
-                                    color: "#9ab8ee"
+                                    color: "#a4a8b4"
                                 }
                                 },                    
                             },
@@ -531,7 +572,7 @@ export default {
                                 name: '底盘',
                                 itemStyle: {
                                     normal:{
-                                        color: "#5d8fdc"
+                                        color: "#71778b"
                                     }
                                 },                    
                             },
@@ -540,7 +581,7 @@ export default {
                                 name: '车身',
                                 itemStyle: {
                                     normal:{
-                                        color: "#4a72d1"
+                                        color: "#586078"
                                     }
                                 },                      
                             },
@@ -549,7 +590,7 @@ export default {
                                 name: '电子电器',
                                 itemStyle: {
                                     normal:{
-                                        color: "#3f5996"
+                                        color: "#4b5265"
                                     }
                                 },       
                             },
@@ -558,7 +599,7 @@ export default {
                                 name: '动力总成',
                                 itemStyle: {
                                     normal:{
-                                        color: "#1c417b"
+                                        color: "#000000"
                                     }
                                 },                  
                             },
@@ -620,7 +661,7 @@ export default {
                     barWidth:30,
                     itemStyle:{
                         normal: {
-                            color:"#2b879c",
+                            color:"#515055",
                             barBorderRadius:[2,2,2,2],
                         }
                     },
@@ -677,7 +718,7 @@ export default {
                     barWidth:30,
                     itemStyle:{
                         normal: {
-                            color:"#48629f",
+                            color:"#333333",
                             barBorderRadius:[2,2,2,2],
                         }
                     },

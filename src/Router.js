@@ -9,11 +9,21 @@ import VueRouter from 'vue-router';
 
 
 import Page from './board/index1.vue';
+import Board1 from './board/index1.vue';
+import Board2 from './board/index2.vue';
+
+
 // import MessagePage from './message/index.vue';
+// D:\code\vue-project\src\board\index1.vue
 
 const routes = [
   // { path: '/', component: RegisterPage },   // 注册页面
   { path: '/', component: Page },   // home 页面
+
+  { path: '/board/index1', component: Board1 },   
+  { path: '/board/index2', component: Board2 },   
+
+
 
 ]
 
