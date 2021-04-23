@@ -321,7 +321,26 @@ export default {
                         crossStyle: {
                             color: '#999'
                         }
-                    }
+                    },
+                    formatter: function (params) {
+                        return `<p>${params[0]["axisValue"]}</p>
+                            <div>
+                                ${params[0]["marker"]} 
+                                ${params[0]["seriesName"]}  
+                                <span style="padding-left:15px">${((params[0]["value"]).toFixed(2))} %</span>
+                            </div>
+                            <div>
+                                ${params[2]["marker"]} 
+                                ${params[2]["seriesName"]}  
+                                <span style="padding-left:15px">${String(params[2]["value"]).replace(/\d(?=(?:\d{3})+\b)/g,'$&,')}</span>
+                            </div> 
+                             <div>
+                                ${params[4]["marker"]} 
+                                ${params[4]["seriesName"]}  
+                                <span style="padding-left:15px">${String(params[4]["value"]).replace(/\d(?=(?:\d{3})+\b)/g,'$&,')}</span>
+                            </div>                            
+                        `;
+                    },                    
                 },
                 toolbox: {
                     // feature: {
@@ -431,6 +450,9 @@ export default {
                                         fontSize : '10',
                                         color:"#0a1f77",
                                         fontFamily : '微软雅黑',
+                                    },
+                                    formatter: function (params) {
+                                        return String(params["value"]).replace(/\d(?=(?:\d{3})+\b)/g,'$&,');
                                     }
                                 }
                             }
@@ -469,6 +491,9 @@ export default {
                                         fontSize : '10',
                                         color:"#0a1f77",
                                         fontFamily : '微软雅黑',
+                                    },
+                                    formatter: function (params) {
+                                        return String(params["value"]).replace(/\d(?=(?:\d{3})+\b)/g,'$&,');
                                     }
                                 }
                             }
@@ -496,10 +521,12 @@ export default {
                 },
                 legend: {
                     orient: 'vertical',
-                    y: 'center',
-                    x: 'right',
-                    align:'left',
-                    icon:'circle'
+                    // y: 'center',
+                    // x: 'right',
+                    // align:'left',
+                    icon:'circle',
+                    top:'25%',
+                    right: '7%', 
                 },
                 series: [
                     {
@@ -584,6 +611,15 @@ export default {
             var myChart = echarts.init(obj);     
             
             let _option={
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        crossStyle: {
+                            color: '#999'
+                        }
+                    }
+                },                
                 grid: {
                     top: '23%',
                     bottom:'30%',
@@ -636,6 +672,15 @@ export default {
             var myChart = echarts.init(obj);     
             
             let _option={
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        crossStyle: {
+                            color: '#999'
+                        }
+                    }
+                },                
                 grid: {
                     top: '23%',
                     bottom:'30%',
