@@ -3,18 +3,18 @@
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="0" :label-colon="true">
             
             <Row>
-                <Col span="5">
+                <i-col span="5">
                     <h3 style="textAlign:right" class="title-text">营业执照：</h3>                
-                </Col>                
-                <Col span="4">
+                </i-col>                
+                <i-col span="4">
                     <FormItem prop="businessLicense.code">
                         <Input 
                             v-model="formValidate.businessLicense.code" 
                             placeholder="请输入证书编号..." 
                         />
                     </FormItem>                
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="businessLicense.startDate">
                         <DatePicker 
                             v-model="formValidate.businessLicense.startDate" 
@@ -24,8 +24,8 @@
                             :options="businessLicenseStartDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="businessLicense.endDate">
                         <DatePicker 
                             v-model="formValidate.businessLicense.endDate" 
@@ -35,8 +35,8 @@
                             :options="businessLicenseEndDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col> 
-                <Col span="4">
+                </i-col> 
+                <i-col span="4">
                     <Upload
                         action=""
                         :before-upload="(file)=>{ 
@@ -53,30 +53,30 @@
                             <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
                         </span> 
                     </Upload>               
-                </Col> 
-                <Col span="3" class="checkbox-box">
+                </i-col> 
+                <i-col span="3" class="checkbox-box">
                     <FormItem >
                         <Checkbox
                             v-model="formValidate.businessLicense.required" 
                             disabled
                         > {{ formValidate.businessLicense.required?'附件必传':'附件不必传' }}</Checkbox>
                     </FormItem>               
-                </Col>                                                                 
+                </i-col>                                                                 
             </Row>
 
             <Row>
-                <Col span="5">
+                <i-col span="5">
                     <h3 style="textAlign:right" class="title-text">开户许可证：</h3>                
-                </Col>                
-                <Col span="4">
+                </i-col>                
+                <i-col span="4">
                     <FormItem prop="accountLicence.code">
                         <Input 
                             v-model="formValidate.accountLicence.code" 
                             placeholder="请输入证书编号..." 
                         />
                     </FormItem>                
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="accountLicence.startDate">
                         <DatePicker 
                             v-model="formValidate.accountLicence.startDate" 
@@ -86,8 +86,8 @@
                             :options="accountLicenceStartDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="accountLicence.endDate">
                         <DatePicker 
                             v-model="formValidate.accountLicence.endDate" 
@@ -97,8 +97,8 @@
                             :options="accountLicenceEndDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col> 
-                <Col span="4">
+                </i-col> 
+                <i-col span="4">
                     <Upload
                         action=""
                         :before-upload="(file)=>{ 
@@ -115,30 +115,30 @@
                             <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
                         </span> 
                     </Upload>               
-                </Col> 
-                <Col span="3" class="checkbox-box">
+                </i-col> 
+                <i-col span="3" class="checkbox-box">
                     <FormItem >
                         <Checkbox
                             v-model="formValidate.accountLicence.required" 
                             disabled
                         > {{ formValidate.accountLicence.required?'附件必传':'附件不必传' }}</Checkbox>
                     </FormItem>               
-                </Col>                                                                 
+                </i-col>                                                                 
             </Row>  
 
             <Row>
-                <Col span="5">
+                <i-col span="5">
                     <h3 style="textAlign:right" class="title-text">质量管理体系ISO9001：</h3>                
-                </Col>                
-                <Col span="4">
+                </i-col>                
+                <i-col span="4">
                     <FormItem prop="ISO.code">
                         <Input 
                             v-model="formValidate.ISO.code" 
                             placeholder="请输入证书编号..." 
                         />
                     </FormItem>                
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="ISO.startDate">
                         <DatePicker 
                             v-model="formValidate.ISO.startDate" 
@@ -148,8 +148,8 @@
                             :options="ISOStartDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="ISO.endDate">
                         <DatePicker 
                             v-model="formValidate.ISO.endDate" 
@@ -159,8 +159,8 @@
                             :options="ISOEndDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col> 
-                <Col span="4">
+                </i-col> 
+                <i-col span="4">
                     <Upload
                         action=""
                         :before-upload="(file)=>{ 
@@ -177,30 +177,30 @@
                             <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
                         </span> 
                     </Upload>               
-                </Col> 
-                <Col span="3" class="checkbox-box">
+                </i-col> 
+                <i-col span="3" class="checkbox-box">
                     <FormItem >
                         <Checkbox
                             v-model="formValidate.ISO.required" 
                             disabled
                         > {{ formValidate.ISO.required?'附件必传':'附件不必传' }}</Checkbox>
                     </FormItem>               
-                </Col>                                                                 
+                </i-col>                                                                 
             </Row> 
 
             <Row>
-                <Col span="5">
+                <i-col span="5">
                     <h3 style="textAlign:right" class="title-text">质量管理体系ITF16949：</h3>                
-                </Col>                
-                <Col span="4">
+                </i-col>                
+                <i-col span="4">
                     <FormItem prop="ITF.code">
                         <Input 
                             v-model="formValidate.ITF.code" 
                             placeholder="请输入证书编号..." 
                         />
                     </FormItem>                
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="ITF.startDate">
                         <DatePicker 
                             v-model="formValidate.ITF.startDate" 
@@ -210,8 +210,8 @@
                             :options="ITFStartDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="ITF.endDate">
                         <DatePicker 
                             v-model="formValidate.ITF.endDate" 
@@ -221,8 +221,8 @@
                             :options="ITFEndDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col> 
-                <Col span="4">
+                </i-col> 
+                <i-col span="4">
                     <Upload
                         action=""
                         :before-upload="(file)=>{ 
@@ -239,30 +239,30 @@
                             <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
                         </span> 
                     </Upload>               
-                </Col> 
-                <Col span="3" class="checkbox-box">
+                </i-col> 
+                <i-col span="3" class="checkbox-box">
                     <FormItem >
                         <Checkbox
                             v-model="formValidate.ITF.required" 
                             disabled
                         > {{ formValidate.ITF.required?'附件必传':'附件不必传' }}</Checkbox>
                     </FormItem>               
-                </Col>                                                                 
+                </i-col>                                                                 
             </Row> 
 
             <Row>
-                <Col span="5">
+                <i-col span="5">
                     <h3 style="textAlign:right" class="title-text">职业健康安全：</h3>                
-                </Col>                
-                <Col span="4">
+                </i-col>                
+                <i-col span="4">
                     <FormItem prop="healthySafety.code">
                         <Input 
                             v-model="formValidate.healthySafety.code" 
                             placeholder="请输入证书编号..." 
                         />
                     </FormItem>                
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="healthySafety.startDate">
                         <DatePicker 
                             v-model="formValidate.healthySafety.startDate" 
@@ -272,8 +272,8 @@
                             :options="healthySafetyStartDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="healthySafety.endDate">
                         <DatePicker 
                             v-model="formValidate.healthySafety.endDate" 
@@ -283,8 +283,8 @@
                             :options="healthySafetyEndDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col> 
-                <Col span="4">
+                </i-col> 
+                <i-col span="4">
                     <Upload
                         action=""
                         :before-upload="(file)=>{ 
@@ -301,30 +301,30 @@
                             <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
                         </span> 
                     </Upload>               
-                </Col> 
-                <Col span="3" class="checkbox-box">
+                </i-col> 
+                <i-col span="3" class="checkbox-box">
                     <FormItem >
                         <Checkbox
                             v-model="formValidate.healthySafety.required" 
                             disabled
                         > {{ formValidate.healthySafety.required?'附件必传':'附件不必传' }}</Checkbox>
                     </FormItem>               
-                </Col>                                                                 
+                </i-col>                                                                 
             </Row> 
 
             <Row>
-                <Col span="5">
+                <i-col span="5">
                     <h3 style="textAlign:right" class="title-text">环境管理：</h3>                
-                </Col>                
-                <Col span="4">
+                </i-col>                
+                <i-col span="4">
                     <FormItem prop="environmentalManagement.code">
                         <Input 
                             v-model="formValidate.environmentalManagement.code" 
                             placeholder="请输入证书编号..." 
                         />
                     </FormItem>                
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="environmentalManagement.startDate">
                         <DatePicker 
                             v-model="formValidate.environmentalManagement.startDate" 
@@ -334,8 +334,8 @@
                             :options="environmentalManagementStartDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="environmentalManagement.endDate">
                         <DatePicker 
                             v-model="formValidate.environmentalManagement.endDate" 
@@ -345,8 +345,8 @@
                             :options="environmentalManagementEndDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col> 
-                <Col span="4">
+                </i-col> 
+                <i-col span="4">
                     <Upload
                         action=""
                         :before-upload="(file)=>{ 
@@ -363,30 +363,30 @@
                             <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
                         </span> 
                     </Upload>               
-                </Col> 
-                <Col span="3" class="checkbox-box">
+                </i-col> 
+                <i-col span="3" class="checkbox-box">
                     <FormItem >
                         <Checkbox
                             v-model="formValidate.environmentalManagement.required" 
                             disabled
                         > {{ formValidate.environmentalManagement.required?'附件必传':'附件不必传' }}</Checkbox>
                     </FormItem>               
-                </Col>                                                                 
+                </i-col>                                                                 
             </Row> 
          
             <Row>
-                <Col span="5">
+                <i-col span="5">
                     <h3 style="textAlign:right" class="title-text">特殊资质：</h3>                
-                </Col>                
-                <Col span="4">
+                </i-col>                
+                <i-col span="4">
                     <FormItem prop="specialQualifications.code">
                         <Input 
                             v-model="formValidate.specialQualifications.code" 
                             placeholder="请输入证书编号..." 
                         />
                     </FormItem>                
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="specialQualifications.startDate">
                         <DatePicker 
                             v-model="formValidate.specialQualifications.startDate" 
@@ -396,8 +396,8 @@
                             :options="specialQualificationsStartDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="specialQualifications.endDate">
                         <DatePicker 
                             v-model="formValidate.specialQualifications.endDate" 
@@ -407,8 +407,8 @@
                             :options="specialQualificationsEndDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col> 
-                <Col span="4">
+                </i-col> 
+                <i-col span="4">
                     <Upload
                         action=""
                         :before-upload="(file)=>{ 
@@ -425,30 +425,30 @@
                             <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
                         </span> 
                     </Upload>               
-                </Col> 
-                <Col span="3" class="checkbox-box">
+                </i-col> 
+                <i-col span="3" class="checkbox-box">
                     <FormItem >
                         <Checkbox
                             v-model="formValidate.specialQualifications.required" 
                             disabled
                         > {{ formValidate.specialQualifications.required?'附件必传':'附件不必传' }}</Checkbox>
                     </FormItem>               
-                </Col>                                                                 
+                </i-col>                                                                 
             </Row> 
 
             <Row>
-                <Col span="5">
+                <i-col span="5">
                     <h3 style="textAlign:right" class="title-text">代理商授权书：</h3>                
-                </Col>                
-                <Col span="4">
+                </i-col>                
+                <i-col span="4">
                     <FormItem prop="authorization.code">
                         <Input 
                             v-model="formValidate.authorization.code" 
                             placeholder="请输入证书编号..." 
                         />
                     </FormItem>                
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="authorization.startDate">
                         <DatePicker 
                             v-model="formValidate.authorization.startDate" 
@@ -458,8 +458,8 @@
                             :options="authorizationStartDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="authorization.endDate">
                         <DatePicker 
                             v-model="formValidate.authorization.endDate" 
@@ -469,8 +469,8 @@
                             :options="authorizationEndDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col> 
-                <Col span="4">
+                </i-col> 
+                <i-col span="4">
                     <Upload
                         action=""
                         :before-upload="(file)=>{ 
@@ -487,30 +487,30 @@
                             <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
                         </span> 
                     </Upload>               
-                </Col> 
-                <Col span="3" class="checkbox-box">
+                </i-col> 
+                <i-col span="3" class="checkbox-box">
                     <FormItem >
                         <Checkbox
                             v-model="formValidate.authorization.required" 
                             disabled
                         > {{ formValidate.authorization.required?'附件必传':'附件不必传' }}</Checkbox>
                     </FormItem>               
-                </Col>                                                                 
+                </i-col>                                                                 
             </Row> 
 
             <Row>
-                <Col span="5">
+                <i-col span="5">
                     <h3 style="textAlign:right" class="title-text">其他：</h3>                
-                </Col>                
-                <Col span="4">
+                </i-col>                
+                <i-col span="4">
                     <FormItem prop="other.code">
                         <Input 
                             v-model="formValidate.other.code" 
                             placeholder="请输入证书编号..." 
                         />
                     </FormItem>                
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="other.startDate">
                         <DatePicker 
                             v-model="formValidate.other.startDate" 
@@ -520,8 +520,8 @@
                             :options="otherStartDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col>
-                <Col span="3">
+                </i-col>
+                <i-col span="3">
                     <FormItem prop="other.endDate">
                         <DatePicker 
                             v-model="formValidate.other.endDate" 
@@ -531,8 +531,8 @@
                             :options="otherEndDate"
                         ></DatePicker>                        
                     </FormItem>  
-                </Col> 
-                <Col span="4">
+                </i-col> 
+                <i-col span="4">
                     <Upload
                         action=""
                         :before-upload="(file)=>{ 
@@ -549,15 +549,15 @@
                             <Button v-else type="warning" icon="ios-cloud-upload-outline">  待上传</Button>
                         </span> 
                     </Upload>               
-                </Col> 
-                <Col span="3" class="checkbox-box">
+                </i-col> 
+                <i-col span="3" class="checkbox-box">
                     <FormItem >
                         <Checkbox
                             v-model="formValidate.other.required" 
                             disabled
                         > {{ formValidate.other.required?'附件必传':'附件不必传' }}</Checkbox>
                     </FormItem>               
-                </Col>                                                                 
+                </i-col>                                                                 
             </Row> 
 
 
