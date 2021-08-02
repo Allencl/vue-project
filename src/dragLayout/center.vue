@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
   .drag-content-iframe{
     .top-box{
       height: 30px;

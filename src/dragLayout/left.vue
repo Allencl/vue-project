@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .design-center-page{
         .left-side{
             ul{

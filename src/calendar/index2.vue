@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
 .transfer-class-calendar{
   .ivu-color-picker-picker-panel{
     visibility: hidden;

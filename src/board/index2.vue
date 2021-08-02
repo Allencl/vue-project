@@ -1,5 +1,5 @@
-<style lang="scss">
-    @import './index.scss';
+<style lang="less">
+    @import './index.less';
 
     .board-page-html.pag2{
         >header{

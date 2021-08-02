@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .home-page{
         background: rgba(238, 238, 238,0.3);
         padding: 16px 35px;

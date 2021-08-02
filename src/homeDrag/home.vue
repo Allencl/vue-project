@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
 
   .custom-drag-home{
     // position: relative;

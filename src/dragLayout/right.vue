@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .design-right-page{
         // padding-left: 6px;
         // padding-right: 6px;

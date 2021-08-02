@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
   .weima-large-screen{
     background: url(./Img/bag.png);
 

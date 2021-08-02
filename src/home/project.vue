@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .weima-home-project{
         .box{
             padding: 10px;

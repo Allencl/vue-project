@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
 
     .weima-home-tpl{
         margin-top: 10px;

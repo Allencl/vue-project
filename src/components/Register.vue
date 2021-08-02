@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
 
     .register-html{
         position: relative;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .bi-carousel{
         top: 0px;
         width: 100%;

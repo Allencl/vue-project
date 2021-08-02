@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .login-page{
         width: 100%;
         background-repeat: no-repeat;   //不重复

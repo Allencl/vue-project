@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .bi-module-box{
        .head-title{
             -moz-user-select: none; 

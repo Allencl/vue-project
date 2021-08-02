@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .home-page{
         padding: 0px 10px;
         padding-bottom: 30px;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .sand-clock-card{
         width: 610px;
         height: 380px;

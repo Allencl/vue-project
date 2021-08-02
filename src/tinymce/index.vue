@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     // #formatHTMLID span[contentEditable="true"]:hover {
     //     outline: 1px solid #2276d2;
     // }

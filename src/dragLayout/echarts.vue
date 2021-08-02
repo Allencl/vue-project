@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .echarts-html{
         // >div{
         //         width: 100% !important;

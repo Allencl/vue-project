@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
     .design-center-page{
         .ivu-layout-sider{
             background: #fff;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
   .weima-home-table{
     text-align:center;
     width: 230px;
