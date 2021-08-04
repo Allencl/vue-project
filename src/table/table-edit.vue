@@ -1,25 +1,47 @@
 <template>
     <span>
         <Button type="info" @click="getData">获取数据</Button>
-        <Table border :columns="columns" :data="data">
-            <template slot-scope="{ row }" slot="name">
-                <strong>{{ row.name }}</strong>
-            </template>
-            <template slot-scope="{row,index}" slot="input">
-                <span>{{index}}</span>
-                <Input v-model="row.name" placeholder="Enter something..." style="width: 300px" />
-            </template>        
-            <template slot-scope="{ row, index }" slot="action">
-                <Button type="primary" size="small" style="margin-right: 5px" @click="show(index)">View</Button>
-                <Button type="error" size="small" @click="remove(index)">Delete</Button>
-            </template>
-        </Table>
+
+
+        <Form ref="formDynamic" :model="formDynamic">
+            <Table ref="table" border 
+                :columns="columns" 
+                :data="formDynamic.tableData"
+            >
+                <template slot-scope="{row}" slot="name">
+                    <strong>{{ row.name }}</strong>
+                </template>
+                <template slot-scope="{row,index}" slot="input">
+                    <FormItem 
+                        :prop="'tableData.' + index + '.name'"
+                        :rules="{required: true, message: '请输入报文类型', trigger: 'change'}"
+                    >
+                        <Input v-model="formDynamic.tableData[index].input" placeholder="请输入..." :maxlength="10" show-word-limit clearable />
+                    </FormItem>
+                </template>        
+                <template slot-scope="{ row, index }" slot="action">
+                    <Button type="primary" size="small" style="margin-right: 5px" @click="show(index)">View</Button>
+                    <Button type="error" size="small" @click="remove(index)">Delete</Button>
+                </template>
+            </Table>
+        </Form>
     </span>
 </template>
 <script>
     export default {
         data () {
             return {
+
+                formValidate: {
+                    input: '',
+                },
+
+                // ruleValidate: {
+                //     input: [
+                //         { required: true, message: 'The name cannot be empty', trigger: 'blur' }
+                //     ],
+                // },
+
                 columns: [
                     {
                         title: 'Name',
@@ -40,21 +62,41 @@
                         align: 'center'
                     }
                 ],
-                data: [
-                    {
-                        name: 'John Brown',
-                        input: 'New York No'
-                    },
-                    {
-                        name: 'John Brown',
-                        input: '1 Lake Park'
-                    },
-                ]
+
+                formDynamic:{
+                    tableData: [
+                        {
+                            name: 'John danfu',
+                            input: ''
+                        },
+                        {
+                            name: 'norah jonse',
+                            input: ''
+                        },
+                        {
+                            name: 'adele',
+                            input: ''
+                        }                    
+                    ]
+                }
             }
         },
         methods: {
             getData:function(){
-                console.log(this.data[0]);
+                // console.log(this.data[0]);
+                let _data=this.$refs.table.rebuildData;
+                console.log(_data);
+
+
+                this.$refs["formDynamic"].validate((valid) => {
+                    if (valid) {
+                        this.$Message.success('Success!');
+                    } else {
+                        this.$Message.error('Fail!');
+                    }
+                })
+
+
             }
         }
     }
