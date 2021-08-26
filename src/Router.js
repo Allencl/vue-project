@@ -16,7 +16,7 @@ import LargeScreenPage2 from './home3/index.vue';   // 大屏
 // import MessagePage from './message/index.vue';
 // D:\code\vue-project\src\board\index1.vue
 
-import TableEditPage from './table/table-edit.vue';   // 可编辑 table
+import TableEditPage from './table/index.vue';   // 可编辑 table
 
 
 

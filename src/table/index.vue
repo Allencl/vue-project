@@ -27,6 +27,12 @@
              */
             saveData: function(){
                 console.log( this.data );
+
+                this.$Notice.open({
+                    title: 'Notification title',
+                    desc: JSON.stringify(this.data)
+                });
+
             },
             /**
              *  初始化
@@ -39,13 +45,14 @@
 
                     // 列数据
                     let _columns=["2021-01-01","2021-01-02","2021-01-03"];  
+                    
                     // 行数据
                     let _data=[
                         {
                             "equipment":"设备一",
-                            "2021-01-01":"111",
-                            "2021-01-02":"22",
-                            "2021-01-03":"33"
+                            "2021-01-01":11,
+                            "2021-01-02":22,
+                            "2021-01-03":3
                         },
                         {
                             "equipment":"设备二"
@@ -69,10 +76,13 @@
                             width:300,
                             render: (h, params) => {
                                 return h('div', [
-                                    h('Input', {
+                                    h('InputNumber', {
                                         props: {
                                             value:params.row[o],
-                                            placeholder:"请输入..."
+                                            placeholder:"请输入...",
+                                            max:100, 
+                                            min:1,
+                                            step:1
                                         },
                                         on: {
                                             input: event => {
