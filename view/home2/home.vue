@@ -261,27 +261,27 @@
                 <h2>{{ o['head']['title'] }}</h2>
                 <div class="head-box">
                     <Row>
-                        <Col span="4" offset="1">
+                        <i-col span="4" offset="1">
                             <label for="">交货日期:</label>
                             <input type="text" readonly :value="o['head']['date']">
-                        </Col>
-                        <Col span="4">
+                        </i-col>
+                        <i-col span="4">
                             <label for="">车辆区分:</label>
                             <input type="text" readonly :value="o['head']['area']">
-                        </Col>   
-                        <Col span="4" class="col-img">
+                        </i-col>   
+                        <i-col span="4" class="col-img">
                     
                             <div class="img1"></div>
                             <label>货架区域</label>
-                        </Col>     
-                        <Col span="4" class="col-img">
+                        </i-col>     
+                        <i-col span="4" class="col-img">
                             <div class="img2"></div>
                             
                             <label>自由区域</label>
-                        </Col>     
-                        <Col span="4">
+                        </i-col>     
+                        <i-col span="4">
                             <span>作成：{{ o['head']['principal'] }}</span>
-                        </Col>                                             
+                        </i-col>                                             
                     </Row>         
                 </div>
             </span>
