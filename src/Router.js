@@ -18,13 +18,16 @@ import VueRouter from 'vue-router';
 
 // import TableEditPage from '@view/test/index.vue';   // 可编辑 table
 
+// import largeScreenPage from '@view/largeScreen/index.vue';   // 大屏 
+
+
 const routes = [
   // { path: '/', component: RegisterPage },   // 注册页面
   // { path: '/', component: TableEditPage },   // home 页面
 
   {
     path: '/wis/test',
-    component: () => import("@view/test/index.vue")
+    component: () => import("@view/largeScreen/index.vue")  // 大屏
   },
   {
     path: '/wis/homeDrag',

@@ -203,7 +203,7 @@
                     <Button @click="addModle" size="large" icon="md-add" type="primary" shape="circle" title="添加"></Button>
                 </Row>    
                 <Row>
-                    <Col span="24"> 
+                    <i-col span="24"> 
                         <ul>
                             <li 
                                 v-for="(o,i) in data" :key="i" :title="o['name']"
@@ -215,7 +215,7 @@
                                 <span style="padding-left: 6px;">{{ o["name"] }}</span>
                             </li>
                         </ul>
-                    </Col>  
+                    </i-col>  
                     
                 </Row> 
             </div> 
