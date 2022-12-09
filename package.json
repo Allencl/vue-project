@@ -11,7 +11,7 @@
     "@tinymce/tinymce-vue": "^3.2.2",
     "core-js": "^3.6.4",
     "echarts": "^5.0.2",
-    "tinymce": "^5.4.1",
+    "tinymce": "^5.10.7",
     "view-design": "^4.2.0",
     "vue": "^2.6.11",
     "vue-draggable-resizable": "^2.3.0",
